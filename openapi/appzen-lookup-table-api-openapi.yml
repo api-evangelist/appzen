@@ -1,0 +1,351 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Lookup Table API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Lookup Table
+paths:
+  /lookup-table:
+    post:
+      tags:
+      - Lookup Table
+      summary: Creates/updates a Lookup Table
+      description: Creates a new Lookup Table. Returns a uuid for this lookup table. <br> When there already exists a lookup table (with the same lookup_name_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).
+      parameters:
+      - $ref: '#/parameters/lookup-table-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+    get:
+      tags:
+      - Lookup Table
+      summary: Returns list of Lookup Tables
+      description: Returns the list of Lookup Tables
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/definitions/lookup-table-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /lookup-table/{uuid}:
+    get:
+      tags:
+      - Lookup Table
+      summary: Returns Lookup Table details given its uuid
+      description: Returns the details of a Lookup Table by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/lookup-table-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /lookup-table/lookup-name-id/{lookup-name-id}:
+    get:
+      tags:
+      - Lookup Table
+      summary: Returns Lookup Table details given its external lookup-name-id
+      description: Returns the details of a Lookup Table matching its external lookup-name-id
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/lookup-name-id'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/lookup-table-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  lookup-table:
+    properties:
+      lookup_name_id:
+        example: TAX_APPLICABILITY
+        description: Lookup Table ID.
+        type: string
+      lookup_name:
+        description: Lookup Name in the ERP system
+        type: string
+        example: TAX APPLICABILITY
+      parent_lookup_name_id:
+        example: REGION
+        description: Parent Lookup Table ID.
+        type: string
+      lookup_description:
+        example: This Lookup Table provides Tax Applicability Information in Different Regions
+        description: Lookup Table Description.
+        type: string
+      is_active:
+        description: Is lookup active in the ERP system.
+        default: true
+        type: boolean
+      created_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+    required:
+    - lookup_name_id
+    - lookup_name
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  lookup-table-get:
+    properties:
+      lookup_name_id:
+        example: TAX_APPLICABILITY
+        description: Lookup Table ID.
+        type: string
+      lookup_name:
+        description: Lookup Name in the ERP system
+        type: string
+        example: TAX APPLICABILITY
+      parent_lookup_name_id:
+        example: REGION
+        description: Parent Lookup Table ID.
+        type: string
+      lookup_description:
+        example: This Lookup Table provides Tax Applicability Information in Different Regions
+        description: Lookup Table Description.
+        type: string
+      is_active:
+        description: Is lookup active in the ERP system.
+        default: true
+        type: boolean
+      created_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      uuid:
+        type: string
+        example: 0045-89707-0906-DE3C
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  lookup-table-json-schema:
+    in: body
+    required: true
+    name: lookup-json-schema
+    schema:
+      $ref: '#/definitions/lookup-table'
+  lookup-name-id:
+    in: path
+    description: lookup table name id
+    required: true
+    name: lookup-name-id
+    type: string
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

@@ -1,0 +1,140 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/appzen-autonomous-ap-openapi-original.yml
+notes: >-
+  Entity graph derived from the Autonomous AP Swagger 2.0 resource paths and
+  their id-reference fields. Master-data entities (suppliers, entities, chart
+  of accounts, tax, vat, payment terms, units of measure, lookups) are
+  referenced by transactional documents (invoices, purchase orders, goods
+  receipts). Every entity is addressable by a global uuid plus an external id.
+entities:
+- name: invoice
+  keys: [uuid, external invoice id]
+  operations:
+  - 'POST /invoice'
+  - 'GET /invoice/{uuid}'
+  - 'POST /invoice/search'
+  - 'POST /invoice/{uuid}/status-sync'
+- name: externally-processed-invoice
+  keys: [uuid]
+  operations: [POST /invoice/externally-processed, POST /invoice/externally-processed-for-audit]
+- name: processed-invoice
+  keys: [uuid]
+  operations:
+  - 'GET /invoice/processed-invoice/{uuid}'
+- name: invoice-audit-result
+  keys: [invoice uuid]
+  operations:
+  - 'GET /invoice/{uuid}/audit-results'
+  - 'GET /invoice/audit-results'
+- name: purchase-order
+  keys: [uuid, po-number, po-unique-id]
+  operations:
+  - 'POST /purchase-order'
+  - 'GET /purchase-order/{uuid}'
+- name: goods-receipt
+  keys: [receipt_id]
+  operations:
+  - 'POST /goods-receipt'
+  - 'GET /goods-receipt/{receipt_id}'
+- name: supplier
+  keys: [uuid, external-supplier-id]
+  operations:
+  - 'POST /supplier'
+  - 'GET /supplier/{uuid}'
+  - 'POST /supplier/search'
+- name: entity
+  keys: [uuid, external-entity-id]
+  operations:
+  - 'POST /entity'
+  - 'GET /entity/{uuid}'
+  - 'POST /entity/search'
+- name: chart-of-accounts
+  keys: [uuid]
+  operations:
+  - 'POST /chart-of-accounts'
+  - 'GET /chart-of-accounts/{uuid}'
+  - 'POST /chart-of-accounts/search'
+- name: payment-term
+  keys: [uuid, payment-term-id]
+  operations:
+  - 'POST /payment-term'
+  - 'GET /payment-term/{uuid}'
+  - 'POST /payment-term/search'
+- name: tax
+  keys: [uuid, tax-id]
+  operations:
+  - 'POST /tax'
+  - 'GET /tax/{uuid}'
+- name: vat
+  keys: [uuid, vat-id, vat-code+vat-rate]
+  operations:
+  - 'POST /vat'
+  - 'GET /vat/{uuid}'
+- name: unit-of-measure
+  keys: [uuid, uom-code]
+  operations:
+  - 'POST /unit-of-measures'
+  - 'GET /unit-of-measure/{uuid}'
+- name: lookup-table
+  keys: [uuid, lookup-name-id]
+  operations:
+  - 'POST /lookup-table'
+  - 'GET /lookup-table/{uuid}'
+- name: lookup-item
+  keys: [uuid, lookup-name-id+lookup-item-id]
+  operations:
+  - 'POST /lookup'
+  - 'GET /lookup/{uuid}'
+- name: custom-data
+  keys: [uuid, dataset-name+external-id]
+  operations:
+  - 'POST /custom-data'
+  - 'GET /custom-data/{uuid}'
+- name: user-group
+  keys: [external-group-id]
+  operations: [POST /user-group, GET /user-groups]
+- name: document
+  keys: [signed upload url]
+  operations: [GET /generate-upload-url]
+relationships:
+- from: invoice
+  to: supplier
+  type: belongs_to
+  via: supplier reference
+- from: invoice
+  to: purchase-order
+  type: belongs_to
+  via: po reference (2/3-way match)
+- from: invoice
+  to: entity
+  type: belongs_to
+  via: entity reference
+- from: invoice
+  to: invoice-audit-result
+  type: has_many
+  via: invoice uuid
+- from: invoice
+  to: chart-of-accounts
+  type: references
+  via: account segment
+- from: invoice
+  to: vat
+  type: references
+  via: vat code/rate
+- from: invoice
+  to: tax
+  type: references
+  via: tax id
+- from: purchase-order
+  to: goods-receipt
+  type: has_many
+  via: po reference (3-way match)
+- from: purchase-order
+  to: supplier
+  type: belongs_to
+  via: supplier reference
+- from: lookup-item
+  to: lookup-table
+  type: belongs_to
+  via: lookup-name-id

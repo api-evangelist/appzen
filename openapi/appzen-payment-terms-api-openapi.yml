@@ -1,0 +1,410 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Payment Terms API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Payment Terms
+paths:
+  /payment-term:
+    post:
+      tags:
+      - Payment Terms
+      summary: Creates/updates a payment term
+      description: Creates a new payment term in AppZen. Returns a uuid for this payment term. When there already exists a payment term (with the same payment_term_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).
+      parameters:
+      - $ref: '#/parameters/payment-terms-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /payment-term/{uuid}:
+    get:
+      tags:
+      - Payment Terms
+      summary: Returns payment-term details
+      description: Returns the details of a payment-term by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/payment-term'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /payment-term/payment-term-id/{payment-term-id}:
+    get:
+      tags:
+      - Payment Terms
+      summary: Returns payment-term details
+      description: Returns the details of a payment-term with specific payment-term-id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        description: external payment term identifier
+        required: true
+        name: payment-term-id
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/payment-term'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /payment-term/search:
+    post:
+      tags:
+      - Payment Terms
+      summary: Returns all Payment Terms uuid that match the search criteria
+      description: Returns a list of the Payment Terms uuids that match from-date and end-date
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/find-query-spec'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/find-payment-terms-result-spec'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  payment-term:
+    properties:
+      name:
+        description: Payment term name as mentioned in the ERP system
+        type: string
+        example: NET 30
+      id:
+        description: Payment term id that uniquely identifies a payment term in the ERP system
+        type: string
+        example: '8900012'
+      active:
+        description: If payment term is active in the ERP system
+        default: true
+        type: boolean
+      code:
+        default: ''
+        example: NET
+        description: Refers to the AppZen Code. Should be one from the mentioned here.
+        enum:
+        - NONE_PAYMENT_TERM_CODE
+        - NET
+        - EOM
+        - FOM
+        - PIA
+        - CWO
+        - DOR
+        type: string
+      date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      discounts:
+        $ref: '#/definitions/discounts'
+      num_days:
+        default: ''
+        example: 30
+        description: Number of days for payment to be made.
+        type: integer
+      num_grace_days:
+        example: 0
+        description: Number of grace days available for the payment
+        type: integer
+      custom_json:
+        type: object
+      entities_list:
+        description: list of external identifier for entities that this payment term is associated with
+        type: array
+        items:
+          type: string
+    required:
+    - id
+    - name
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  find-payment-terms-result-spec:
+    example:
+    - payment-term-id: NET20-EPR-XID
+      appzen-uuid: 02e9c5ab-3973-4552-9ba0-d069439e92a5
+      is-active: true
+      last-appzen-update-time: '2022-12-09T08:24:13.192Z'
+    - payment-term-id: NET30-DISC5
+      appzen-uuid: 01fb405a-78f6-4924-9531-425fbffdda6d
+      is-active: true
+      last-appzen-update-time: '2022-12-09T08:37:29.526Z'
+    properties:
+      payment-term-id:
+        type: string
+      appzen-uuid:
+        type: string
+      is-active:
+        type: boolean
+      last-appzen-update-time:
+        type: string
+  discounts:
+    items:
+      properties:
+        discount_days:
+          default: 0
+          example: 0
+          description: The discount days
+          type: integer
+        discount_percent:
+          default: 0
+          example: 0
+          description: The discount percent
+          type: integer
+        discount_amount:
+          default: 0
+          example: 0
+          description: The discount amount
+          type: integer
+      type: object
+      required:
+      - discount_amount
+      - discount_days
+      - discount_percent
+    type: array
+  find-query-spec:
+    description: The date range must be limited to 7 days
+    properties:
+      from-last-appzen-update-time:
+        description: Start Date Range value for Appzen processing date specified in UTC format
+        allOf:
+        - $ref: '#/definitions/date-time'
+      to-last-appzen-update-time:
+        description: End Date Range for Appzen processing date specified in UTC format
+        allOf:
+        - $ref: '#/definitions/date-time'
+      limit:
+        description: Number of matched records to return
+        type: number
+        default: 1000
+        maximum: 1000
+        example: 50
+    required:
+    - from-last-appzen-update-time
+    - to-last-appzen-update-time
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  payment-terms-json-schema:
+    in: body
+    required: true
+    name: payment-terms-json-schema
+    schema:
+      $ref: '#/definitions/payment-term'
+  find-query-spec:
+    in: body
+    description: Query Criterion for locating Items
+    required: true
+    name: find-query-spec
+    schema:
+      $ref: '#/definitions/find-query-spec'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

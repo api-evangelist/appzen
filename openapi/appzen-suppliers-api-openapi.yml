@@ -1,0 +1,1197 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Suppliers API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Suppliers
+paths:
+  /supplier:
+    post:
+      tags:
+      - Suppliers
+      summary: Creates/updates a supplier
+      description: Creates a new supplier in AppZen. Returns a uuid for this supplier. When there already exists a supplier (with the same external_supplier_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).
+      parameters:
+      - $ref: '#/parameters/suppliers-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /supplier/{uuid}:
+    get:
+      tags:
+      - Suppliers
+      summary: Returns a supplier's details
+      description: Returns the details of a supplier by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/supplier'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /supplier/external-supplier-id/{external-supplier-id}:
+    get:
+      tags:
+      - Suppliers
+      summary: Returns a supplier's details
+      description: Returns the details of a supplier matching external supplier id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        description: external supplier id
+        required: true
+        name: external-supplier-id
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/supplier'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /supplier/search:
+    post:
+      tags:
+      - Suppliers
+      summary: Returns all Supplier uuids that match the search criteria
+      description: Returns a list of Supplier uuids that match from-date and end-date
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/find-query-spec'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/find-supplier-result-spec'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  bank_account_type:
+    type: string
+    enum:
+    - CHECKING
+    - SAVINGS
+    - BUSINESS_CHECKING
+    - BUSINESS_SAVINGS
+    - MONEY_MARKET
+    - CD
+    - OTHER
+  payment_type:
+    type: string
+    enum:
+    - ACH
+    - DOMESTIC_WIRE
+    - SEPA_CREDIT_TRANSFER
+    - INTERNATIONAL_WIRE_SWIFT
+    - BACS
+    - BECS
+    - CHECK_PAPER
+    - REAL_TIME_PAYMENTS
+    - VIRTUAL_CARD
+  addresses:
+    type: array
+    items:
+      allOf:
+      - $ref: '#/definitions/address'
+  find-query-spec:
+    description: The date range must be limited to 7 days
+    properties:
+      from-last-appzen-update-time:
+        description: Start Date Range value for Appzen processing date specified in UTC format
+        allOf:
+        - $ref: '#/definitions/date-time'
+      to-last-appzen-update-time:
+        description: End Date Range for Appzen processing date specified in UTC format
+        allOf:
+        - $ref: '#/definitions/date-time'
+      limit:
+        description: Number of matched records to return
+        type: number
+        default: 1000
+        maximum: 1000
+        example: 50
+    required:
+    - from-last-appzen-update-time
+    - to-last-appzen-update-time
+  addressCore:
+    required:
+    - address_line1
+    - country
+    - zip
+    properties:
+      address_line1:
+        default: ''
+        title: The address_line1 schema
+        type: string
+        example: 12345 MARKET STREET
+      address_line2:
+        default: ''
+        title: The address_line2 schema
+        type: string
+        example: SUITE 1234
+      address_line3:
+        default: ''
+        title: The address_line3 schema
+        type: string
+        example: ''
+      area_code:
+        default: ''
+        title: The area_code schema
+        type: string
+        example: '415'
+      city:
+        default: ''
+        title: The city schema
+        type: string
+        example: SAN FRANCISCO
+      company:
+        default: ''
+        title: The company schema
+        type: string
+        example: Preferred Supplier Inc.
+      contact:
+        default: ''
+        title: The contact schema
+        type: string
+        example: Jane Doe
+      country:
+        default: ''
+        title: The country schema
+        type: string
+        example: US
+      country_iso3:
+        default: ''
+        title: The country_iso3 schema
+        type: string
+        example: USA
+      email:
+        default: ''
+        title: The email schema
+        type: string
+        example: janedoe@supplier.com
+      phone:
+        default: ''
+        title: The phone schema
+        type: string
+        example: '4042965282'
+      province:
+        default: ''
+        title: The province schema
+        type: string
+        example: ''
+      state:
+        default: ''
+        title: The state schema
+        type: string
+        example: CA
+      zip:
+        default: ''
+        title: The zip schema
+        type: string
+        example: '94016'
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  address:
+    type: object
+    required:
+    - address_type
+    properties:
+      address_type:
+        type: string
+        enum:
+        - REMIT_TO
+        - BILL_TO
+        - SHIP_TO
+        - OFFICE
+        - SUPPLIER_ADDRESS
+        - CUSTOMER_ADDRESS
+        - NONE_ADDRESS_TYPE
+      address:
+        allOf:
+        - $ref: '#/definitions/addressCore'
+      site_id:
+        type: string
+        example: '913838'
+      site_name:
+        type: string
+        example: California HQ
+      custom_json:
+        type: object
+        properties:
+          key1:
+            type: string
+            example: value1
+      is_active:
+        type: boolean
+        default: true
+      valid_start_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      valid_end_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  suppliers-json-schema:
+    type: object
+    required:
+    - supplier_core
+    - addresses
+    properties:
+      supplier_core:
+        type: object
+        required:
+        - external_supplier_id
+        - supplier_name
+        properties:
+          external_supplier_id:
+            type: string
+            example: '691759'
+          supplier_name:
+            type: string
+            example: ABC Suppliers Inc.
+          supplier_number:
+            type: string
+            example: '2342112'
+          web_site:
+            type: string
+            example: abcsuppliers.com
+          on_file_1099:
+            type: string
+            example: 3DMWWFF
+          vat_registration_number:
+            type: string
+            example: D08J66
+            deprecated: true
+          tax_registration_numbers:
+            type: array
+            items:
+              type: string
+            example:
+            - D08J6671736
+            - ABC123456
+          fed_tax_id:
+            type: string
+            example: GI19E
+          is_active:
+            default: true
+            type: boolean
+          is_one_time:
+            type: boolean
+            default: false
+            description: 'Marks this record as a one-time / CPD (Conpicuous Posting Document)
+
+              supplier. When `is_one_time` is `true`, only `external_supplier_id`,
+
+              `entities_list`, `is_one_time` and the status flags
+
+              (`is_active` / `supplier_status`) are accepted on the master record
+
+              — `supplier_name` and other fields outside the CPD surface are
+
+              optional and silently ignored. Name, address, banking, tax
+
+              registration etc. are captured per-invoice on the invoice payload
+
+              rather than on the master.
+
+              '
+            example: false
+          deactive_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          deactived_by:
+            type: string
+            example: JOHN.DOE@ABC.COM
+          note:
+            default: ''
+            type: string
+            example: Category A Supplier
+      addresses:
+        allOf:
+        - $ref: '#/definitions/addresses'
+      contacts:
+        type: array
+        items:
+          type: object
+          properties:
+            external_contact_id:
+              type: string
+              example: '4266477'
+            first_name:
+              type: string
+              example: John
+            last_name:
+              type: string
+              example: Doe
+            email:
+              type: string
+              example: john.doe@abc.com
+            phone_number:
+              type: string
+              example: '4081234567'
+      payment_term_id:
+        type: string
+        description: This value should be unique in the customer’s ERP system to distinguish payment terms
+        example: '652402'
+      bank_information:
+        type: object
+        properties:
+          bank_acct_last4:
+            type: string
+            example: '8674'
+          routing_number_last4:
+            type: string
+            example: '6521'
+          bank_account_name:
+            type: string
+            example: ABC Bank
+          bank_account_type:
+            type: string
+            example: Checking
+      entities_list:
+        description: list of external identifier for entities that this supplier is associated with
+        type: array
+        items:
+          type: string
+      payment_types:
+        type: array
+        items:
+          type: string
+        example:
+        - CREDIT
+        - CASH
+        - WIRE
+      custom_json:
+        type: object
+        properties:
+          key1:
+            type: string
+            example: value1
+      supplier_lookup_names:
+        type: array
+        description: List of supplier lookup names associated with this supplier.
+        example:
+        - s1
+        - s3
+      wht_tax_ids:
+        type: array
+        description: List of tax ids fo withholding tax category
+        example:
+        - T1
+        - WHT1
+      entities_banking_details:
+        type: array
+        items:
+          type: object
+          properties:
+            entity_id:
+              type: string
+              description: Unique identifier for the entity
+              example: ENT001
+            payment_block:
+              type: boolean
+              description: Indicates if payments are blocked for this entity
+              example: false
+            payment_block_reason:
+              type: string
+              description: Reason for payment block if payments are blocked
+              example: Pending compliance review
+            payment_types:
+              type: array
+              description: List of supported payment types for this entity
+              example:
+              - ACH
+              - DOMESTIC_WIRE
+              items:
+                type: string
+                allOf:
+                - $ref: '#/definitions/payment_type'
+            default_payment_type:
+              type: string
+              description: Default payment type for this entity
+              example: ACH
+              allOf:
+              - $ref: '#/definitions/payment_type'
+            default_payment_term_id:
+              type: string
+              description: Default payment term identifier for this entity
+              example: NET30
+            default_house_bank:
+              type: string
+              description: Default house bank identifier for this entity
+              example: HB001
+            intercompany_flag:
+              type: boolean
+              description: Indicates if this is an intercompany entity
+              example: false
+            bank_information:
+              type: array
+              items:
+                type: object
+                properties:
+                  part_bank_key:
+                    type: string
+                    description: Unique identifier for the bank account
+                    example: BANK001
+                  account_id:
+                    type: string
+                    description: Account identifier
+                    example: ACC123456
+                  iban:
+                    type: string
+                    description: International Bank Account Number
+                    example: GB29NWBK60161331926819
+                  swift_bic:
+                    type: string
+                    description: SWIFT Business Identifier Code
+                    example: NWBKGB2L
+                  currency:
+                    type: string
+                    description: Currency code for the account
+                    example: USD
+                  name:
+                    type: string
+                    description: Name of the bank account
+                    example: Main Business Account
+                  account_type:
+                    allOf:
+                    - $ref: '#/definitions/bank_account_type'
+                    description: Type of bank account
+                  country:
+                    type: string
+                    description: Country where the bank is located
+                    example: US
+                  contact:
+                    type: string
+                    description: Contact information for the bank account
+                    example: John Doe - john.doe@company.com
+                  account_number:
+                    type: string
+                    description: Bank account number
+                    example: '1234567890'
+                  routing_number:
+                    type: string
+                    description: Bank routing number
+                    example: '021000021'
+                  is_primary:
+                    type: boolean
+                    description: Indicates if this is the primary bank account
+                    example: true
+      global_banking_details:
+        type: object
+        description: Global banking details for the supplier (not entity-specific)
+        properties:
+          payment_block:
+            type: boolean
+            description: Indicates if payments are blocked globally
+            example: false
+          payment_block_reason:
+            type: string
+            description: Reason for payment block if payments are blocked
+            example: Pending compliance review
+          payment_types:
+            type: array
+            description: List of supported payment types globally
+            example:
+            - ACH
+            - DOMESTIC_WIRE
+            items:
+              type: string
+              allOf:
+              - $ref: '#/definitions/payment_type'
+          default_payment_type:
+            type: string
+            description: Default payment type globally
+            example: ACH
+            allOf:
+            - $ref: '#/definitions/payment_type'
+          default_payment_term_id:
+            type: string
+            description: Default payment term identifier globally
+            example: NET30
+          default_house_bank:
+            type: string
+            description: Default house bank identifier globally
+            example: HB001
+          intercompany_flag:
+            type: boolean
+            description: Indicates if this is an intercompany supplier
+            example: false
+          bank_information:
+            type: array
+            items:
+              type: object
+              properties:
+                part_bank_key:
+                  type: string
+                  description: Unique identifier for the bank account
+                  example: BANK001
+                account_id:
+                  type: string
+                  description: Account identifier
+                  example: ACC123456
+                iban:
+                  type: string
+                  description: International Bank Account Number
+                  example: GB29NWBK60161331926819
+                swift_bic:
+                  type: string
+                  description: SWIFT Business Identifier Code
+                  example: NWBKGB2L
+                currency:
+                  type: string
+                  description: Currency code for the account
+                  example: USD
+                name:
+                  type: string
+                  description: Name of the bank account
+                  example: Main Business Account
+                account_type:
+                  allOf:
+                  - $ref: '#/definitions/bank_account_type'
+                  description: Type of bank account
+                country:
+                  type: string
+                  description: Country where the bank is located
+                  example: US
+                contact:
+                  type: string
+                  description: Contact information for the bank account
+                  example: John Doe - john.doe@company.com
+                account_number:
+                  type: string
+                  description: Bank account number
+                  example: '1234567890'
+                routing_number:
+                  type: string
+                  description: Bank routing number
+                  example: '021000021'
+                is_primary:
+                  type: boolean
+                  description: Indicates if this is the primary bank account
+                  example: true
+      entities_other_fields:
+        type: array
+        description: Entity-specific custom fields for the supplier. Each entry contains an entity_id and a set of key-value pairs (other_fields). Entity IDs are validated against entity master data — if an entity_id is not found, supplier ingestion fails. Values can be any type (strings, numbers, booleans, arrays, objects) — non-string values are stringified for storage.
+        items:
+          type: object
+          required:
+          - entity_id
+          properties:
+            entity_id:
+              type: string
+              description: External identifier for the entity. Must exist in entity master data.
+              example: ENT-INDIA
+            other_fields:
+              type: object
+              description: Arbitrary key-value pairs for entity-specific custom fields. Values can be any type — non-string values are stringified for storage.
+              example:
+                poRequirementMode: FORBIDDEN
+                allowedCurrencies:
+                - INR
+                - USD
+                invoiceAmountHardThreshold:
+                  amount: 50000
+                  currency: USD
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  find-supplier-result-spec:
+    example:
+    - supplier-id: SX13072
+      appzen-uuid: a93cd9b6-cd98-48fc-98e8-425fbffdda6d
+      is-active: false
+      last-appzen-update-time: '2021-12-08T23:00:17.724Z'
+    - supplier-id: Sup-162683
+      appzen-uuid: f11b5612-11b5-4965-9554-425fbffdda6d
+      is-active: false
+      last-appzen-update-time: '2021-12-08T23:30:15.368Z'
+    properties:
+      supplier-id:
+        type: string
+      appzen-uuid:
+        type: string
+      is-active:
+        type: boolean
+      last-appzen-update-time:
+        type: string
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  supplier:
+    properties:
+      addresses:
+        allOf:
+        - $ref: '#/definitions/addresses'
+      bank_information:
+        properties:
+          bank_account_name:
+            default: ''
+            type: string
+            example: ABC Bank
+          bank_account_type:
+            default: ''
+            type: string
+            example: Checking
+          bank_acct_last4:
+            type: string
+            example: '8674'
+          routing_number_last4:
+            type: string
+        required:
+        - bank_acct_last4
+        - routing_number_last4
+        - bank_account_name
+        - bank_account_type
+        type: object
+      entities_list:
+        description: list of external identifier for entities that this supplier is associated with
+        type: array
+        items:
+          type: string
+      payment_types:
+        type: array
+        items:
+          type: string
+        example:
+        - CREDIT
+        - CASH
+        - WIRE
+      contacts:
+        items:
+          properties:
+            email:
+              type: string
+              example: john.doe@abc.com
+            external_contact_id:
+              type: string
+              example: '4266477'
+            first_name:
+              type: string
+              example: John
+            last_name:
+              type: string
+              example: Doe
+            phone_number:
+              type: string
+              example: '4081234567'
+          required:
+          - external_contact_id
+          - first_name
+          - last_name
+          - email
+          - phone_number
+          type: object
+        type: array
+      customer_id:
+        default: ''
+        type: string
+        example: '488059'
+      payment_term_id:
+        type: string
+        description: This value should be unique in the customer’s ERP system to distinguish payment terms
+        example: '652402'
+      supplier_core:
+        properties:
+          deactive_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          deactived_by:
+            type: string
+            example: JOHN.DOE@ABC.COM
+          external_supplier_id:
+            type: string
+            example: '691759'
+          fed_tax_id:
+            type: string
+            example: GI19E
+          is_active:
+            default: true
+            type: boolean
+          is_one_time:
+            type: boolean
+            default: false
+            description: 'Marks this record as a one-time / CPD (Conpicuous Posting Document)
+
+              supplier. CPD master records are intentionally sparse — only
+
+              `external_supplier_id`, `entities_list`, `is_one_time` and the
+
+              status flags are persisted on the master. Name, address, banking,
+
+              tax registration and similar fields are captured per-invoice on
+
+              the invoice payload rather than on the master, so they may be
+
+              omitted when creating/updating a CPD supplier.
+
+              '
+            example: false
+          valid_start_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          valid_end_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          note:
+            default: ''
+            type: string
+            example: Category A Supplier
+          on_file_1099:
+            type: string
+            example: 3DMWWFF
+          supplier_name:
+            type: string
+            example: ABC Suppliers Inc.
+          supplier_number:
+            type: string
+            example: MZ342F1
+          vat_registration_number:
+            type: string
+            example: D08J66
+          web_site:
+            type: string
+            example: abcsuppliers.com
+        type: object
+      custom_json:
+        type: object
+        properties:
+          key1:
+            type: string
+            example: value1
+      supplier_lookup_names:
+        type: array
+        description: List of supplier lookup names associated with this supplier.
+        example:
+        - s1
+        - s3
+      uuid:
+        type: string
+        example: 6731fb82-2e69-4d0e-a71b-4b1576dad163
+      entities_banking_details:
+        type: array
+        items:
+          type: object
+          properties:
+            entity_id:
+              type: string
+              description: Unique identifier for the entity
+              example: ENT001
+            payment_block:
+              type: boolean
+              description: Indicates if payments are blocked for this entity
+              example: false
+            payment_block_reason:
+              type: string
+              description: Reason for payment block if payments are blocked
+              example: Pending compliance review
+            payment_types:
+              type: array
+              description: List of supported payment types for this entity
+              example:
+              - ACH
+              - DOMESTIC_WIRE
+              items:
+                type: string
+                allOf:
+                - $ref: '#/definitions/payment_type'
+            default_payment_type:
+              type: string
+              description: Default payment type for this entity
+              example: ACH
+              allOf:
+              - $ref: '#/definitions/payment_type'
+            default_payment_term_id:
+              type: string
+              description: Default payment term identifier for this entity
+              example: NET30
+            default_house_bank:
+              type: string
+              description: Default house bank identifier for this entity
+              example: HB001
+            intercompany_flag:
+              type: boolean
+              description: Indicates if this is an intercompany entity
+              example: false
+            bank_information:
+              type: array
+              items:
+                type: object
+                properties:
+                  part_bank_key:
+                    type: string
+                    description: Unique identifier for the bank account
+                    example: BANK001
+                  account_id:
+                    type: string
+                    description: Account identifier
+                    example: ACC123456
+                  iban:
+                    type: string
+                    description: International Bank Account Number
+                    example: GB29NWBK60161331926819
+                  swift_bic:
+                    type: string
+                    description: SWIFT Business Identifier Code
+                    example: NWBKGB2L
+                  currency:
+                    type: string
+                    description: Currency code for the account
+                    example: USD
+                  name:
+                    type: string
+                    description: Name of the bank account
+                    example: Main Business Account
+                  account_type:
+                    allOf:
+                    - $ref: '#/definitions/bank_account_type'
+                    description: Type of bank account
+                  country:
+                    type: string
+                    description: Country where the bank is located
+                    example: US
+                  contact:
+                    type: string
+                    description: Contact information for the bank account
+                    example: John Doe - john.doe@company.com
+                  account_number:
+                    type: string
+                    description: Bank account number
+                    example: '1234567890'
+                  routing_number:
+                    type: string
+                    description: Bank routing number
+                    example: '021000021'
+                  is_primary:
+                    type: boolean
+                    description: Indicates if this is the primary bank account
+                    example: true
+      global_banking_details:
+        type: object
+        description: Global banking details for the supplier (not entity-specific)
+        properties:
+          payment_block:
+            type: boolean
+            description: Indicates if payments are blocked globally
+            example: false
+          payment_block_reason:
+            type: string
+            description: Reason for payment block if payments are blocked
+            example: Pending compliance review
+          payment_types:
+            type: array
+            description: List of supported payment types globally
+            example:
+            - ACH
+            - DOMESTIC_WIRE
+            items:
+              type: string
+              allOf:
+              - $ref: '#/definitions/payment_type'
+          default_payment_type:
+            type: string
+            description: Default payment type globally
+            example: ACH
+            allOf:
+            - $ref: '#/definitions/payment_type'
+          default_payment_term_id:
+            type: string
+            description: Default payment term identifier globally
+            example: NET30
+          default_house_bank:
+            type: string
+            description: Default house bank identifier globally
+            example: HB001
+          intercompany_flag:
+            type: boolean
+            description: Indicates if this is an intercompany supplier
+            example: false
+          bank_information:
+            type: array
+            items:
+              type: object
+              properties:
+                part_bank_key:
+                  type: string
+                  description: Unique identifier for the bank account
+                  example: BANK001
+                account_id:
+                  type: string
+                  description: Account identifier
+                  example: ACC123456
+                iban:
+                  type: string
+                  description: International Bank Account Number
+                  example: GB29NWBK60161331926819
+                swift_bic:
+                  type: string
+                  description: SWIFT Business Identifier Code
+                  example: NWBKGB2L
+                currency:
+                  type: string
+                  description: Currency code for the account
+                  example: USD
+                name:
+                  type: string
+                  description: Name of the bank account
+                  example: Main Business Account
+                account_type:
+                  allOf:
+                  - $ref: '#/definitions/bank_account_type'
+                  description: Type of bank account
+                country:
+                  type: string
+                  description: Country where the bank is located
+                  example: US
+                contact:
+                  type: string
+                  description: Contact information for the bank account
+                  example: John Doe - john.doe@company.com
+                account_number:
+                  type: string
+                  description: Bank account number
+                  example: '1234567890'
+                routing_number:
+                  type: string
+                  description: Bank routing number
+                  example: '021000021'
+                is_primary:
+                  type: boolean
+                  description: Indicates if this is the primary bank account
+                  example: true
+      entities_other_fields:
+        type: array
+        description: Entity-specific custom fields for the supplier. Each entry contains an entity_id and a map of key-value pairs.
+        items:
+          type: object
+          properties:
+            entity_id:
+              type: string
+              description: External identifier for the entity
+              example: ENT-INDIA
+            other_fields:
+              type: object
+              description: Key-value pairs for entity-specific custom fields. Values are stored as strings.
+              example:
+                poRequirementMode: FORBIDDEN
+                allowedCurrencies: '["INR","USD"]'
+    type: object
+parameters:
+  find-query-spec:
+    in: body
+    description: Query Criterion for locating Items
+    required: true
+    name: find-query-spec
+    schema:
+      $ref: '#/definitions/find-query-spec'
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  suppliers-json-schema:
+    in: body
+    required: true
+    name: suppliers-json-schema
+    schema:
+      $ref: '#/definitions/suppliers-json-schema'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

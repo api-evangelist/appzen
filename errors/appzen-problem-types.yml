@@ -1,0 +1,49 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/appzen-autonomous-ap-openapi-original.yml
+docs: https://api-docs.appzen.com/api_guidelines.html
+format: custom
+notes: >-
+  The Autonomous AP API does NOT use RFC 9457 problem+json. Every 4xx/5xx
+  response returns a custom JSON envelope with fields: timestamp, status,
+  error, message. The message frequently embeds an "Error code : <id>"
+  correlation token. Every response also carries an x-correlation-id header
+  to quote to AppZen Support. Rate-limit breaches return HTTP 429.
+envelope:
+  media_type: application/json
+  fields:
+  - name: timestamp
+    example: '2019-01-17T16:12:45.977+0000'
+  - name: status
+    example: '400'
+  - name: error
+    example: Bad Request
+  - name: message
+    example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+problems:
+- status: 400
+  title: Bad Request
+  schema: http-400-error-response
+  remediation: Invalid request payload or parameters; fix and resend.
+- status: 401
+  title: Unauthorized
+  schema: http-401-error-response
+  remediation: Missing or invalid x-api-key / customer-id / customer-key headers.
+- status: 403
+  title: Forbidden
+  schema: http-403-error-response
+  remediation: Credentials valid but not authorized for this resource/customer.
+- status: 404
+  title: Not Found
+  schema: http-404-error-response
+  remediation: Resource (uuid / external id) does not exist.
+- status: 429
+  title: Too Many Requests
+  schema: null
+  remediation: >-
+    Rate limit exceeded (1,000 req/sec or 300,000 req/day). Back off and retry.
+  source: https://api-docs.appzen.com/api_guidelines.html
+- status: 500
+  title: Internal Server Error
+  schema: http-500-error-response
+  remediation: Retry; if persistent, contact AppZen Support with the x-correlation-id.

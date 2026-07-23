@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AppZen Autonomous AP
+  version: 1.0.0
+extends: openapi/appzen-autonomous-ap-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-auth: api-key-headers (x-api-key, customer-id, customer-key)
+    x-apievangelist-rate-limit: 1000/sec, 300000/day (429 on breach)
+    x-apievangelist-tracing-header: x-correlation-id
+    x-apievangelist-error-format: custom envelope {timestamp,status,error,message} (not RFC 9457)
+    x-apievangelist-sandbox: https://api.us.sandbox.appzen.com
+    x-apievangelist-production: https://api.appzen.com
+    x-apievangelist-artifacts:
+      authentication: authentication/appzen-authentication.yml
+      conventions: conventions/appzen-conventions.yml
+      errors: errors/appzen-problem-types.yml
+      data_model: data-model/appzen-data-model.yml
+      sandbox: sandbox/appzen-sandbox.yml

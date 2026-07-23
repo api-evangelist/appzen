@@ -1,0 +1,185 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Invoice Status Sync API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Invoice Status Sync
+paths:
+  /invoice/{uuid}/status-sync:
+    post:
+      tags:
+      - Invoice Status Sync
+      summary: Updates the external status of an invoice in Appzen
+      description: This is used to update the external ERP status as well as appzen internal state for an invoice referred by uuid.
+      parameters:
+      - $ref: '#/parameters/uuid'
+      - $ref: '#/parameters/invoice-status-sync-request-schema'
+      responses:
+        200:
+          description: Posted
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  invoice-status-sync-request-schema:
+    type: object
+    required:
+    - appzen_invoice_state
+    - timestamp
+    properties:
+      invoice_id:
+        description: required when appzen_invoice_state is CREATED
+        type: string
+      invoice_status:
+        description: required when appzen_invoice_state is CREATED
+        type: string
+      appzen_invoice_state:
+        type: string
+        enum:
+        - CREATED
+        - ERROR
+      timestamp:
+        description: time of creating invoice in source system
+        $ref: '#/definitions/date-time'
+      error_data:
+        description: required when appzen_invoice_state is ERROR
+        type: object
+        properties:
+          message:
+            type: string
+          status:
+            type: string
+          exception:
+            type: string
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  invoice-status-sync-request-schema:
+    in: body
+    required: true
+    name: invoice-json-schema
+    schema:
+      $ref: '#/definitions/invoice-status-sync-request-schema'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

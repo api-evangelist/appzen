@@ -1,0 +1,22 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.appzen.com/
+notes: >-
+  Autonomous AP public API. The Swagger document is versioned (info.version)
+  and the docs site records a "Last Published" date. No public status page,
+  deprecation policy, or SLA page was found on AppZen's public developer
+  surface as of this pass (absence recorded as valid data).
+versioning:
+  scheme: spec-version
+  current: 2.0.3
+  path_version: v1
+  base_path: /dictionary-data-services
+  docs: https://api-docs.appzen.com/
+  last_published: '2026-07-13'
+deprecation:
+  policy_url: null
+  sunset_header: false
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

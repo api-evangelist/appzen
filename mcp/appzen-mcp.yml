@@ -1,0 +1,173 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/appzen-autonomous-ap-openapi-original.yml
+notes: AppZen publishes no official hosted MCP server. This is a CANDIDATE tool list derived one-per-operation
+  from the Autonomous AP Swagger 2.0 spec, to seed a potential MCP server. Not an AppZen product.
+server:
+  name: appzen-autonomous-ap
+  transport: http
+  url: null
+tools:
+- name: create_payment_term
+  description: Creates/updates a payment term
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /payment-term
+- name: get_payment_term
+  description: Returns payment-term details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /payment-term/{uuid}
+- name: get_payment_term_payment_term_id
+  description: Returns payment-term details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /payment-term/payment-term-id/{payment-term-id}
+- name: search_payment_term_search
+  description: Returns all Payment Terms uuid that match the search criteria
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /payment-term/search
+- name: create_chart_of_accounts
+  description: Creates a new chart of account segment
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /chart-of-accounts
+- name: get_chart_of_accounts
+  description: Returns a chart of account segment's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /chart-of-accounts/{uuid}
+- name: search_chart_of_accounts_search
+  description: Returns all Chart of Accounts uuid that match the search criteria
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /chart-of-accounts/search
+- name: create_entity
+  description: Creates/updates an entity
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /entity
+- name: get_entity
+  description: Returns entity details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /entity/{uuid}
+- name: get_entity_external_entity_id
+  description: Returns entity details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /entity/external-entity-id/{external-entity-id}
+- name: search_entity_search
+  description: Returns all Entities uuid that match the search criteria
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /entity/search
+- name: create_supplier
+  description: Creates/updates a supplier
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /supplier
+- name: get_supplier
+  description: Returns a supplier's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /supplier/{uuid}
+- name: get_supplier_external_supplier_id
+  description: Returns a supplier's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /supplier/external-supplier-id/{external-supplier-id}
+- name: search_supplier_search
+  description: Returns all Supplier uuids that match the search criteria
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /supplier/search
+- name: create_purchase_order
+  description: Creates/Updates a purchase order
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /purchase-order
+- name: get_purchase_order
+  description: Returns a purchase order's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /purchase-order/{uuid}
+- name: get_purchase_order_purchase_order_number
+  description: Returns a purchase order's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /purchase-order/purchase-order-number/{po-number}
+- name: get_purchase_order_purchase_order_number_purchase_order_uniq
+  description: Returns a purchase order's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /purchase-order/purchase-order-number/{po-number}/purchase-order-unique-id/{po-unique-id}
+- name: get_generate_upload_url
+  description: Generates a url to upload a document into AppZen repository.
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /generate-upload-url
+- name: create_vat
+  description: Creates/updates a Vat master item
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /vat
+- name: get_vat
+  description: Returns Vat master item details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /vat/{uuid}
+- name: get_vat_vat_id
+  description: Returns Vat master item details by vat-id
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /vat/vat-id/{vat-id}
+- name: get_vat_vat_code_vat_rate
+  description: Returns Vat master item details by vat-code and vat-rate
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /vat/vat-code/{vat-code}/vat-rate/{vat-rate}
+- name: create_unit_of_measures
+  description: Creates/updates a unit of measure
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /unit-of-measures
+- name: get_unit_of_measure
+  description: Returns unit of measure details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /unit-of-measure/{uuid}
+- name: get_unit_of_measure_uom_code
+  description: Returns unit of measure details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /unit-of-measure/uom-code/{uom-code}
+- name: create_lookup_table
+  description: Creates/updates a Lookup Table
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /lookup-table
+- name: get_lookup_table
+  description: Returns list of Lookup Tables
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /lookup-table
+- name: get_lookup_table
+  description: Returns Lookup Table details given its uuid
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /lookup-table/{uuid}
+- name: get_lookup_table_lookup_name_id
+  description: Returns Lookup Table details given its external lookup-name-id
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /lookup-table/lookup-name-id/{lookup-name-id}
+- name: create_lookup
+  description: Creates/updates a Lookup Item associated with a Look up Table.
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /lookup
+- name: get_lookup
+  description: Returns Lookup Item details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /lookup/{uuid}
+- name: get_lookup_lookup_name_id_lookup_item_id
+  description: Returns Lookup Item details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /lookup/lookup-name-id/{lookup-name-id}/lookup-item-id/{lookup-item-id}
+- name: create_custom_data
+  description: Creates/updates a custom data record
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /custom-data
+- name: get_custom_data
+  description: Returns custom data record details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /custom-data/{uuid}
+- name: get_custom_data_dataset_name_external_id
+  description: Returns custom data record details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /custom-data/dataset-name/{dataset-name}/external-id/{custom-external-id}
+- name: create_invoice
+  description: Creates/Updates an invoice
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /invoice
+- name: search_invoice_search
+  description: Returns all invoices uuid that match the search criteria
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /invoice/search
+- name: get_invoice
+  description: Returns an invoice's details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /invoice/{uuid}
+- name: create_invoice_externally_processed
+  description: Creates an externally processed invoice in Appzen with optional validation checks
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /invoice/externally-processed
+- name: create_invoice_externally_processed_for_audit
+  description: Creates an externally processed invoice in Appzen with validation checks
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /invoice/externally-processed-for-audit
+- name: get_invoice_processed_invoice
+  description: Returns the processed invoice
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /invoice/processed-invoice/{uuid}
+- name: create_invoice_status_sync
+  description: Updates the external status of an invoice in Appzen
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /invoice/{uuid}/status-sync
+- name: get_invoice_audit_results
+  description: Returns an invoice's audit results
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /invoice/{uuid}/audit-results
+- name: get_invoice_audit_results
+  description: Returns a collection of audit results filtered by search parameters.
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /invoice/audit-results
+- name: create_goods_receipt
+  description: Creates/Updates a goods receipt
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /goods-receipt
+- name: get_goods_receipt
+  description: Returns a goods receipt details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /goods-receipt/{receipt_id}
+- name: create_tax
+  description: Creates/Updates a tax master record
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /tax
+- name: get_tax
+  description: Returns Tax master item details
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /tax/{uuid}
+- name: get_tax_tax_id
+  description: Returns tax master item details by tax-id
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /tax/tax-id/{tax-id}
+- name: get_user_groups
+  description: Returns all user groups for the customer
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /user-groups
+- name: create_user_group
+  description: Creates/updates a user group
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#POST /user-group
+- name: get_user_group
+  description: Returns a user group
+  source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /user-group/{external-group-id}

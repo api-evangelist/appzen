@@ -1,0 +1,462 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Chart of Accounts
+paths:
+  /chart-of-accounts:
+    post:
+      tags:
+      - Chart of Accounts
+      summary: Creates a new chart of account segment
+      description: Creates a new chart of account segment in AppZen and returns a uuid that uniquely identifies it. When there already exists a chart of account segment (segment_code), then the operation is an update (the `status` would be `UPDATED` in this case).
+      parameters:
+      - $ref: '#/parameters/chart-of-account-input-schema'
+      - in: header
+        name: segment-name-for-uniqueness
+        type: boolean
+        required: false
+        default: false
+        description: Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account
+      - in: header
+        name: merge-segment-lookup-names
+        type: boolean
+        required: false
+        default: false
+        description: Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /chart-of-accounts/{uuid}:
+    get:
+      tags:
+      - Chart of Accounts
+      summary: Returns a chart of account segment's details
+      description: Returns the details of a chart of account segment by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/chart-of-account-output-schema'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /chart-of-accounts/search:
+    post:
+      tags:
+      - Chart of Accounts
+      summary: Returns all Chart of Accounts uuid that match the search criteria
+      description: Returns a list of the Chart of Accounts uuids that match from-date and end-date
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/find-query-spec'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/find-chart-of-accounts-result-spec'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  chart-of-account-output-schema:
+    type: object
+    properties:
+      customer_id:
+        type: string
+      appzen_segment_type:
+        type: string
+        description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
+        enum:
+        - OTHER_SEGMENT
+        - LEGAL_ENTITY_SEGMENT
+        - COMPANY_SEGMENT
+        - ACCOUNT_SEGMENT
+        - DEPARTMENT_SEGMENT
+        - COST_CENTER_SEGMENT
+        - VENDOR_SEGMENT
+        - LOCATION_SEGMENT
+        - USER_SEGMENT
+        - CUSTOMER_SEGMENT
+        - PROJECT_SEGMENT
+        - SPEND_CATEGORY_SEGMENT
+        - REGION_SEGMENT
+        - INTERCOMPANY_SEGMENT
+        example: LOCATION_SEGMENT
+      segment_type:
+        type: string
+        example: Location
+      segment_name:
+        type: string
+        example: San Jose
+      segment_code:
+        type: string
+        example: SanJose
+      parent_segment_type:
+        description: Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
+        type: string
+        example: Location
+      parent_segment_name:
+        type: string
+        example: United States
+      parent_segment_code:
+        description: Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
+        type: string
+        example: USA
+      parent_segments:
+        description: parent chart of account segments. Combination of segment_type and segment_code must reference another existing Chart of Account
+        $ref: '#/definitions/segments'
+      segment_lookup_names:
+        description: optional list of lookup names
+        type: array
+        example:
+        - ca_locations
+        - hr_locations
+      custom_json:
+        type: object
+        description: 20 fields allowed, 500 chars per field
+      active:
+        type: boolean
+      valid_start_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      valid_end_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+  chart-of-account-input-schema:
+    type: object
+    properties:
+      appzen_segment_type:
+        type: string
+        description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
+        enum:
+        - OTHER_SEGMENT
+        - LEGAL_ENTITY_SEGMENT
+        - COMPANY_SEGMENT
+        - ACCOUNT_SEGMENT
+        - DEPARTMENT_SEGMENT
+        - COST_CENTER_SEGMENT
+        - VENDOR_SEGMENT
+        - LOCATION_SEGMENT
+        - USER_SEGMENT
+        - CUSTOMER_SEGMENT
+        - PROJECT_SEGMENT
+        - SPEND_CATEGORY_SEGMENT
+        - REGION_SEGMENT
+        - INTERCOMPANY_SEGMENT
+        example: LOCATION_SEGMENT
+      segment_type:
+        type: string
+        example: Location
+      segment_name:
+        type: string
+        example: San Jose
+      segment_code:
+        type: string
+        example: SanJose
+      parent_segment_type:
+        description: customer segment type for parent chart of account. Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
+        type: string
+        example: Location
+      parent_segment_name:
+        description: customer segment name for parent chart of account.
+        type: string
+        example: United States
+      parent_segment_code:
+        description: customer segment code for parent chart of account. Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
+        type: string
+        example: USA
+      parent_segments:
+        description: parent chart of account segments. Combination of segment_type and segment_code must reference another existing Chart of Account
+        $ref: '#/definitions/segments'
+      segment_lookup_names:
+        description: optional list of lookup names
+        type: array
+        example:
+        - ca_locations
+        - hr_locations
+        items:
+          type: string
+      custom_json:
+        type: object
+        description: 20 fields allowed, 500 chars per field
+        example:
+          custom_key1: any-value1
+          custom_key2: any-value2
+      active:
+        type: boolean
+        default: true
+      valid_start_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      valid_end_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+    required:
+    - appzen_segment_type
+    - segment_type
+    - segment_name
+    - segment_code
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  find-chart-of-accounts-result-spec:
+    example:
+    - segment-code: '3689490915'
+      segment-type: Account
+      appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
+      is-active: true
+      last-appzen-update-time: '2021-12-08T23:30:10.314Z'
+    - segment-code: '6649972540'
+      segment-type: Legal
+      appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
+      is-active: true
+      last-appzen-update-time: '2021-12-08T23:30:12.597Z'
+    properties:
+      erp-invoice-id:
+        type: string
+      erp-invoice-status:
+        type: string
+      appzen-uuid:
+        type: string
+      appzen-invoice-status:
+        type: string
+      last-appzen-update-time:
+        type: string
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  find-query-spec:
+    description: The date range must be limited to 7 days
+    properties:
+      from-last-appzen-update-time:
+        description: Start Date Range value for Appzen processing date specified in UTC format
+        allOf:
+        - $ref: '#/definitions/date-time'
+      to-last-appzen-update-time:
+        description: End Date Range for Appzen processing date specified in UTC format
+        allOf:
+        - $ref: '#/definitions/date-time'
+      limit:
+        description: Number of matched records to return
+        type: number
+        default: 1000
+        maximum: 1000
+        example: 50
+    required:
+    - from-last-appzen-update-time
+    - to-last-appzen-update-time
+  segments:
+    type: object
+    properties:
+      segment_name:
+        type: string
+        example: San Jose
+      segment_code:
+        type: string
+        example: SanJose
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+parameters:
+  chart-of-account-input-schema:
+    in: body
+    required: true
+    name: chart-of-account-input-schema
+    schema:
+      $ref: '#/definitions/chart-of-account-input-schema'
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  find-query-spec:
+    in: body
+    description: Query Criterion for locating Items
+    required: true
+    name: find-query-spec
+    schema:
+      $ref: '#/definitions/find-query-spec'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

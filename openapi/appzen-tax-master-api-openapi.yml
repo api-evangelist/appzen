@@ -1,0 +1,379 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Tax Master API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Tax Master
+paths:
+  /tax:
+    post:
+      tags:
+      - Tax Master
+      summary: Creates/Updates a tax master record
+      description: Creates a new tax master record in AppZen and returns a uuid that uniquely identifies it. When there is already exists a record (tax_id), then the operation is an update (the `status` would be `UPDATED` in this case).
+      parameters:
+      - $ref: '#/parameters/tax-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /tax/{uuid}:
+    get:
+      tags:
+      - Tax Master
+      summary: Returns Tax master item details
+      description: Returns the details of a Tax master item by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/tax-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /tax/tax-id/{tax-id}:
+    get:
+      tags:
+      - Tax Master
+      summary: Returns tax master item details by tax-id
+      description: Returns Tax master item details matching tax-id specified as path parameter
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/tax-id'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/tax-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  tax-get:
+    properties:
+      tax_code:
+        description: Tax code as mentioned in ERP system
+        type: string
+        example: VAT12
+      tax_rate:
+        example: 12
+        description: Tax item rate in ERP system.
+        type: number
+      tax_id:
+        description: Tax Id from ERP system
+        type: string
+        example: vat_1xsd2sd
+      appzen_tax_code:
+        description: Appzen mapped tax item code
+        type: string
+        example: VAT
+      appzen_tax_rate:
+        description: Appzen mapped Vat item rate
+        type: number
+        example: 12
+      appzen_vat_breakdown:
+        type: array
+        items:
+          allOf:
+          - $ref: '#/definitions/appzen-vat-breakdown-item'
+          - description: The appzen break down of vat amount
+      country:
+        type: string
+        example: Germany
+      country_code_iso3:
+        type: string
+        description: ISO3 standard country code
+        example: DEU
+      is_active:
+        description: Is Tax item active in ERP system.
+        default: true
+        type: boolean
+      tax_category:
+        type: string
+        example: WHT_CATEGORY
+        description: The category of record. Possible values - WHT_CATEGORY, VAT_CATEGORY
+      entity_id:
+        type: string
+        description: 'Entity id for which this tax is applicable '
+        example: E124
+      tax_type:
+        type: string
+        description: Tax type for withholding tax. Require for WHT category
+        example: WHT
+      jurisdiction_code:
+        type: string
+        description: Standard tax jurisdiction code
+        example: IN
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  appzen-vat-breakdown-item:
+    type: object
+    properties:
+      code:
+        description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+        type: string
+        example: VAT
+      rate:
+        type: number
+        description: rate as percentage
+        minimum: 0
+        exclusiveMinimum: true
+        example: 12
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  tax-json-schema:
+    type: object
+    properties:
+      tax_id:
+        type: string
+        example: 123AB
+        description: The Tax ID from source system
+      tax_category:
+        type: string
+        example: WHT_CATEGORY
+        description: The category of record. Possible values - WHT_CATEGORY, VAT_CATEGORY
+      tax_code:
+        type: string
+        example: C1
+        description: The tax code for the tax master record
+      tax_rate:
+        type: number
+        example: 10.5
+        description: Tax rate in ERP system. Required for WHT category.
+      appzen_tax_code:
+        type: string
+        example: VAT
+        description: ERP tax code maps to one of these predefined list of codes maintained by Appzen
+      appzen_tax_rate:
+        type: number
+        example: 20
+        description: Appzen mapped Tax item code
+      appzen_vat_breakdown:
+        type: array
+        items:
+          allOf:
+          - $ref: '#/definitions/appzen-vat-breakdown-item'
+          - description: The appzen break down of vat amount for vat tax categories
+      country:
+        type: string
+        example: Germany
+      country_code_iso3:
+        type: string
+        description: ISO3 standard country code
+        example: DEU
+      is_active:
+        description: Is Tax item active in ERP system
+        default: true
+        type: boolean
+      entity_id:
+        type: string
+        description: 'Entity id for which this tax is applicable '
+        example: E124
+      tax_type:
+        type: string
+        description: Tax type for withholding tax. Require for WHT category
+        example: WHT
+      jurisdiction_code:
+        type: string
+        description: Standard tax jurisdiction code
+        example: IN
+    required:
+    - tax_id
+    - tax_category
+    - tax_type
+    - tax_code
+    - tax_rate
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  tax-id:
+    in: path
+    description: customer tax id
+    required: true
+    name: tax-id
+    type: string
+  tax-json-schema:
+    in: body
+    required: true
+    name: tax-json-schema
+    schema:
+      $ref: '#/definitions/tax-json-schema'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

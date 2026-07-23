@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/appzen-autonomous-ap-openapi-original.yml
+skills:
+- file: appzen-submit-invoice-for-audit.md
+  name: Submit an invoice to AppZen for automated audit
+  api: openapi/appzen-autonomous-ap-openapi-original.yml
+  operations:
+  - 'POST /invoice'
+  - 'POST /invoice/search'
+  - 'GET /invoice/{uuid}'
+  - 'GET /invoice/{uuid}/audit-results'
+- file: appzen-externally-processed-invoice.md
+  name: Send an externally-processed invoice to AppZen for audit
+  api: openapi/appzen-autonomous-ap-openapi-original.yml
+  operations:
+  - 'POST /invoice/externally-processed'
+  - 'POST /invoice/externally-processed-for-audit'
+  - 'GET /invoice/processed-invoice/{uuid}'
+  - 'POST /invoice/{uuid}/status-sync'
+- file: appzen-sync-master-data.md
+  name: Sync AppZen master data
+  api: openapi/appzen-autonomous-ap-openapi-original.yml
+  operations:
+  - 'POST /supplier'
+  - 'POST /entity'
+  - 'POST /chart-of-accounts'
+  - 'POST /purchase-order'
+  - 'POST /tax'
+  - 'POST /vat'
+  - 'POST /payment-term'

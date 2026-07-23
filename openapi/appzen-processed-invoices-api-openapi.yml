@@ -1,0 +1,1476 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Processed Invoices API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Processed Invoices
+paths:
+  /invoice/processed-invoice/{uuid}:
+    get:
+      tags:
+      - Processed Invoices
+      summary: Returns the processed invoice
+      description: Returns the processed results and invoice by uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH, the overall invoice status, such as Approved, Rejected and invoice detail. The download links to the images are valid for only 5 minutes.
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/processed-invoice-json-schema'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  withholding-tax:
+    type: object
+    properties:
+      type:
+        type: string
+      code:
+        type: string
+      base_amount:
+        type: object
+        required:
+        - amount
+        - currency
+        properties:
+          amount:
+            type: number
+          currency:
+            type: string
+      wht_amount:
+        type: object
+        required:
+        - amount
+        - currency
+        properties:
+          amount:
+            type: number
+          currency:
+            type: string
+  payment_type:
+    type: string
+    enum:
+    - ACH
+    - DOMESTIC_WIRE
+    - SEPA_CREDIT_TRANSFER
+    - INTERNATIONAL_WIRE_SWIFT
+    - BACS
+    - BECS
+    - CHECK_PAPER
+    - REAL_TIME_PAYMENTS
+    - VIRTUAL_CARD
+  invoice_line_type:
+    type: string
+    enum:
+    - NONE_LINE_TYPE
+    - GOODS
+    - SERVICE
+    - FREIGHT
+    - TAX
+    - MISCELLANEOUS
+  validation:
+    type: object
+    properties:
+      action_type:
+        type: string
+      confidence:
+        type: string
+      field_name:
+        type: string
+      final_risk:
+        type: string
+      post_config_risk:
+        type: string
+      post_feedback_risk:
+        type: string
+      result_data:
+        type: object
+        properties:
+          ai_model_detected:
+            type: array
+            items:
+              type: string
+          duplicate_invoice_ids:
+            type: array
+            items:
+              type: string
+          electronic_query_detected:
+            type: array
+            items:
+              type: string
+      risk_level:
+        type: string
+      risk_reason:
+        type: string
+      state:
+        type: string
+      validation_display_name:
+        type: string
+      validation_id:
+        type: string
+      validation_name:
+        type: string
+  addressCore:
+    required:
+    - address_line1
+    - country
+    - zip
+    properties:
+      address_line1:
+        default: ''
+        title: The address_line1 schema
+        type: string
+        example: 12345 MARKET STREET
+      address_line2:
+        default: ''
+        title: The address_line2 schema
+        type: string
+        example: SUITE 1234
+      address_line3:
+        default: ''
+        title: The address_line3 schema
+        type: string
+        example: ''
+      area_code:
+        default: ''
+        title: The area_code schema
+        type: string
+        example: '415'
+      city:
+        default: ''
+        title: The city schema
+        type: string
+        example: SAN FRANCISCO
+      company:
+        default: ''
+        title: The company schema
+        type: string
+        example: Preferred Supplier Inc.
+      contact:
+        default: ''
+        title: The contact schema
+        type: string
+        example: Jane Doe
+      country:
+        default: ''
+        title: The country schema
+        type: string
+        example: US
+      country_iso3:
+        default: ''
+        title: The country_iso3 schema
+        type: string
+        example: USA
+      email:
+        default: ''
+        title: The email schema
+        type: string
+        example: janedoe@supplier.com
+      phone:
+        default: ''
+        title: The phone schema
+        type: string
+        example: '4042965282'
+      province:
+        default: ''
+        title: The province schema
+        type: string
+        example: ''
+      state:
+        default: ''
+        title: The state schema
+        type: string
+        example: CA
+      zip:
+        default: ''
+        title: The zip schema
+        type: string
+        example: '94016'
+  amount:
+    properties:
+      amount:
+        example: 1.5
+        type: number
+      currency:
+        example: USD
+        type: string
+    type: object
+  invoice-goods-receipt:
+    type: object
+    properties:
+      receipt_id:
+        type: string
+        example: 123AB
+        description: The Receipt ID from source system
+      amount:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Amount allocated to invoice from this receipt
+      quantity:
+        type: integer
+        format: int32
+        example: 10
+        description: Quantity allocated to invoice from this receipt
+  payment-term:
+    properties:
+      name:
+        description: Payment term name as mentioned in the ERP system
+        type: string
+        example: NET 30
+      id:
+        description: Payment term id that uniquely identifies a payment term in the ERP system
+        type: string
+        example: '8900012'
+      active:
+        description: If payment term is active in the ERP system
+        default: true
+        type: boolean
+      code:
+        default: ''
+        example: NET
+        description: Refers to the AppZen Code. Should be one from the mentioned here.
+        enum:
+        - NONE_PAYMENT_TERM_CODE
+        - NET
+        - EOM
+        - FOM
+        - PIA
+        - CWO
+        - DOR
+        type: string
+      date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      discounts:
+        $ref: '#/definitions/discounts'
+      num_days:
+        default: ''
+        example: 30
+        description: Number of days for payment to be made.
+        type: integer
+      num_grace_days:
+        example: 0
+        description: Number of grace days available for the payment
+        type: integer
+      custom_json:
+        type: object
+      entities_list:
+        description: list of external identifier for entities that this payment term is associated with
+        type: array
+        items:
+          type: string
+    required:
+    - id
+    - name
+  po_receipt_type:
+    type: string
+    enum:
+    - PO
+    - GOODS_RECEIPT
+  po_policy_match_type:
+    type: string
+    enum:
+    - PO_NONE_MATCH_TYPE
+    - PO_POLICY_TWO_WAY_MATCH
+    - PO_POLICY_THREE_WAY_MATCH
+  address:
+    type: object
+    required:
+    - address_type
+    properties:
+      address_type:
+        type: string
+        enum:
+        - REMIT_TO
+        - BILL_TO
+        - SHIP_TO
+        - OFFICE
+        - SUPPLIER_ADDRESS
+        - CUSTOMER_ADDRESS
+        - NONE_ADDRESS_TYPE
+      address:
+        allOf:
+        - $ref: '#/definitions/addressCore'
+      site_id:
+        type: string
+        example: '913838'
+      site_name:
+        type: string
+        example: California HQ
+      custom_json:
+        type: object
+        properties:
+          key1:
+            type: string
+            example: value1
+      is_active:
+        type: boolean
+        default: true
+      valid_start_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      valid_end_date:
+        allOf:
+        - $ref: '#/definitions/date-time'
+  processed-invoice-other-object-fields:
+    type: object
+    description: Set of key value pairs, where each value is an object with two keys - name and id
+    example:
+      code-region:
+        name: us-east
+        id: region1s
+      code-dept:
+        name: wing-1
+        id: '325'
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  processed-invoice-other-segment:
+    type: object
+    properties:
+      segment_code:
+        type: string
+      segment_name:
+        type: string
+      segment_type:
+        type: string
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  appzen-vat-breakdown-item:
+    type: object
+    properties:
+      code:
+        description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+        type: string
+        example: VAT
+      rate:
+        type: number
+        description: rate as percentage
+        minimum: 0
+        exclusiveMinimum: true
+        example: 12
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  po_policy:
+    type: object
+    properties:
+      po_backed:
+        type: boolean
+      po_match_type:
+        allOf:
+        - $ref: '#/definitions/po_policy_match_type'
+      receipt_type:
+        allOf:
+        - $ref: '#/definitions/po_receipt_type'
+  processed-invoice-account-segment:
+    type: object
+    properties:
+      appzen_segment_type:
+        type: string
+        description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
+        enum:
+        - OTHER_SEGMENT
+        - LEGAL_ENTITY_SEGMENT
+        - COMPANY_SEGMENT
+        - ACCOUNT_SEGMENT
+        - DEPARTMENT_SEGMENT
+        - COST_CENTER_SEGMENT
+        - VENDOR_SEGMENT
+        - LOCATION_SEGMENT
+        - USER_SEGMENT
+        - CUSTOMER_SEGMENT
+        - PROJECT_SEGMENT
+        - SPEND_CATEGORY_SEGMENT
+        - REGION_SEGMENT
+        - INTERCOMPANY_SEGMENT
+        example: COST_CENTER_SEGMENT
+      segment_code:
+        type: string
+      segment_name:
+        type: string
+      segment_type:
+        type: string
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  vat-breakdown-item:
+    type: object
+    properties:
+      vat_id:
+        type: string
+        description: External vat_id
+        example: gst_1232ext
+      code:
+        type: string
+        example: GST
+      rate:
+        type: number
+        description: rate as percentage
+        minimum: 0
+        exclusiveMinimum: true
+        example: 20.5
+      vat_amount:
+        allOf:
+        - $ref: '#/definitions/amount'
+      jurisdiction_code:
+        type: string
+        description: Standard tax jurisdiction code
+        example: IN
+  discounts:
+    items:
+      properties:
+        discount_days:
+          default: 0
+          example: 0
+          description: The discount days
+          type: integer
+        discount_percent:
+          default: 0
+          example: 0
+          description: The discount percent
+          type: integer
+        discount_amount:
+          default: 0
+          example: 0
+          description: The discount amount
+          type: integer
+      type: object
+      required:
+      - discount_amount
+      - discount_days
+      - discount_percent
+    type: array
+  processed-invoice-json-schema:
+    example:
+      audit_results:
+        actions:
+          field_validations: []
+          header_validations:
+          - action_type: blocking
+            confidence: 1
+            final_risk: NONE_RISK
+            post_config_risk: NONE_RISK
+            post_feedback_risk: NONE_RISK
+            result_data:
+              duplicate_invoice_ids: []
+            risk_level: NONE_RISK
+            risk_reason: None
+            state: Approved
+            validation_display_name: Duplicate Invoices Check
+            validation_id: duplicate_image_within_invoices
+            validation_name: duplicate_image_within_invoices
+          - action_type: blocking
+            confidence: 1
+            final_risk: NONE_RISK
+            post_config_risk: NONE_RISK
+            post_feedback_risk: NONE_RISK
+            result_data: []
+            risk_level: NONE_RISK
+            risk_reason: None
+            state: Approved
+            validation_display_name: Duplicate Invoice Across Expense
+            validation_id: duplicate_across_expenses
+            validation_name: duplicate_across_expenses
+          - action_type: blocking
+            confidence: 1
+            final_risk: NONE_RISK
+            post_config_risk: NONE_RISK
+            post_feedback_risk: NONE_RISK
+            result_data: []
+            risk_level: NONE_RISK
+            risk_reason: None risk found.
+            state: Approved
+            validation_display_name: Supplier Check
+            validation_id: supplier_check
+            validation_name: supplier_check
+          line_validations: []
+        appzen_invoice_id: '...'
+        appzen_invoice_state: Processed
+        customer_id: ..
+        uuid: '...'
+      processed_invoice:
+        appzen_invoice_id: 015979ba-67a3-4607-a63c-42017af986d7
+        appzen_invoice_state: Processed
+        customer_id: ..
+        currency: USD
+        created_at: '2021-07-11T17:02:03Z'
+        entity_name: ERT Division
+        entity_id: ERTDA-231
+        image_locations:
+        - image_url: https://...
+          name: invoice_from_supplier123243
+          mime_type: pdf
+          link_expires_after: '2024-02-15T02:55:40.404Z'
+        invoice_id: '...'
+        invoice_date: '2021-07-01T00:00:00Z'
+        payment_type_override: WIRE
+        accounting_date_override: '2022-02-01T00:00:00Z'
+        requester: pos
+        requester_id: SX123
+        requester_email_address: pos@appzen.ai
+        product_category: software
+        invoice_lines:
+        - appzen_line_number: 1
+          line_description: '....'
+          line_number: 1
+          line_item_code: vc-dfs
+          model_number: '...'
+          purchase_order_number: '...'
+          purchase_order_line_number: 2
+          gl_code: 8720.NA.Company.CD414
+          quantity: 122
+          currency: USD
+          memo: trip expenses
+          price_per_unit: 2.25
+          amortization_schedule: monthly
+          tax_amount:
+            amount: 1.25
+            currency: USD
+          total_amount:
+            amount: 205
+            currency: USD
+          labels:
+          - AB
+          - PROTO
+          other_fields:
+            custom1: Line
+            'appzen: line_level_note_text': Include total check
+          other_object_fields:
+            inv_code:
+              name: invX32
+              id: '324'
+            tax_code:
+              name: vat32
+              id: tax-list-1
+          po_match_type: PO_POLICY_THREE_WAY_MATCH
+          pre_paid: false
+          service_start_date: '2020-07-11T17:02:03Z'
+          service_end_date: '2023-07-11T17:02:03Z'
+          tax_applicability_id: 2A3BL
+          line_vat_amount:
+            amount: 1.5
+            currency: USD
+          po_backed_line: false
+          has_line_allocations: true
+          line_allocations:
+          - amount: 200
+            tax: 0.125
+            gl_code: 8720.NA.Company.CD414
+          - amount: 5.0
+            tax: 1.375
+            gl_code: 8720.NA.Company.CD413
+          line_vat_breakdown:
+          - vat_id: vat_324
+            code: GST
+            rate: 20.5
+            vat_amount:
+              amount: 12.5
+              currency: USD
+            jurisdiction_code: IN
+          appzen_line_vat_breakdown:
+          - code: GST
+            rate: 20.5
+          unit_of_measure: Each
+          unit_price:
+            amount: 1
+            currency: USD
+          segments:
+          - appzen_segment_type: SPEND_CATEGORY_SEGMENT
+            segment_type: Spend Category
+            segment_name: Supplies - Research & Lab work
+            segment_code: SUP384
+          - appzen_segment_type: COST_CENTER_SEGMENT
+            segment_type: Cost Center
+            segment_name: Basic Sc  Testing
+            segment_code: CD414
+          - appzen_segment_type: COMPANY_SEGMENT
+            segment_type: Company
+            segment_name: 001 Georgetown University
+            segment_code: Georgetown
+          other_segments:
+          - segment_type: Assignee
+            segment_name: 80720 Ostroumov, Alexey
+            segment_code: '8720'
+          - segment_type: Budget Code
+            segment_name: NA
+            segment_code: NA
+        invoice_number: INC-32434
+        invoice_status: Approved
+        last_updated_at: '2021-07-12T16:47:56Z'
+        payment_term_id: pt-1045
+        tax_applicability_id: 2A3B
+        default_tax_option: Calculate
+        memo: apply towards expenses
+        payment_term:
+          code: NET
+          discounts:
+          - discount_days: 4
+            discount_percent: 15
+            discount_amount:
+              amount: 10
+              currency: USD
+          num_days: 30
+          source: NET 30
+        po_policy:
+          po_backed: true
+          po_match_type: PO_POLICY_THREE_WAY_MATCH
+          receipt_type: GOODS_RECEIPT
+        purchase_order_numbers:
+        - 12321XP
+        shipping_handling_amount:
+          amount: 2.5
+          currency: USD
+        sub_total_amount:
+          amount: 120.65
+          currency: USD
+        submitter: Admin@mycompany.com
+        invoice_supplier_address:
+          address:
+            address_line1: 246 FENTON DR
+            city: '...'
+            country: US
+            state: KS
+            zip: '20882'
+          address_type: REMIT_TO
+          site_id: '2687310'
+        supplier_id: XSR6310
+        supplier_name: UDS LANDSCAPE
+        supplier_number: '6310'
+        tax_amount:
+          amount: 0
+          currency: USD
+        original_total_amount:
+          amount: 43.65
+          currency: USD
+        other_fields:
+          approval-code: KE-382
+          category: internal-projects
+          'appzen: withholding': '23.5'
+        other_object_fields:
+          code-region:
+            name: us-east
+            id: region1s
+        payment_due_date: '2022-07-31T00:00:00Z'
+        total_amount:
+          amount: 122
+          currency: USD
+        vat_amount:
+          amount: 1.5
+          currency: USD
+        vat_breakdown:
+        - code: GST
+          rate: 20.5
+          vat_amount:
+            amount: 1.5
+            currency: USD
+          jurisdiction_code: IN
+        appzen_vat_breakdown:
+        - code: GST
+          rate: 20.5
+        vat_registration_numbers:
+        - AX234SD
+        - 123DXSE_XDC
+        total_amount_excluding_vat:
+          amount: 113.25
+          currency: USD
+        non_invoice_attachments:
+        - name: supplier note.txt
+          mime_type: text/plain
+          image_url: https://...
+          link_expires_after: '2024-06-15T02:55:40.404Z'
+        payment_type: ACH
+        iban: GB29NWBK60161331926819
+        bank_account_number: '1234567890'
+        part_bank_key: BANK001
+        bank_name: ABC Bank
+        routing_number: '021000021'
+        bank_currency: USD
+    type: object
+    properties:
+      audit_results:
+        type: object
+        properties:
+          actions:
+            type: object
+            properties:
+              field_validations:
+                type: array
+                items:
+                  $ref: '#/definitions/validation'
+              header_validations:
+                type: array
+                items:
+                  $ref: '#/definitions/validation'
+              line_validations:
+                type: array
+                items:
+                  $ref: '#/definitions/validation'
+              missing_mandatory_fields_header:
+                type: array
+                items:
+                  type: string
+              missing_mandatory_fields_line:
+                type: array
+                items:
+                  type: string
+          appzen_invoice_id:
+            type: string
+          appzen_invoice_state:
+            type: string
+          customer_id:
+            type: string
+          uuid:
+            type: string
+      processed_invoice:
+        type: object
+        properties:
+          appzen_invoice_id:
+            type: string
+          appzen_invoice_state:
+            type: string
+          currency:
+            type: string
+          customer_id:
+            type: string
+          created_at:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          last_updated_at:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          entity_id:
+            type: string
+          entity_name:
+            type: string
+          image_locations:
+            type: array
+            items:
+              type: object
+              properties:
+                image_url:
+                  type: string
+                name:
+                  type: string
+                mime_type:
+                  type: string
+                link_expires_after:
+                  allOf:
+                  - $ref: '#/definitions/date-time'
+          invoice_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          invoice_id:
+            type: string
+          invoice_type:
+            type: string
+            enum:
+            - INVOICE
+            - CREDIT_NOTE
+            - DEBIT_NOTE
+            - PROFORMA
+            - TAX_ONLY
+            - DOWN_PAYMENT
+            - MPREQ
+          memo:
+            type: string
+          invoice_lines:
+            type: array
+            items:
+              type: object
+              properties:
+                appzen_line_number:
+                  type: integer
+                line_number:
+                  type: integer
+                line_description:
+                  type: string
+                line_item_code:
+                  type: string
+                model_number:
+                  type: string
+                unit_of_measure:
+                  type: string
+                gl_code:
+                  type: string
+                quantity:
+                  type: number
+                currency:
+                  type: string
+                purchase_order_line_number:
+                  type: integer
+                purchase_order_number:
+                  type: string
+                po_match_type:
+                  allOf:
+                  - $ref: '#/definitions/po_policy_match_type'
+                pre_paid:
+                  type: boolean
+                memo:
+                  type: string
+                amortization_schedule:
+                  type: string
+                price_per_unit:
+                  type: number
+                service_start_date:
+                  allOf:
+                  - $ref: '#/definitions/date-time'
+                service_end_date:
+                  allOf:
+                  - $ref: '#/definitions/date-time'
+                unit_price:
+                  allOf:
+                  - $ref: '#/definitions/amount'
+                tax_amount:
+                  allOf:
+                  - $ref: '#/definitions/amount'
+                total_amount:
+                  allOf:
+                  - $ref: '#/definitions/amount'
+                default_tax_option:
+                  type: string
+                tax_applicability_id:
+                  type: string
+                line_vat_amount:
+                  allOf:
+                  - $ref: '#/definitions/amount'
+                line_vat_breakdown:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: '#/definitions/vat-breakdown-item'
+                    - description: The break down of vat amount for the invoice line
+                appzen_line_vat_breakdown:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: '#/definitions/appzen-vat-breakdown-item'
+                    - description: Appzen break down of vat amount for the invoice line
+                po_backed_line:
+                  type: boolean
+                has_line_allocations:
+                  type: boolean
+                line_allocations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      external_allocation_id:
+                        type: string
+                      amount:
+                        type: number
+                        example: 25.6
+                      tax:
+                        example: 2.56
+                        type: number
+                      percentage:
+                        type: number
+                        example: 35
+                      gl_code:
+                        type: string
+                      spend_category:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      cost_center:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      region:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      location:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      legal_entity:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      company:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      account:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      department:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      vendor:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      user:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      customer:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      project:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      inter_company:
+                        allOf:
+                        - $ref: '#/definitions/processed-invoice-account-segment'
+                      other_segment:
+                        type: array
+                        items:
+                          allOf:
+                          - $ref: '#/definitions/processed-invoice-account-segment'
+                      allocation_quantity:
+                        type: number
+                      purchase_order_number:
+                        type: string
+                      purchase_order_line_number:
+                        type: integer
+                      appzen_line_allocation_number:
+                        type: integer
+                      goods_receipts:
+                        type: array
+                        items:
+                          allOf:
+                          - $ref: '#/definitions/invoice-goods-receipt'
+                line_type:
+                  allOf:
+                  - $ref: '#/definitions/invoice_line_type'
+                labels:
+                  type: array
+                  items:
+                    type: string
+                other_fields:
+                  type: object
+                other_object_fields:
+                  allOf:
+                  - $ref: '#/definitions/processed-invoice-other-object-fields'
+                segments:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: '#/definitions/processed-invoice-account-segment'
+                other_segments:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: '#/definitions/processed-invoice-other-segment'
+                goods_receipts:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: '#/definitions/invoice-goods-receipt'
+                hsn_sac_code:
+                  type: string
+          invoice_number:
+            type: string
+          invoice_status:
+            type: string
+          invoice_description:
+            type: string
+          payment_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          original_invoice_id:
+            type: string
+          original_invoice_number:
+            type: string
+          original_invoice_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          payment_due_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          default_tax_option:
+            type: string
+          tax_applicability_id:
+            type: string
+          payment_term_id:
+            type: string
+            description: This value should be unique in the customer’s ERP system to distinguish payment terms
+          payment_term:
+            allOf:
+            - $ref: '#/definitions/payment-term'
+          payment_type_override:
+            type: string
+            example: CASH
+          accounting_date_override:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          requester:
+            type: string
+            example: pos
+          requester_id:
+            type: string
+            example: SX123
+          requester_email_address:
+            type: string
+            example: pos@appzen.ai
+          product_category:
+            type: string
+            example: software
+          po_policy:
+            allOf:
+            - $ref: '#/definitions/po_policy'
+          external_unique_id:
+            type: string
+          submitter:
+            type: string
+          submission_date:
+            allOf:
+            - $ref: '#/definitions/date-time'
+          supplier_id:
+            type: string
+          supplier_name:
+            type: string
+          supplier_number:
+            type: string
+          site_id:
+            type: string
+          labels:
+            type: array
+            items:
+              type: string
+          spend_category:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          cost_center:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          region:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          location:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          legal_entity:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          company:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          account:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          department:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          vendor:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          user:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          customer:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          project:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          inter_company:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-account-segment'
+          other_segment:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/definitions/processed-invoice-account-segment'
+          other_fields:
+            allOf:
+            - $ref: '#/definitions/invoice-header-custom-json'
+          other_object_fields:
+            allOf:
+            - $ref: '#/definitions/processed-invoice-other-object-fields'
+          purchase_order_numbers:
+            type: array
+            items:
+              type: string
+          shipping_handling_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          invoice_shipping_address:
+            allOf:
+            - $ref: '#/definitions/address'
+          invoice_billing_address:
+            allOf:
+            - $ref: '#/definitions/address'
+          invoice_supplier_address:
+            allOf:
+            - $ref: '#/definitions/address'
+          invoice_remit_to_address:
+            allOf:
+            - $ref: '#/definitions/address'
+          original_total_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          sub_total_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          total_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          tax_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          total_vat_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          miscellaneous_charges:
+            allOf:
+            - $ref: '#/definitions/amount'
+          vat_breakdown:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/definitions/vat-breakdown-item'
+              - description: The break down of vat amount for the invoice
+          appzen_vat_breakdown:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/definitions/appzen-vat-breakdown-item'
+              - description: Appzen break down of vat amount for the invoice
+          vat_registration_numbers:
+            type: array
+            items:
+              type: string
+          total_amount_excluding_vat:
+            allOf:
+            - $ref: '#/definitions/amount'
+          is_free_trial:
+            type: boolean
+          assignee_name:
+            type: string
+          assignee_id:
+            type: string
+          non_invoice_attachments:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                mime_type:
+                  type: string
+                image_url:
+                  type: string
+                link_expires_after:
+                  allOf:
+                  - $ref: '#/definitions/date-time'
+          total_wht_amount:
+            allOf:
+            - $ref: '#/definitions/amount'
+          wht_breakdown:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/definitions/withholding-tax'
+          payment_type:
+            allOf:
+            - $ref: '#/definitions/payment_type'
+            example: ACH
+          iban:
+            type: string
+            example: GB29NWBK60161331926819
+          bank_account_number:
+            type: string
+            example: '1234567890'
+          part_bank_key:
+            type: string
+            example: BANK001
+          bank_name:
+            type: string
+            example: ABC Bank
+          routing_number:
+            type: string
+            example: '021000021'
+          bank_currency:
+            type: string
+            example: USD
+  invoice-header-custom-json:
+    type: object
+    description: 'Maximum of 20 fields allowed, 500 chars per field.
+
+      The following is the list of predefined reserved field names. They are the only field names that can have prefix &quot;appzen&#58; &quot;. They are also not subject to the maximum count limit.
+
+
+      appzen&#58; vendor_einvoice
+
+      appzen&#58; exchange_rate
+
+      appzen&#58; nota_fiscal_elec_num
+
+      appzen&#58; nota_fiscal_type
+
+      appzen&#58; nota_fiscal_material
+
+      appzen&#58; nota_fiscal_service
+
+      appzen&#58; withholding
+
+      appzen&#58; invoice_category
+
+      appzen&#58; business_place
+
+      appzen&#58; section_code
+
+      appzen&#58; gst_partner
+
+      appzen&#58; place_of_supply
+
+      appzen&#58; invoice_reference_no
+
+      appzen&#58; payment_references
+
+      appzen&#58; qr_reference_code
+
+      appzen&#58; qr_bank
+
+      appzen&#58; qr_unstructured_info
+
+      appzen&#58; qr_structured_info
+
+      appzen&#58; enasarco
+
+      appzen&#58; partner_bank
+
+      appzen&#58; assignment
+
+      appzen&#58; sweden_ocr
+
+      appzen&#58; norway_kid
+
+      appzen&#58; denmark_fik
+
+      appzen&#58; project
+
+      appzen&#58; expenditure_org
+
+      appzen&#58; expenditure_type
+
+      appzen&#58; task
+
+      appzen&#58; work_breakdown_structure
+
+      appzen&#58; latam_vendor_vat_id
+
+      appzen&#58; poland_ksef_id
+
+      appzen&#58; israel_allocation_number
+
+      appzen&#58; buyer_endpoint_id
+
+      appzen&#58; buyer_reference
+
+      appzen&#58; pl_ksef_number
+
+      appzen&#58; pl_ksef_schema_version
+
+      appzen&#58; pl_corrected_invoice_issue_date
+
+      appzen&#58; pl_corrected_invoice_ksef_number
+
+      appzen&#58; pl_corrected_invoice_number
+
+      appzen&#58; pl_reason_for_correction
+
+      appzen&#58; pl_type_of_correction
+
+      appzen&#58; fr_supplier_siren
+
+      appzen&#58; fr_supplier_siret
+
+      appzen&#58; fr_customer_siren
+
+      appzen&#58; fr_customer_siret
+
+      appzen&#58; fr_invoice_format
+
+      appzen&#58; fr_invoice_lifecycle_status
+
+      appzen&#58; it_sdi_codice_destinatario
+
+      appzen&#58; it_sdi_formato_trasmissione
+
+      appzen&#58; it_sdi_id_trasmittente_code
+
+      appzen&#58; it_sdi_id_trasmittente_country
+
+      appzen&#58; it_sdi_pec_destinatario
+
+      appzen&#58; it_sdi_progressivo_invio
+
+      appzen&#58; es_dir3_oficina_contable
+
+      appzen&#58; es_dir3_organo_gestor
+
+      appzen&#58; es_dir3_unidad_tramitadora
+
+      appzen&#58; es_facturae_version
+
+      appzen&#58; de_einvoice_format
+
+      appzen&#58; de_leitweg_id
+
+      appzen&#58; nl_oin
+
+      appzen&#58; nl_preferred_format
+
+      appzen&#58; no_ehf_profile_id
+
+      appzen&#58; no_org_number
+
+      appzen&#58; pt_atcud
+
+      appzen&#58; pt_qr_code_present
+
+      appzen&#58; dk_cvr
+
+      appzen&#58; dk_ean_gln
+
+      appzen&#58; fi_einvoice_address
+
+      appzen&#58; fi_business_id_y_tunnus
+
+      appzen&#58; ie_exchange_rate
+
+      appzen&#58; lu_exchange_rate
+
+      appzen&#58; se_endpoint_id
+
+      appzen&#58; hu_nav_rtir_reporting_required
+
+      appzen&#58; bg_converted_vat_amount
+
+      appzen&#58; be_company_number_kbo_cbe
+
+      appzen&#58; bd_bin_or_tin
+
+      appzen&#58; ca_gst_hst_registration
+
+      appzen&#58; hk_business_registration_number
+
+      appzen&#58; lk_vat_registration
+
+      appzen&#58; mu_vat_number
+
+      appzen&#58; ua_vat_number
+
+      appzen&#58; us_supplier_ein
+
+      appzen&#58; ae_tax_amount_aed
+
+      '
+    example:
+      approval-code: KE-382
+      category: internal-projects
+      'appzen: withholding': '23.5'
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

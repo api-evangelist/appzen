@@ -1,0 +1,295 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Invoice Audit Results API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Invoice Audit Results
+paths:
+  /invoice/{uuid}/audit-results:
+    get:
+      tags:
+      - Invoice Audit Results
+      summary: Returns an invoice's audit results
+      description: Returns the audit results of an invoice by uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH and the overall invoice status, such as Approved, Rejected.
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/invoice-audit-results-json-schema'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /invoice/audit-results:
+    get:
+      tags:
+      - Invoice Audit Results
+      summary: Returns a collection of audit results filtered by search parameters.
+      description: 'Returns the audit results of an invoice filtered by the following search parameters: supplier-id, invoice-number, invoice-id, uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH and the overall invoice status, such as Approved, Rejected. Note: supplier-id and invoice-number are always used in tandem : (supplier-id, invoice-number). Otherwise, it will result in HTTP 400 error response.'
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid-query'
+      - $ref: '#/parameters/invoice-number'
+      - $ref: '#/parameters/invoice-id'
+      - $ref: '#/parameters/supplier-id'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/invoice-audit-results-search-json-schema'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  invoice-audit-results-json-schema:
+    type: object
+    properties:
+      audit_results:
+        type: object
+        properties:
+          rules:
+            type: array
+            items:
+              type: object
+              properties:
+                rule_code:
+                  type: string
+                  description: A unique identifier of a rule
+                  example: duplicate_invoice_amount
+                risk_message:
+                  type: string
+                  description: Description of the risk detected
+                  example: No duplicate detected
+                risk_results:
+                  type: object
+                  properties:
+                    risk_level:
+                      type: string
+                      description: The Risk Level, such as LOW, MEDIUM, or HIGH.
+                      example: LOW
+          risk_level:
+            type: string
+            description: The risk at invoice header level, such as LOW, MEDIUM, HIGH.
+            example: LOW
+          status:
+            type: string
+            description: The overall invoice status, such as Approved, Rejected.
+            example: Approved
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  invoice-audit-results-search-json-schema:
+    type: array
+    items:
+      type: object
+      properties:
+        audit_results:
+          type: object
+          properties:
+            uuid:
+              type: string
+              description: A globally unique identifier for an invoice
+              example: 08edd8d9-cc1c-45e1-8bbb-29ffb7e3a404
+            invoice-number:
+              type: string
+              description: The supplier's invoice number
+              example: MHEIN00051739
+            invoice-id:
+              type: string
+              description: The external invoice id
+              example: '77887788'
+            supplier-id:
+              type: string
+              description: The external supplier id
+              example: '7082403'
+            rules:
+              type: array
+              items:
+                type: object
+                properties:
+                  rule_code:
+                    type: string
+                    description: A unique identifier of a rule
+                    example: duplicate_invoice_amount
+                  risk_message:
+                    type: string
+                    description: Description of the risk detected
+                    example: No duplicate detected
+                  risk_results:
+                    type: object
+                    properties:
+                      risk_level:
+                        type: string
+                        description: The Risk Level, such as LOW, MEDIUM, or HIGH.
+                        example: LOW
+            risk_level:
+              type: string
+              description: The risk at invoice header level, such as LOW, MEDIUM, HIGH.
+              example: LOW
+            status:
+              type: string
+              description: The overall invoice status, such as Approved, Rejected.
+              example: Approved
+parameters:
+  invoice-number:
+    in: query
+    description: The supplier's invoice number
+    required: false
+    name: invoice-number
+    type: string
+  uuid-query:
+    in: query
+    description: Globally unique identifier for an invoice
+    required: false
+    name: uuid
+    type: string
+  invoice-id:
+    in: query
+    description: The external invoice id
+    required: false
+    name: invoice-id
+    type: string
+  supplier-id:
+    in: query
+    description: The external supplier id
+    required: false
+    name: supplier-id
+    type: string
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

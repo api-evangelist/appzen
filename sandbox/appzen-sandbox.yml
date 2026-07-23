@@ -1,0 +1,28 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.appzen.com/environments.html
+notes: >-
+  AppZen publishes a dedicated US sandbox environment for the Autonomous AP
+  API, separate from production, reachable at its own host. EU sandbox and
+  EU production are listed as "coming soon". Credentials (x-api-key,
+  customer-id, customer-key) are issued per customer by AppZen Support; no
+  self-serve or magic test values are published (AppZen is not a card
+  acquirer, so there are no test card numbers).
+environments:
+- name: Sandbox US
+  base_url: https://api.us.sandbox.appzen.com
+  status: available
+- name: Production US
+  base_url: https://api.appzen.com
+  status: available
+- name: Sandbox EU
+  base_url: null
+  status: coming-soon
+- name: Production EU
+  base_url: null
+  status: coming-soon
+base_path: /dictionary-data-services
+credentials:
+  issued_by: AppZen Support team
+  headers: [x-api-key, customer-id, customer-key]
+test_values: []

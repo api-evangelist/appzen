@@ -1,0 +1,458 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts User Groups API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: User Groups
+paths:
+  /user-groups:
+    get:
+      tags:
+      - User Groups
+      summary: Returns all user groups for the customer
+      description: Returns every user group for the customer as an array. Each element has the same shape as the single-group GET response.
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user-group'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /user-group:
+    post:
+      tags:
+      - User Groups
+      summary: Creates/updates a user group
+      description: 'Creates a user group, or updates the existing one with the same `external_group_id` (upsert).
+
+        An update is a full replace of the group, including its `members`. Setting `status` to
+
+        `DISABLED` archives the group, and is allowed even while the group is referenced by in-flight
+
+        invoices or automations. Members that are not existing AppZen users are skipped and returned
+
+        in `unresolved_user_ids` (the request still succeeds).
+
+        '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/user-group-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/user-group-sync-result'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/user-group-sync-result'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /user-group/{external-group-id}:
+    get:
+      tags:
+      - User Groups
+      summary: Returns a user group
+      description: Returns the details (including members) of the group matching the external group id.
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/external-group-id'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/user-group'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  group-management-source:
+    type: string
+    description: Who owns the group.
+    enum:
+    - APPZEN_MANAGED
+    - EXTERNALLY_MANAGED
+    example: EXTERNALLY_MANAGED
+  user-group-sync-result:
+    type: object
+    description: Result of a create/update (POST) operation.
+    properties:
+      group_id:
+        type: string
+        description: AppZen-assigned unique identifier for the group.
+        example: '734512'
+      external_group_id:
+        type: string
+        example: AP-GROUP-1001
+      management_source:
+        description: The `management_source` the group was created/updated with.
+        allOf:
+        - $ref: '#/definitions/group-management-source'
+      status:
+        type: string
+        description: Outcome of the operation.
+        enum:
+        - CREATED
+        - UPDATED
+        example: CREATED
+      unresolved_user_ids:
+        type: array
+        description: 'Member user ids that are not existing AppZen users. These members are skipped; the request
+
+          still succeeds and the rest of the group is applied.
+
+          '
+        items:
+          type: string
+        example:
+        - az-user-99999
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  user-group-member:
+    type: object
+    description: A group member as returned by the API.
+    properties:
+      user_id:
+        type: string
+        example: az-user-90211
+      first_name:
+        type: string
+        example: John
+      last_name:
+        type: string
+        example: Doe
+      email:
+        type: string
+        example: john.doe@abc.com
+      added_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      added_by:
+        type: string
+        description: AppZen user id who added this member.
+        example: az-user-00001
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  user-group-json-schema:
+    type: object
+    description: Request body for creating/updating a user group.
+    properties:
+      external_group_id:
+        type: string
+        description: Identifier of the group in the external system. Identity / upsert key.
+        example: AP-GROUP-1001
+      management_source:
+        description: Required. Who owns the group.
+        allOf:
+        - $ref: '#/definitions/group-management-source'
+      category:
+        $ref: '#/definitions/group-category'
+      product:
+        $ref: '#/definitions/group-product'
+      group_name:
+        type: string
+        description: Display name of the group. Optional.
+        example: AP Approvers - North America
+      group_description:
+        type: string
+        description: Description of the group. Optional.
+        example: Approvers for North America AP invoices
+      group_email:
+        type: string
+        description: Group email alias. Optional.
+        example: ap-approvers-na@abc.com
+      notification_method:
+        $ref: '#/definitions/group-notification-method'
+      status:
+        $ref: '#/definitions/group-status'
+      source_created_at:
+        description: When the group was created in the source system. Optional.
+        allOf:
+        - $ref: '#/definitions/date-time'
+      source_last_updated_at:
+        description: When the group was last modified in the source system. Optional.
+        allOf:
+        - $ref: '#/definitions/date-time'
+      members:
+        type: array
+        description: The group's members. Replaced in full on each create/update. Any user_id that is not an existing AppZen user is skipped and returned in `unresolved_user_ids`; the request still succeeds.
+        items:
+          $ref: '#/definitions/user-group-member-input'
+    required:
+    - external_group_id
+    - management_source
+    - category
+    - product
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  user-group-member-input:
+    type: object
+    description: A group member to assign.
+    properties:
+      user_id:
+        type: string
+        description: The AppZen user id of the member. If it is not an existing AppZen user, the member is skipped and returned in `unresolved_user_ids`.
+        example: az-user-90211
+    required:
+    - user_id
+  group-notification-method:
+    type: string
+    description: How notifications are delivered to the group.
+    enum:
+    - GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
+    - GROUP_NOTIFICATION_METHOD_SEND_TO_GROUP_ALIAS
+    - GROUP_NOTIFICATION_METHOD_SEND_TO_BOTH
+    default: GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
+    example: GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
+  group-category:
+    type: string
+    description: Purpose of the group.
+    enum:
+    - TRANSACTION_ASSIGNMENT
+    - BIZ_USER_ASSIGNMENT
+    - APPROVAL_ASSIGNMENT
+    example: APPROVAL_ASSIGNMENT
+  user-group:
+    type: object
+    description: A user group as returned by the API.
+    properties:
+      group_id:
+        type: string
+        description: AppZen-assigned unique identifier for the group (read-only).
+        example: '734512'
+      customer_id:
+        type: string
+        description: AppZen customer id (read-only).
+        example: '488059'
+      external_group_id:
+        type: string
+        example: AP-GROUP-1001
+      management_source:
+        $ref: '#/definitions/group-management-source'
+      category:
+        $ref: '#/definitions/group-category'
+      product:
+        $ref: '#/definitions/group-product'
+      group_name:
+        type: string
+        example: AP Approvers - North America
+      group_description:
+        type: string
+        example: Approvers for North America AP invoices
+      group_email:
+        type: string
+        example: ap-approvers-na@abc.com
+      notification_method:
+        $ref: '#/definitions/group-notification-method'
+      status:
+        $ref: '#/definitions/group-status'
+      members:
+        type: array
+        items:
+          $ref: '#/definitions/user-group-member'
+      source_created_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      source_last_updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      created_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      created_by:
+        type: string
+        example: az-user-00001
+      updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      updated_by:
+        type: string
+        example: az-user-00001
+  group-status:
+    type: string
+    description: Lifecycle status of the group.
+    enum:
+    - ACTIVE
+    - DISABLED
+    default: ACTIVE
+    example: ACTIVE
+  group-product:
+    type: string
+    description: AppZen product the group belongs to.
+    enum:
+    - PRODUCT_AP
+    - PRODUCT_EXPENSE
+    - PRODUCT_SPEND_AUDIT
+    - PRODUCT_AUTONOMOUS_INBOX
+    - PRODUCT_AGENTS
+    example: PRODUCT_AP
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+parameters:
+  external-group-id:
+    in: path
+    description: The group identifier in the source ERP system (e.g. "AP-GROUP-1001"). This is the stable identity of an externally managed group.
+    required: true
+    name: external-group-id
+    type: string
+  user-group-json-schema:
+    in: body
+    required: true
+    name: user-group-json-schema
+    schema:
+      $ref: '#/definitions/user-group-json-schema'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

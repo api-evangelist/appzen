@@ -1,0 +1,317 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Unit of Measures API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Unit of Measures
+paths:
+  /unit-of-measures:
+    post:
+      tags:
+      - Unit of Measures
+      summary: Creates/updates a unit of measure
+      description: Creates a new unit of measure in AppZen. Returns a uuid for this unit of measure. When there already exists a unit of measure (with the same uom_code), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).
+      parameters:
+      - $ref: '#/parameters/unit-of-measures-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /unit-of-measure/{uuid}:
+    get:
+      tags:
+      - Unit of Measures
+      summary: Returns unit of measure details
+      description: Returns the details of a unit of measure by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/unit-of-measure-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /unit-of-measure/uom-code/{uom-code}:
+    get:
+      tags:
+      - Unit of Measures
+      summary: Returns unit of measure details
+      description: Returns the details of a unit of measure matching the uom-code
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uom-code'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/unit-of-measure-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  unit-of-measure:
+    properties:
+      uom_code:
+        description: Unit of Measure code in the ERP system
+        type: string
+        example: PCS
+      uom_description:
+        default: ''
+        example: Number of Pieces
+        description: Unit of Measure name/description in the ERP system.
+        type: string
+      uom_precision:
+        type: integer
+        minimum: 0
+        maximum: 9
+        default: 9
+        example: if defined as 2, then quantity of 12.555 will be rounded to 12.56
+        description: Max number of decimal digits of precision to be preserved
+      is_active:
+        description: Is Unit of measure active in the ERP system.
+        default: true
+        type: boolean
+      is_default:
+        description: Is Unit of measure default in the ERP system.
+        default: false
+        type: boolean
+    required:
+    - uom_code
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  unit-of-measure-get:
+    properties:
+      uom_code:
+        description: Unit of Measure code in the ERP system
+        type: string
+        example: PCS
+      uom_description:
+        default: ''
+        example: Number of Pieces
+        description: Unit of Measure name/description in the ERP system.
+        type: string
+      uom_precision:
+        type: integer
+        minimum: 0
+        maximum: 9
+        default: 9
+        example: if defined as 2, then quantity of 12.555 will be rounded to 12.56
+        description: Max number of decimal digits of precision to be preserved
+      appzen_uom_code:
+        description: Appzen mapped unit of measure code
+        example: PIECE
+        type: string
+      is_active:
+        description: Is Unit of measure active in the ERP system.
+        default: true
+        type: boolean
+      is_default:
+        description: Is Unit of measure default in the ERP system.
+        default: false
+        type: boolean
+      last_updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+    required:
+    - uom_code
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  unit-of-measures-json-schema:
+    in: body
+    required: true
+    name: unit-of-measures-json-schema
+    schema:
+      $ref: '#/definitions/unit-of-measure'
+  uom-code:
+    in: path
+    description: Customer specific unit of measure code
+    required: true
+    name: uom-code
+    type: string
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

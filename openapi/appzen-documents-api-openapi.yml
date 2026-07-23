@@ -1,0 +1,150 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Documents API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Documents
+paths:
+  /generate-upload-url:
+    get:
+      tags:
+      - Documents
+      summary: Generates a url to upload a document into AppZen repository.
+      description: "This is first part of a two part process for uploading a document into AppZen repository.\n1) Generate URL\n    ```\n\n    curl --location \\\n      --request GET 'https://<api-gateway-url>/dictionary-data-services/generate-upload-url' \\\n      --header 'x-api-key: <x-api-key>' \\\n      --header 'customer-id: <customer-id>' \\\n      --header 'customer-key: <customer-key>'\n\n    ```\n2) The JSON reponse contains three elements.\n    A `uuid` field contains the identifier of the document to be uploaded.\n    An `url` field is a one-time unique URL.\n    An `expires` field is the expiration timestamp of the url field. Example JSON response:\n    ```\n    {\n      \"url\": \"https://<download-link>\",\n      \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n      \"expires\": \"2021-02-23T22:20:47.636Z\"\n    }\n    ```\n\n3) Using the URL generated above, upload a document/attachment via an additional PUT API call, such as in the following example.\n    A document attachment is limited to max size of 25MB.\n\n    ```\n    curl --location \\\n      --request PUT 'https://<download-link>' \\\n      --data-binary '@/<local_file_path>/Attachment_012.pdf'\n    ```\n4) The uuid returned in 2), such as `5fc03087-d265-11e7-b8c6-83e29cd24f4c` in the example, can be used to link the attachment, to an invoice.\n"
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/signed-url-response'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  signed-url-response:
+    type: object
+    properties:
+      url:
+        type: string
+        example: http://download-link.appzen.com/Staged_Documents/0102/5fc03087-d265-11e7-b8c6-83e29cd24f4c/AEMB7W..<very-long-url>
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      expires:
+        type: string
+        example: '2021-02-23T22:20:47.636Z'
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

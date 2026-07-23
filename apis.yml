@@ -1,8 +1,15 @@
 aid: appzen
 name: AppZen
-description: AppZen is a company surfaced as a portfolio company of 500-global, bloomberg-beta, lightspeed-venture-partners,
-  redpoint-ventures and added to the API Evangelist network as a stub for enrichment. This profile is
-  a lead awaiting the enrichment pipeline.
+description: >-
+  AppZen is an AI platform for finance teams that automates accounts payable
+  and expense auditing. Its Autonomous AP product ingests invoices, purchase
+  orders, goods receipts and supporting master data, then applies AI to run
+  validation checks, assign risk scores, and audit spend before payment. The
+  public Autonomous AP REST API (Swagger 2.0, 54 operations) lets ERP and
+  accounting systems such as SAP, Oracle, NetSuite, Coupa, Workday and
+  Microsoft Dynamics push documents into AppZen and retrieve audit results.
+  Authentication is via three API-key headers issued by AppZen Support, with
+  US sandbox and production environments (EU coming soon).
 url: https://raw.githubusercontent.com/api-evangelist/appzen/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,19 +18,273 @@ x-backed-by:
 - bloomberg-beta
 - lightspeed-venture-partners
 - redpoint-ventures
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://api-docs.appzen.com/img/appzen-logo.svg
 tags:
 - Company
-apis: []
+- Finance
+- Accounts Payable
+- Expense Management
+- Invoice Processing
+- Spend Audit
+- Artificial Intelligence
+- ERP Integration
+apis:
+- aid: appzen:appzen-chart-of-accounts-api
+  name: AppZen Chart of Accounts API
+  description: The Chart of Accounts API from AppZen — 3 operation(s) for chart of accounts.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Chart of Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-chart-of-accounts-api-openapi.yml
+- aid: appzen:appzen-custom-data-sets-api
+  name: AppZen Custom Data Sets API
+  description: The Custom Data Sets API from AppZen — 3 operation(s) for custom data sets.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Custom Data Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-custom-data-sets-api-openapi.yml
+- aid: appzen:appzen-documents-api
+  name: AppZen Documents API
+  description: The Documents API from AppZen — 1 operation(s) for documents.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-documents-api-openapi.yml
+- aid: appzen:appzen-entities-api
+  name: AppZen Entities API
+  description: The Entities API from AppZen — 4 operation(s) for entities.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-entities-api-openapi.yml
+- aid: appzen:appzen-externally-processed-invoices-api
+  name: AppZen Externally Processed Invoices API
+  description: >-
+    The Externally Processed Invoices API from AppZen — 2 operation(s) for externally processed invoices.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Externally Processed Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-externally-processed-invoices-api-openapi.yml
+- aid: appzen:appzen-goods-receipt-api
+  name: AppZen Goods Receipt API
+  description: The Goods Receipt API from AppZen — 2 operation(s) for goods receipt.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Goods Receipt
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-goods-receipt-api-openapi.yml
+- aid: appzen:appzen-invoice-audit-results-api
+  name: AppZen Invoice Audit Results API
+  description: The Invoice Audit Results API from AppZen — 2 operation(s) for invoice audit results.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Invoice Audit Results
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-invoice-audit-results-api-openapi.yml
+- aid: appzen:appzen-invoice-status-sync-api
+  name: AppZen Invoice Status Sync API
+  description: The Invoice Status Sync API from AppZen — 1 operation(s) for invoice status sync.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Invoice Status Sync
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-invoice-status-sync-api-openapi.yml
+- aid: appzen:appzen-invoices-api
+  name: AppZen Invoices API
+  description: The Invoices API from AppZen — 3 operation(s) for invoices.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-invoices-api-openapi.yml
+- aid: appzen:appzen-lookup-item-api
+  name: AppZen Lookup Item API
+  description: The Lookup Item API from AppZen — 3 operation(s) for lookup item.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Lookup Item
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-lookup-item-api-openapi.yml
+- aid: appzen:appzen-lookup-table-api
+  name: AppZen Lookup Table API
+  description: The Lookup Table API from AppZen — 3 operation(s) for lookup table.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Lookup Table
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-lookup-table-api-openapi.yml
+- aid: appzen:appzen-payment-terms-api
+  name: AppZen Payment Terms API
+  description: The Payment Terms API from AppZen — 4 operation(s) for payment terms.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Payment Terms
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-payment-terms-api-openapi.yml
+- aid: appzen:appzen-processed-invoices-api
+  name: AppZen Processed Invoices API
+  description: The Processed Invoices API from AppZen — 1 operation(s) for processed invoices.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Processed Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-processed-invoices-api-openapi.yml
+- aid: appzen:appzen-purchase-orders-api
+  name: AppZen Purchase Orders API
+  description: The Purchase Orders API from AppZen — 4 operation(s) for purchase orders.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Purchase Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-purchase-orders-api-openapi.yml
+- aid: appzen:appzen-suppliers-api
+  name: AppZen Suppliers API
+  description: The Suppliers API from AppZen — 4 operation(s) for suppliers.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Suppliers
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-suppliers-api-openapi.yml
+- aid: appzen:appzen-tax-master-api
+  name: AppZen Tax Master API
+  description: The Tax Master API from AppZen — 3 operation(s) for tax master.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Tax Master
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-tax-master-api-openapi.yml
+- aid: appzen:appzen-unit-of-measures-api
+  name: AppZen Unit of Measures API
+  description: The Unit of Measures API from AppZen — 3 operation(s) for unit of measures.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Unit of Measures
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-unit-of-measures-api-openapi.yml
+- aid: appzen:appzen-user-groups-api
+  name: AppZen User Groups API
+  description: The User Groups API from AppZen — 3 operation(s) for user groups.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - User Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-user-groups-api-openapi.yml
+- aid: appzen:appzen-vat-api
+  name: AppZen Vat API
+  description: The Vat API from AppZen — 4 operation(s) for vat.
+  humanURL: https://api-docs.appzen.com/
+  baseURL: https://api.appzen.com/dictionary-data-services
+  tags:
+  - Vat
+  properties:
+  - type: OpenAPI
+    url: openapi/appzen-vat-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/appzen-domain-security.yml
+- type: Authentication
+  url: authentication/appzen-authentication.yml
+- type: Conventions
+  url: conventions/appzen-conventions.yml
+- type: ErrorCatalog
+  url: errors/appzen-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/appzen-lifecycle.yml
+- type: Sandbox
+  url: sandbox/appzen-sandbox.yml
+- type: DataModel
+  url: data-model/appzen-data-model.yml
+- type: Conformance
+  url: conformance/appzen-conformance.yml
+- type: MCPServer
+  url: mcp/appzen-mcp.yml
+- type: LLMsTxt
+  url: llms/appzen-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://api-docs.appzen.com/
+- type: Documentation
+  url: https://support.appzen.com/hc/en-us/categories/13996913056659-AppZen-REST-API
+- type: APIReference
+  url: https://api-docs.appzen.com/swagger/apis.html
+- type: GettingStarted
+  url: https://support.appzen.com/hc/en-us/articles/12682580110739-Introduction
+- type: Support
+  url: https://support.appzen.com/
+- type: Blog
+  url: https://www.appzen.com/blog
+- type: TermsOfService
+  url: https://www.appzen.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.appzen.com/privacy-policy-appzen
 - type: Website
   url: https://appzen.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

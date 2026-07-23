@@ -1,0 +1,39 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.appzen.com/api_guidelines.html
+notes: >-
+  Cross-cutting request/response semantics for the AppZen Autonomous AP API,
+  from the published API Guidelines plus what the Swagger 2.0 spec implies.
+authentication:
+  style: api-key-headers
+  headers: [x-api-key, customer-id, customer-key]
+  ref: authentication/appzen-authentication.yml
+idempotency:
+  supported: false
+  notes: No idempotency-key header is documented; write operations are POST create/update.
+pagination:
+  style: search-endpoints
+  notes: >-
+    List/search is via dedicated POST /{resource}/search endpoints that take a
+    query spec (e.g. from-date/end-date) and return matching uuids; no documented
+    cursor/offset envelope.
+request_tracing:
+  header: x-correlation-id
+  direction: response
+  notes: Returned on every response (success and failure); quote to AppZen Support for troubleshooting.
+versioning:
+  ref: lifecycle/appzen-lifecycle.yml
+  scheme: spec-version + /v1 path
+rate_limiting:
+  per_second: 1000
+  per_day: 300000
+  exceeded_status: 429
+  ref: https://api-docs.appzen.com/api_guidelines.html
+error_envelope:
+  media_type: application/json
+  format: custom
+  fields: [timestamp, status, error, message]
+  ref: errors/appzen-problem-types.yml
+content_type:
+  request: application/json
+  response: application/json

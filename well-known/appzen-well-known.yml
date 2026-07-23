@@ -1,0 +1,27 @@
+generated: '2026-07-18'
+method: searched
+source: live probes of /.well-known/* on AppZen hosts
+notes: >-
+  No /.well-known discovery documents are published on AppZen's API or web
+  hosts. api.appzen.com returns 403 to unauthenticated probes; appzen.com
+  redirects (301) to www.appzen.com which returns 404 for each path. Recorded
+  as valid absence; no WellKnown/SecurityTxt pointer emitted.
+hosts:
+- host: https://api.appzen.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+- host: https://www.appzen.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://audit.appzen.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}

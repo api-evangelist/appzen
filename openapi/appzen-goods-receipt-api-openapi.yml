@@ -1,0 +1,347 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Goods Receipt API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Goods Receipt
+paths:
+  /goods-receipt:
+    post:
+      tags:
+      - Goods Receipt
+      summary: Creates/Updates a goods receipt
+      description: Creates a new goods receipt in AppZen and returns a uuid that uniquely identifies it. When there already exists a goods receipt (receipt_id), then the operation is an update (the `status` would be `UPDATED` in this case).
+      parameters:
+      - $ref: '#/parameters/goods-receipt-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /goods-receipt/{receipt_id}:
+    get:
+      tags:
+      - Goods Receipt
+      summary: Returns a goods receipt details
+      description: Returns the details of a goods receipt for a receipt id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        description: goods receipt id
+        required: true
+        name: receipt_id
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/goods-receipt'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  amount:
+    properties:
+      amount:
+        example: 1.5
+        type: number
+      currency:
+        example: USD
+        type: string
+    type: object
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  goods-receipt-json-schema:
+    type: object
+    properties:
+      receipt_id:
+        type: string
+        example: 123AB
+        description: The Receipt ID from source system
+      receipt_number:
+        type: string
+        example: R1
+        description: The receipt number visible/present in invoice pdf/image
+      receipt_type:
+        type: string
+        example: TYPE_1
+        description: The type of receipt
+      purchase_order_number:
+        type: string
+        example: '000010232'
+        description: The unique purchase order identifier in the source system that matches with the purchase order reference sent in purchase order header file.
+      purchase_order_line_number:
+        type: integer
+        format: int32
+        example: 1
+        description: The reference of the purchase order line
+      po_external_unique_id:
+        type: string
+        example: A000010232
+        description: The unique purchase order identifier in the source system the external system which uniquely identities a PO.
+      receipt_date:
+        allOf:
+        - $ref: '#/definitions/date'
+        - description: The date when the receipt has been created
+      unit_of_measure:
+        type: string
+        example: UOM
+        description: The unit of measurement
+      unit_price:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Unit price of item in the receipt along with currency
+      receipt_quantity:
+        type: integer
+        format: int32
+        example: 10
+        description: The total quantity of the receipt
+      receipt_amount:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Total amount of the receipt along with currency
+      open_amount:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Open amount available to allocate to invoices of the receipt along with currency
+      open_quantity:
+        type: integer
+        format: int32
+        example: 10
+        description: available to allocate to invoices of the receipt
+    required:
+    - receipt_id
+    - receipt_number
+    - purchase_order_number
+    - purchase_order_line_number
+    - unit_price
+    - receipt_amount
+    - receipt_quantity
+    - open_amount
+    - open_quantity
+    - receipt_date
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  goods-receipt:
+    type: object
+    properties:
+      receipt_id:
+        type: string
+        example: 123AB
+        description: The Receipt ID from source system
+      receipt_number:
+        type: string
+        example: R1
+        description: The receipt number visible/present in invoice pdf/image
+      receipt_type:
+        type: string
+        example: TYPE_1
+        description: The type of receipt
+      purchase_order_number:
+        type: string
+        example: '000010232'
+        description: The unique purchase order identifier in the source system that matches with the purchase order reference sent in purchase order header file.
+      purchase_order_line_number:
+        type: integer
+        format: int32
+        example: 1
+        description: The reference of the purchase order line
+      po_external_unique_id:
+        type: string
+        example: A000010232
+        description: The unique purchase order identifier in the source system the external system which uniquely identities a PO.
+      receipt_date:
+        allOf:
+        - $ref: '#/definitions/date'
+        - description: The date when the receipt has been created
+      unit_of_measure:
+        type: string
+        example: UOM
+        description: The unit of measurement
+      unit_price:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Unit price of item in the receipt along with currency
+      receipt_quantity:
+        type: integer
+        format: int32
+        example: 10
+        description: The total quantity of the receipt
+      receipt_amount:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Total amount of the receipt along with currency
+      open_amount:
+        allOf:
+        - $ref: '#/definitions/amount'
+        - description: Open amount available to allocate to invoices of the receipt along with currency
+      open_quantity:
+        type: integer
+        format: int32
+        example: 10
+        description: available to allocate to invoices of the receipt
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  date:
+    type: string
+    format: date
+    example: '2020-11-01'
+    description: date should be in UTC format
+parameters:
+  goods-receipt-json-schema:
+    in: body
+    required: true
+    name: goods-receipt-json-schema
+    schema:
+      $ref: '#/definitions/goods-receipt-json-schema'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key

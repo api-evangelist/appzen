@@ -1,0 +1,341 @@
+swagger: '2.0'
+info:
+  title: Autonomous AP APIs Chart of Accounts Custom Data Sets API
+  description: Public APIs for integrating with Autonomous AP
+  version: 2.0.3
+host: <env>.appzen.com
+basePath: /dictionary-data-services
+schemes:
+- https
+security:
+- API Key Header: []
+  Customer Id Header: []
+  Customer Key Header: []
+tags:
+- name: Custom Data Sets
+paths:
+  /custom-data:
+    post:
+      tags:
+      - Custom Data Sets
+      summary: Creates/updates a custom data record
+      description: Creates a new Lookup in AppZen (set of named key  value pairs). Returns a uuid for this lookup. When there already exists a lookup (with the same lookup_name and external_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).
+      parameters:
+      - $ref: '#/parameters/custom-data-json-schema'
+      responses:
+        200:
+          description: Updated
+          schema:
+            $ref: '#/definitions/uuid-updated'
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/uuid'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /custom-data/{uuid}:
+    get:
+      tags:
+      - Custom Data Sets
+      summary: Returns custom data record details
+      description: Returns the details of a custom data record by uuid
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/custom-data-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+  /custom-data/dataset-name/{dataset-name}/external-id/{custom-external-id}:
+    get:
+      tags:
+      - Custom Data Sets
+      summary: Returns custom data record details
+      description: Returns the details of a custom data record matching the dataset-name and its external-id
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/dataset-name'
+      - $ref: '#/parameters/custom-external-id'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/custom-data-get'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http-400-error-response'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/http-401-error-response'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/http-403-error-response'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/http-404-error-response'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http-500-error-response'
+definitions:
+  http-500-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 500
+      error:
+        type: string
+        example: Internal Server Error
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+  http-404-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 404
+      error:
+        type: string
+        example: Not Found
+      message:
+        type: string
+        example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+  http-403-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 403
+      error:
+        type: string
+        example: Forbidden
+      message:
+        type: string
+        example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  http-400-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 400
+      error:
+        type: string
+        example: Bad Request
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+  uuid-updated:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: UPDATED
+  uuid:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+      status:
+        type: string
+        example: CREATED
+  http-401-error-response:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        example: 2019-01-17T16:12:45.977+0000
+      status:
+        type: string
+        example: 401
+      error:
+        type: string
+        example: Unauthorized
+      message:
+        type: string
+        example: 'Error code : 17e3338d - Unable to authenticate credentials'
+  custom-data:
+    properties:
+      dataset_name:
+        description: Data Set Name from ERP system
+        type: string
+        example: Employee
+      custom_external_id:
+        example: E123
+        description: Unique ID in the ERP system.
+        type: string
+      items:
+        description: List of key value pairs belong to the custom data record.
+        type: array
+        items:
+          type: object
+          properties:
+            key:
+              type: string
+              description: The field name in the record
+            value:
+              type: string
+              description: The value associated with the key
+        example:
+        - key: first_name
+          value: Anand
+        - key: last_name
+          value: Vijian
+      is_active:
+        description: Is custom data record active in the ERP system.
+        default: true
+        type: boolean
+      created_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+    required:
+    - dataset_name
+    - custom_external_id
+  date-time:
+    type: string
+    format: date-time
+    example: '2024-03-01T11:01:00Z'
+    description: date should be in UTC format
+  custom-data-get:
+    properties:
+      dataset_name:
+        description: Data Set Name in the ERP system
+        type: string
+        example: Employee
+      custom_external_id:
+        example: E123
+        description: Unique ID in the ERP system.
+        type: string
+      items:
+        description: List of key value pairs belong to the custom data record.
+        type: array
+        items:
+          type: object
+          properties:
+            key:
+              type: string
+              description: The field name in the record
+            value:
+              type: string
+              description: The value associated with the key
+        example:
+        - key: first_name
+          value: Anand
+        - key: last_name
+          value: Vijian
+      is_active:
+        description: Is custom data record active in the ERP system.
+        default: true
+        type: boolean
+      created_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      updated_at:
+        allOf:
+        - $ref: '#/definitions/date-time'
+      uuid:
+        type: string
+        example: 0045-89707-0906-DE3C
+parameters:
+  uuid:
+    in: path
+    description: Globally unique identifier for an uploaded document
+    required: true
+    name: uuid
+    type: string
+  dataset-name:
+    in: path
+    description: data set name
+    required: true
+    name: dataset-name
+    type: string
+  custom-external-id:
+    in: path
+    description: external-id for custom data item
+    required: true
+    name: custom-external-id
+    type: string
+  custom-data-json-schema:
+    in: body
+    required: true
+    name: custom-data-json-schema
+    schema:
+      $ref: '#/definitions/custom-data'
+securityDefinitions:
+  API Key Header:
+    type: apiKey
+    in: header
+    name: x-api-key
+  Customer Id Header:
+    type: apiKey
+    in: header
+    name: customer-id
+  Customer Key Header:
+    type: apiKey
+    in: header
+    name: customer-key
