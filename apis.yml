@@ -243,6 +243,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/appzen-autonomous-ap-overlay.yaml
 - type: DomainSecurity
   url: security/appzen-domain-security.yml
 - type: Authentication
