@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Goods Receipt API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Goods Receipt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/Updates a goods receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/goods-receipt"
+          },
+          "docs": "Creates a new goods receipt in AppZen and returns a uuid that uniquely identifies it. When there already exists a goods receipt (receipt_id), then the operation is an update (the `status` would be `UPDATED` in this case)."
+        },
+        {
+          "info": {
+            "name": "Returns a goods receipt details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/goods-receipt/:receipt_id",
+            "params": [
+              {
+                "name": "receipt_id",
+                "value": "",
+                "type": "path",
+                "description": "goods receipt id"
+              }
+            ]
+          },
+          "docs": "Returns the details of a goods receipt for a receipt id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

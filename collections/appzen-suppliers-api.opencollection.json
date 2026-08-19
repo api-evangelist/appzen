@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Suppliers API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Suppliers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/updates a supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/supplier"
+          },
+          "docs": "Creates a new supplier in AppZen. Returns a uuid for this supplier. When there already exists a supplier (with the same external_supplier_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns a supplier's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/supplier/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a supplier by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns a supplier's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/supplier/external-supplier-id/:external-supplier-id",
+            "params": [
+              {
+                "name": "external-supplier-id",
+                "value": "",
+                "type": "path",
+                "description": "external supplier id"
+              }
+            ]
+          },
+          "docs": "Returns the details of a supplier matching external supplier id"
+        },
+        {
+          "info": {
+            "name": "Returns all Supplier uuids that match the search criteria",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/supplier/search"
+          },
+          "docs": "Returns a list of Supplier uuids that match from-date and end-date"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

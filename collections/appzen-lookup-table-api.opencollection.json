@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Lookup Table API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookup Table",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns list of Lookup Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/lookup-table"
+          },
+          "docs": "Returns the list of Lookup Tables"
+        },
+        {
+          "info": {
+            "name": "Creates/updates a Lookup Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/lookup-table"
+          },
+          "docs": "Creates a new Lookup Table. Returns a uuid for this lookup table. <br> When there already exists a lookup table (with the same lookup_name_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns Lookup Table details given its uuid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/lookup-table/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a Lookup Table by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns Lookup Table details given its external lookup-name-id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/lookup-table/lookup-name-id/:lookup-name-id",
+            "params": [
+              {
+                "name": "lookup-name-id",
+                "value": "",
+                "type": "path",
+                "description": "lookup table name id"
+              }
+            ]
+          },
+          "docs": "Returns the details of a Lookup Table matching its external lookup-name-id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

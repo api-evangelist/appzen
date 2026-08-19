@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts User Groups API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns all user groups for the customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user-groups"
+          },
+          "docs": "Returns every user group for the customer as an array. Each element has the same shape as the single-group GET response."
+        },
+        {
+          "info": {
+            "name": "Creates/updates a user group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user-group"
+          },
+          "docs": "Creates a user group, or updates the existing one with the same `external_group_id` (upsert).\nAn update is a full replace of the group, including its `members`. Setting `status` to\n`DISABLED` archives the group, and is allowed even while the group is referenced by in-flight\ninvoices or automations. Members that are not existing AppZen users are skipped and returned\nin `unresolved_user_ids` (the request still succeeds).\n"
+        },
+        {
+          "info": {
+            "name": "Returns a user group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user-group/:external-group-id",
+            "params": [
+              {
+                "name": "external-group-id",
+                "value": "",
+                "type": "path",
+                "description": "The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+              }
+            ]
+          },
+          "docs": "Returns the details (including members) of the group matching the external group id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

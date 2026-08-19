@@ -1,0 +1,1236 @@
+{
+  "item": [
+    {
+      "id": "f8e44843-4837-4549-8584-5def7596ef00",
+      "name": "Lookup Item",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04894a8c-d245-4ba7-ab31-e658e3748931",
+          "name": "Creates/updates a Lookup Item associated with a Look up Table.",
+          "request": {
+            "name": "Creates/updates a Lookup Item associated with a Look up Table.",
+            "description": {
+              "content": "Creates a new Lookup Item. Returns a uuid for this lookup item. <br>When there already exists a lookup item (with the same lookup_item_name and lookup_item_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lookup_name_id\": \"<string>\",\n  \"lookup_item_id\": \"<string>\",\n  \"lookup_item_name\": \"<string>\",\n  \"lookup_item_description\": \"<string>\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"<string>\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "abab1e85-0d82-4baf-8fea-e6617a839bf9",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40ea1a9a-e12c-4f1a-9672-6efdb2bfc596",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6d66b73-797b-411c-a9c1-703dedfab032",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "527068bd-9f1e-4f4d-a11f-cc5f52377b7d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68a39098-b676-48f4-a6c4-f86c28ecd9c2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d565d9dc-7034-422f-ae1e-658d5a9d0035",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d071f601-864d-46ed-b15d-bab2517ebafb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"<string>\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37bba2c3-d9e7-4432-85f0-428405ae38eb",
+          "name": "Returns Lookup Item details",
+          "request": {
+            "name": "Returns Lookup Item details",
+            "description": {
+              "content": "Returns the details of a Lookup Item by its Appzen uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lookup",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) Globally unique identifier for an uploaded document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9e03920-3da0-4f50-9f7b-39769267a47a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_name_id\": \"REGION\",\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"string\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\",\n  \"uuid\": \"0045-89707-0906-DE3C\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b60f1a6-7c20-4faf-8065-87a0f38da424",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e2dfc9f-6ee2-495c-a771-85f54d74e4f0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e99b0c3-1689-42f6-bc1e-ba2e7a180cd3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "890cea77-624d-4904-a5d9-e5e7217b363d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08f61c92-0566-4e5c-b1b4-8adf30b64d5b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecedbefe-5cc9-46f5-8703-c104782ca403",
+          "name": "Returns Lookup Item details",
+          "request": {
+            "name": "Returns Lookup Item details",
+            "description": {
+              "content": "Returns the details of a Lookup Item matching the lookup-name-id and its external lookup-item-id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lookup",
+                "lookup-name-id",
+                ":lookup-name-id",
+                "lookup-item-id",
+                ":lookup-item-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lookup-name-id",
+                  "description": "(Required) lookup table name id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lookup-item-id",
+                  "description": "(Required) lookup item id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11a7b63e-fa66-4acf-bd1b-8c2525a6f2be",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "lookup-name-id",
+                    ":lookup-name-id",
+                    "lookup-item-id",
+                    ":lookup-item-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-name-id",
+                      "description": "(Required) lookup table name id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-item-id",
+                      "description": "(Required) lookup item id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lookup_name_id\": \"TAX_APPLICABILITY\",\n  \"lookup_item_id\": \"XDES322\",\n  \"lookup_item_name\": \"EMEA Region\",\n  \"lookup_item_description\": \"Tax Applicability in EMEA Region\",\n  \"is_active\": true,\n  \"parent_lookup_name_id\": \"REGION\",\n  \"parent_lookup_item_id\": \"Euroasia\",\n  \"parent_lookup_item_ids\": \"string\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\",\n  \"uuid\": \"0045-89707-0906-DE3C\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68b9523c-6541-41f0-8639-fede33a4914e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "lookup-name-id",
+                    ":lookup-name-id",
+                    "lookup-item-id",
+                    ":lookup-item-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-name-id",
+                      "description": "(Required) lookup table name id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-item-id",
+                      "description": "(Required) lookup item id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8321b56-413e-4a2d-956c-48ab92eff379",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "lookup-name-id",
+                    ":lookup-name-id",
+                    "lookup-item-id",
+                    ":lookup-item-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-name-id",
+                      "description": "(Required) lookup table name id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-item-id",
+                      "description": "(Required) lookup item id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db4005d9-bb16-4e40-8228-de6681ed0f92",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "lookup-name-id",
+                    ":lookup-name-id",
+                    "lookup-item-id",
+                    ":lookup-item-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-name-id",
+                      "description": "(Required) lookup table name id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-item-id",
+                      "description": "(Required) lookup item id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06923a7e-ef8a-4b34-9fc1-957ad12d95d1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "lookup-name-id",
+                    ":lookup-name-id",
+                    "lookup-item-id",
+                    ":lookup-item-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-name-id",
+                      "description": "(Required) lookup table name id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-item-id",
+                      "description": "(Required) lookup item id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab909fa7-2b5b-4a61-8c1c-3587e349415e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookup",
+                    "lookup-name-id",
+                    ":lookup-name-id",
+                    "lookup-item-id",
+                    ":lookup-item-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-name-id",
+                      "description": "(Required) lookup table name id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lookup-item-id",
+                      "description": "(Required) lookup item id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6b9d67dc-561c-40df-9cfd-ea35e6628d22",
+    "name": "Autonomous AP APIs Chart of Accounts Lookup Item API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

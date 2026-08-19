@@ -1,0 +1,1173 @@
+{
+  "item": [
+    {
+      "id": "52d54fd9-03a8-4114-9105-89587d8e0e66",
+      "name": "Tax Master",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa977111-1f65-45b0-8692-8712730bb9c3",
+          "name": "Creates/Updates a tax master record",
+          "request": {
+            "name": "Creates/Updates a tax master record",
+            "description": {
+              "content": "Creates a new tax master record in AppZen and returns a uuid that uniquely identifies it. When there is already exists a record (tax_id), then the operation is an update (the `status` would be `UPDATED` in this case).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tax"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tax_id\": \"<string>\",\n  \"tax_category\": \"<string>\",\n  \"tax_type\": \"<string>\",\n  \"tax_code\": \"<string>\",\n  \"tax_rate\": \"<number>\",\n  \"appzen_tax_code\": \"<string>\",\n  \"appzen_tax_rate\": \"<number>\",\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\"\n    }\n  ],\n  \"country\": \"<string>\",\n  \"country_code_iso3\": \"<string>\",\n  \"is_active\": true,\n  \"entity_id\": \"<string>\",\n  \"jurisdiction_code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "821b95d4-917d-437a-9705-f67ab92128a1",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "755c241b-f5bf-4aaa-b4be-9e92ecfa0938",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08c23cde-d44b-427f-ac89-79d3743c462e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29439388-bb2b-4d72-a87b-1b30c8a22060",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "409d78fb-f7b4-4dac-ad12-b22e501c31f9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f538170-2433-4b0e-82fb-13d5818c04ce",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bceb07c-b675-405b-994f-89dff715ce59",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax_id\": \"123AB\",\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"tax_type\": \"WHT\",\n  \"tax_code\": \"C1\",\n  \"tax_rate\": 10.5,\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 20,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"entity_id\": \"E124\",\n  \"jurisdiction_code\": \"IN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b6b19a0-6090-4b36-8b8f-001fa49a3215",
+          "name": "Returns Tax master item details",
+          "request": {
+            "name": "Returns Tax master item details",
+            "description": {
+              "content": "Returns the details of a Tax master item by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tax",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) Globally unique identifier for an uploaded document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3d7d4e5-05b4-4a9e-93e7-7736d4ea7203",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tax_code\": \"VAT12\",\n  \"tax_rate\": 12,\n  \"tax_id\": \"vat_1xsd2sd\",\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 12,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"entity_id\": \"E124\",\n  \"tax_type\": \"WHT\",\n  \"jurisdiction_code\": \"IN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3523f201-d76b-40be-a08c-5cd97cd13d50",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93f17bb8-fae0-4c07-8b7e-72844b8862a3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93b8c1b2-aad2-484a-ac57-467104f7cb9c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4908d8d2-9df9-445c-bb81-3f828bbe44bb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbe53356-ed40-48b3-a2af-19db657c714e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdb66129-7fe7-4eb1-b7bb-898e6e38dbf6",
+          "name": "Returns tax master item details by tax-id",
+          "request": {
+            "name": "Returns tax master item details by tax-id",
+            "description": {
+              "content": "Returns Tax master item details matching tax-id specified as path parameter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tax",
+                "tax-id",
+                ":tax-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tax-id",
+                  "description": "(Required) customer tax id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0827b3b5-a3b4-4348-8fd7-e6b674d285da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "tax-id",
+                    ":tax-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tax-id",
+                      "description": "(Required) customer tax id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tax_code\": \"VAT12\",\n  \"tax_rate\": 12,\n  \"tax_id\": \"vat_1xsd2sd\",\n  \"appzen_tax_code\": \"VAT\",\n  \"appzen_tax_rate\": 12,\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    },\n    {\n      \"code\": \"VAT\",\n      \"rate\": 12\n    }\n  ],\n  \"country\": \"Germany\",\n  \"country_code_iso3\": \"DEU\",\n  \"is_active\": true,\n  \"tax_category\": \"WHT_CATEGORY\",\n  \"entity_id\": \"E124\",\n  \"tax_type\": \"WHT\",\n  \"jurisdiction_code\": \"IN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b2d6b32-b2a7-4f3f-a2f8-0f7e3c22a52b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "tax-id",
+                    ":tax-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tax-id",
+                      "description": "(Required) customer tax id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2478f023-5d0c-4b98-b41f-5bf64e4d3320",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "tax-id",
+                    ":tax-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tax-id",
+                      "description": "(Required) customer tax id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b069c7-02b3-4bf7-891c-cc49955c0644",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "tax-id",
+                    ":tax-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tax-id",
+                      "description": "(Required) customer tax id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abf6dc22-4465-4b85-9a09-8aaa38dea8eb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "tax-id",
+                    ":tax-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tax-id",
+                      "description": "(Required) customer tax id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c75bda2f-5fc4-4ac8-842d-28db9bcf0bfa",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "tax-id",
+                    ":tax-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tax-id",
+                      "description": "(Required) customer tax id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ad902467-a0c8-461b-b179-00df1b8406c2",
+    "name": "Autonomous AP APIs Chart of Accounts Tax Master API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

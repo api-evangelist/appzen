@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chart of Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new chart of account segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/chart-of-accounts",
+            "headers": [
+              {
+                "name": "segment-name-for-uniqueness",
+                "value": ""
+              },
+              {
+                "name": "merge-segment-lookup-names",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a new chart of account segment in AppZen and returns a uuid that uniquely identifies it. When there already exists a chart of account segment (segment_code), then the operation is an update (the `status` would be `UPDATED` in this case)."
+        },
+        {
+          "info": {
+            "name": "Returns a chart of account segment's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/chart-of-accounts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a chart of account segment by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns all Chart of Accounts uuid that match the search criteria",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/chart-of-accounts/search"
+          },
+          "docs": "Returns a list of the Chart of Accounts uuids that match from-date and end-date"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

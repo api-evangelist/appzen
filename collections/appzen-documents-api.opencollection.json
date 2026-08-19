@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Documents API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generates a url to upload a document into AppZen repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/generate-upload-url"
+          },
+          "docs": "This is first part of a two part process for uploading a document into AppZen repository.\n1) Generate URL\n    ```\n\n    curl --location \\\n      --request GET 'https://<api-gateway-url>/dictionary-data-services/generate-upload-url' \\\n      --header 'x-api-key: <x-api-key>' \\\n      --header 'customer-id: <customer-id>' \\\n      --header 'customer-key: <customer-key>'\n\n    ```\n2) The JSON reponse contains three elements.\n    A `uuid` field contains the identifier of the document to be uploaded.\n    A"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

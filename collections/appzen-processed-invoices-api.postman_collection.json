@@ -1,0 +1,412 @@
+{
+  "item": [
+    {
+      "id": "6a3c6069-6446-443a-ac9b-123609b25aaf",
+      "name": "Processed Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eddeae47-2985-4377-aca7-ef98212d2cef",
+          "name": "Returns the processed invoice",
+          "request": {
+            "name": "Returns the processed invoice",
+            "description": {
+              "content": "Returns the processed results and invoice by uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH, the overall invoice status, such as Approved, Rejected and invoice detail. The download links to the images are valid for only 5 minutes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "processed-invoice",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) Globally unique identifier for an uploaded document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f490701a-2372-4db1-af09-21c2903266b1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "processed-invoice",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"audit_results\": {\n    \"actions\": {\n      \"field_validations\": [],\n      \"header_validations\": [\n        {\n          \"action_type\": \"blocking\",\n          \"confidence\": 1,\n          \"final_risk\": \"NONE_RISK\",\n          \"post_config_risk\": \"NONE_RISK\",\n          \"post_feedback_risk\": \"NONE_RISK\",\n          \"result_data\": {\n            \"duplicate_invoice_ids\": []\n          },\n          \"risk_level\": \"NONE_RISK\",\n          \"risk_reason\": \"None\",\n          \"state\": \"Approved\",\n          \"validation_display_name\": \"Duplicate Invoices Check\",\n          \"validation_id\": \"duplicate_image_within_invoices\",\n          \"validation_name\": \"duplicate_image_within_invoices\"\n        },\n        {\n          \"action_type\": \"blocking\",\n          \"confidence\": 1,\n          \"final_risk\": \"NONE_RISK\",\n          \"post_config_risk\": \"NONE_RISK\",\n          \"post_feedback_risk\": \"NONE_RISK\",\n          \"result_data\": [],\n          \"risk_level\": \"NONE_RISK\",\n          \"risk_reason\": \"None\",\n          \"state\": \"Approved\",\n          \"validation_display_name\": \"Duplicate Invoice Across Expense\",\n          \"validation_id\": \"duplicate_across_expenses\",\n          \"validation_name\": \"duplicate_across_expenses\"\n        },\n        {\n          \"action_type\": \"blocking\",\n          \"confidence\": 1,\n          \"final_risk\": \"NONE_RISK\",\n          \"post_config_risk\": \"NONE_RISK\",\n          \"post_feedback_risk\": \"NONE_RISK\",\n          \"result_data\": [],\n          \"risk_level\": \"NONE_RISK\",\n          \"risk_reason\": \"None risk found.\",\n          \"state\": \"Approved\",\n          \"validation_display_name\": \"Supplier Check\",\n          \"validation_id\": \"supplier_check\",\n          \"validation_name\": \"supplier_check\"\n        }\n      ],\n      \"line_validations\": []\n    },\n    \"appzen_invoice_id\": \"...\",\n    \"appzen_invoice_state\": \"Processed\",\n    \"customer_id\": \"..\",\n    \"uuid\": \"...\"\n  },\n  \"processed_invoice\": {\n    \"appzen_invoice_id\": \"015979ba-67a3-4607-a63c-42017af986d7\",\n    \"appzen_invoice_state\": \"Processed\",\n    \"customer_id\": \"..\",\n    \"currency\": \"USD\",\n    \"created_at\": \"2021-07-11T17:02:03Z\",\n    \"entity_name\": \"ERT Division\",\n    \"entity_id\": \"ERTDA-231\",\n    \"image_locations\": [\n      {\n        \"image_url\": \"https://...\",\n        \"name\": \"invoice_from_supplier123243\",\n        \"mime_type\": \"pdf\",\n        \"link_expires_after\": \"2024-02-15T02:55:40.404Z\"\n      }\n    ],\n    \"invoice_id\": \"...\",\n    \"invoice_date\": \"2021-07-01T00:00:00Z\",\n    \"payment_type_override\": \"WIRE\",\n    \"accounting_date_override\": \"2022-02-01T00:00:00Z\",\n    \"requester\": \"pos\",\n    \"requester_id\": \"SX123\",\n    \"requester_email_address\": \"pos@appzen.ai\",\n    \"product_category\": \"software\",\n    \"invoice_lines\": [\n      {\n        \"appzen_line_number\": 1,\n        \"line_description\": \"....\",\n        \"line_number\": 1,\n        \"line_item_code\": \"vc-dfs\",\n        \"model_number\": \"...\",\n        \"purchase_order_number\": \"...\",\n        \"purchase_order_line_number\": 2,\n        \"gl_code\": \"8720.NA.Company.CD414\",\n        \"quantity\": 122,\n        \"currency\": \"USD\",\n        \"memo\": \"trip expenses\",\n        \"price_per_unit\": 2.25,\n        \"amortization_schedule\": \"monthly\",\n        \"tax_amount\": {\n          \"amount\": 1.25,\n          \"currency\": \"USD\"\n        },\n        \"total_amount\": {\n          \"amount\": 205,\n          \"currency\": \"USD\"\n        },\n        \"labels\": [\n          \"AB\",\n          \"PROTO\"\n        ],\n        \"other_fields\": {\n          \"custom1\": \"Line\",\n          \"appzen: line_level_note_text\": \"Include total check\"\n        },\n        \"other_object_fields\": {\n          \"inv_code\": {\n            \"name\": \"invX32\"\n          },\n          \"tax_code\": {\n            \"name\": \"vat32\"\n          }\n        },\n        \"po_match_type\": \"PO_POLICY_THREE_WAY_MATCH\",\n        \"pre_paid\": false,\n        \"service_start_date\": \"2020-07-11T17:02:03Z\",\n        \"service_end_date\": \"2023-07-11T17:02:03Z\",\n        \"tax_applicability_id\": \"2A3BL\",\n        \"line_vat_amount\": {\n          \"amount\": 1.5,\n          \"currency\": \"USD\"\n        },\n        \"po_backed_line\": false,\n        \"has_line_allocations\": true,\n        \"line_allocations\": [\n          {\n            \"amount\": 200,\n            \"tax\": 0.125,\n            \"gl_code\": \"8720.NA.Company.CD414\"\n          },\n          {\n            \"amount\": 5,\n            \"tax\": 1.375,\n            \"gl_code\": \"8720.NA.Company.CD413\"\n          }\n        ],\n        \"line_vat_breakdown\": [\n          {\n            \"vat_id\": \"vat_324\",\n            \"code\": \"GST\",\n            \"rate\": 20.5,\n            \"vat_amount\": {\n              \"amount\": 12.5,\n              \"currency\": \"USD\"\n            },\n            \"jurisdiction_code\": \"IN\"\n          }\n        ],\n        \"appzen_line_vat_breakdown\": [\n          {\n            \"code\": \"GST\",\n            \"rate\": 20.5\n          }\n        ],\n        \"unit_of_measure\": \"Each\",\n        \"unit_price\": {\n          \"amount\": 1,\n          \"currency\": \"USD\"\n        },\n        \"segments\": [\n          {\n            \"appzen_segment_type\": \"SPEND_CATEGORY_SEGMENT\",\n            \"segment_type\": \"Spend Category\",\n            \"segment_name\": \"Supplies - Research & Lab work\",\n            \"segment_code\": \"SUP384\"\n          },\n          {\n            \"appzen_segment_type\": \"COST_CENTER_SEGMENT\",\n            \"segment_type\": \"Cost Center\",\n            \"segment_name\": \"Basic Sc  Testing\",\n            \"segment_code\": \"CD414\"\n          },\n          {\n            \"appzen_segment_type\": \"COMPANY_SEGMENT\",\n            \"segment_type\": \"Company\",\n            \"segment_name\": \"001 Georgetown University\",\n            \"segment_code\": \"Georgetown\"\n          }\n        ],\n        \"other_segments\": [\n          {\n            \"segment_type\": \"Assignee\",\n            \"segment_name\": \"80720 Ostroumov, Alexey\",\n            \"segment_code\": \"8720\"\n          },\n          {\n            \"segment_type\": \"Budget Code\",\n            \"segment_name\": \"NA\",\n            \"segment_code\": \"NA\"\n          }\n        ]\n      }\n    ],\n    \"invoice_number\": \"INC-32434\",\n    \"invoice_status\": \"Approved\",\n    \"last_updated_at\": \"2021-07-12T16:47:56Z\",\n    \"payment_term_id\": \"pt-1045\",\n    \"tax_applicability_id\": \"2A3B\",\n    \"default_tax_option\": \"Calculate\",\n    \"memo\": \"apply towards expenses\",\n    \"payment_term\": {\n      \"code\": \"NET\",\n      \"discounts\": [\n        {\n          \"discount_days\": 4,\n          \"discount_percent\": 15,\n          \"discount_amount\": {\n            \"amount\": 10,\n            \"currency\": \"USD\"\n          }\n        }\n      ],\n      \"num_days\": 30,\n      \"source\": \"NET 30\"\n    },\n    \"po_policy\": {\n      \"po_backed\": true,\n      \"po_match_type\": \"PO_POLICY_THREE_WAY_MATCH\",\n      \"receipt_type\": \"GOODS_RECEIPT\"\n    },\n    \"purchase_order_numbers\": [\n      \"12321XP\"\n    ],\n    \"shipping_handling_amount\": {\n      \"amount\": 2.5,\n      \"currency\": \"USD\"\n    },\n    \"sub_total_amount\": {\n      \"amount\": 120.65,\n      \"currency\": \"USD\"\n    },\n    \"submitter\": \"Admin@mycompany.com\",\n    \"invoice_supplier_address\": {\n      \"address\": {\n        \"address_line1\": \"246 FENTON DR\",\n        \"city\": \"...\",\n        \"country\": \"US\",\n        \"state\": \"KS\",\n        \"zip\": \"20882\"\n      },\n      \"address_type\": \"REMIT_TO\",\n      \"site_id\": \"2687310\"\n    },\n    \"supplier_id\": \"XSR6310\",\n    \"supplier_name\": \"UDS LANDSCAPE\",\n    \"supplier_number\": \"6310\",\n    \"tax_amount\": {\n      \"amount\": 0,\n      \"currency\": \"USD\"\n    },\n    \"original_total_amount\": {\n      \"amount\": 43.65,\n      \"currency\": \"USD\"\n    },\n    \"other_fields\": {\n      \"approval-code\": \"KE-382\",\n      \"category\": \"internal-projects\",\n      \"appzen: withholding\": \"23.5\"\n    },\n    \"other_object_fields\": {\n      \"code-region\": {\n        \"name\": \"us-east\"\n      }\n    },\n    \"payment_due_date\": \"2022-07-31T00:00:00Z\",\n    \"total_amount\": {\n      \"amount\": 122,\n      \"currency\": \"USD\"\n    },\n    \"vat_amount\": {\n      \"amount\": 1.5,\n      \"currency\": \"USD\"\n    },\n    \"vat_breakdown\": [\n      {\n        \"code\": \"GST\",\n        \"rate\": 20.5,\n        \"vat_amount\": {\n          \"amount\": 1.5,\n          \"currency\": \"USD\"\n        },\n        \"jurisdiction_code\": \"IN\"\n      }\n    ],\n    \"appzen_vat_breakdown\": [\n      {\n        \"code\": \"GST\",\n        \"rate\": 20.5\n      }\n    ],\n    \"vat_registration_numbers\": [\n      \"AX234SD\",\n      \"123DXSE_XDC\"\n    ],\n    \"total_amount_excluding_vat\": {\n      \"amount\": 113.25,\n      \"currency\": \"USD\"\n    },\n    \"non_invoice_attachments\": [\n      {\n        \"name\": \"supplier note.txt\",\n        \"mime_type\": \"text/plain\",\n        \"image_url\": \"https://...\",\n        \"link_expires_after\": \"2024-06-15T02:55:40.404Z\"\n      }\n    ],\n    \"payment_type\": \"ACH\",\n    \"iban\": \"GB29NWBK60161331926819\",\n    \"bank_account_number\": \"1234567890\",\n    \"part_bank_key\": \"BANK001\",\n    \"bank_name\": \"ABC Bank\",\n    \"routing_number\": \"021000021\",\n    \"bank_currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8747afc8-d003-4d67-941e-4525a5103a00",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "processed-invoice",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70e3e678-0098-467c-bafb-0034092ef2b9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "processed-invoice",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "839034ee-3afc-416c-b2ea-2bb1288e8556",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "processed-invoice",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff390b5d-acaa-4bc1-bcf8-1e46a5a7599a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "processed-invoice",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecc01c15-c0aa-43b0-ad02-b40851d16df7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "processed-invoice",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fdc55c8f-bde3-48be-b806-a13b75a3b1ab",
+    "name": "Autonomous AP APIs Chart of Accounts Processed Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

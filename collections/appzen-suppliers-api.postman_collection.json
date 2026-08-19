@@ -1,0 +1,1534 @@
+{
+  "item": [
+    {
+      "id": "f9dd9860-7733-4610-8216-f3c6cc09e3ff",
+      "name": "Suppliers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d878c5a-b96d-4ff6-89e4-0a7223d64719",
+          "name": "Creates/updates a supplier",
+          "request": {
+            "name": "Creates/updates a supplier",
+            "description": {
+              "content": "Creates a new supplier in AppZen. Returns a uuid for this supplier. When there already exists a supplier (with the same external_supplier_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supplier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"<string>\",\n    \"supplier_name\": \"<string>\",\n    \"supplier_number\": \"<string>\",\n    \"web_site\": \"<string>\",\n    \"on_file_1099\": \"<string>\",\n    \"vat_registration_number\": \"<string>\",\n    \"tax_registration_numbers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"fed_tax_id\": \"<string>\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"<dateTime>\",\n    \"deactived_by\": \"<string>\",\n    \"note\": \"\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"<string>\",\n      \"site_name\": \"<string>\",\n      \"custom_json\": {\n        \"key1\": \"<string>\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"<dateTime>\",\n      \"valid_end_date\": \"<dateTime>\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"<string>\",\n      \"site_name\": \"<string>\",\n      \"custom_json\": {\n        \"key1\": \"<string>\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"<dateTime>\",\n      \"valid_end_date\": \"<dateTime>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"external_contact_id\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"payment_term_id\": \"<string>\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"<string>\",\n    \"routing_number_last4\": \"<string>\",\n    \"bank_account_name\": \"<string>\",\n    \"bank_account_type\": \"<string>\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"<string>\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"<string>\",\n      \"payment_block\": \"<boolean>\",\n      \"payment_block_reason\": \"<string>\",\n      \"payment_types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"default_payment_type\": \"<string>\",\n      \"default_payment_term_id\": \"<string>\",\n      \"default_house_bank\": \"<string>\",\n      \"intercompany_flag\": \"<boolean>\",\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"<string>\",\n          \"account_id\": \"<string>\",\n          \"iban\": \"<string>\",\n          \"swift_bic\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"name\": \"<string>\",\n          \"account_type\": \"<string>\",\n          \"country\": \"<string>\",\n          \"contact\": \"<string>\",\n          \"account_number\": \"<string>\",\n          \"routing_number\": \"<string>\",\n          \"is_primary\": \"<boolean>\"\n        },\n        {\n          \"part_bank_key\": \"<string>\",\n          \"account_id\": \"<string>\",\n          \"iban\": \"<string>\",\n          \"swift_bic\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"name\": \"<string>\",\n          \"account_type\": \"<string>\",\n          \"country\": \"<string>\",\n          \"contact\": \"<string>\",\n          \"account_number\": \"<string>\",\n          \"routing_number\": \"<string>\",\n          \"is_primary\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"<string>\",\n      \"payment_block\": \"<boolean>\",\n      \"payment_block_reason\": \"<string>\",\n      \"payment_types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"default_payment_type\": \"<string>\",\n      \"default_payment_term_id\": \"<string>\",\n      \"default_house_bank\": \"<string>\",\n      \"intercompany_flag\": \"<boolean>\",\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"<string>\",\n          \"account_id\": \"<string>\",\n          \"iban\": \"<string>\",\n          \"swift_bic\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"name\": \"<string>\",\n          \"account_type\": \"<string>\",\n          \"country\": \"<string>\",\n          \"contact\": \"<string>\",\n          \"account_number\": \"<string>\",\n          \"routing_number\": \"<string>\",\n          \"is_primary\": \"<boolean>\"\n        },\n        {\n          \"part_bank_key\": \"<string>\",\n          \"account_id\": \"<string>\",\n          \"iban\": \"<string>\",\n          \"swift_bic\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"name\": \"<string>\",\n          \"account_type\": \"<string>\",\n          \"country\": \"<string>\",\n          \"contact\": \"<string>\",\n          \"account_number\": \"<string>\",\n          \"routing_number\": \"<string>\",\n          \"is_primary\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": \"<boolean>\",\n    \"payment_block_reason\": \"<string>\",\n    \"payment_types\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"default_payment_type\": \"<string>\",\n    \"default_payment_term_id\": \"<string>\",\n    \"default_house_bank\": \"<string>\",\n    \"intercompany_flag\": \"<boolean>\",\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"<string>\",\n        \"account_id\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"swift_bic\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"name\": \"<string>\",\n        \"account_type\": \"<string>\",\n        \"country\": \"<string>\",\n        \"contact\": \"<string>\",\n        \"account_number\": \"<string>\",\n        \"routing_number\": \"<string>\",\n        \"is_primary\": \"<boolean>\"\n      },\n      {\n        \"part_bank_key\": \"<string>\",\n        \"account_id\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"swift_bic\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"name\": \"<string>\",\n        \"account_type\": \"<string>\",\n        \"country\": \"<string>\",\n        \"contact\": \"<string>\",\n        \"account_number\": \"<string>\",\n        \"routing_number\": \"<string>\",\n        \"is_primary\": \"<boolean>\"\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"<string>\",\n      \"other_fields\": \"<object>\"\n    },\n    {\n      \"entity_id\": \"<string>\",\n      \"other_fields\": \"<object>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a798f9b9-4cdb-429a-b781-51e3a981d0bf",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4890d63-c24a-413e-8024-129622007d9f",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20cc1417-f88c-4a78-8760-4ccf8ce7066b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df189f18-674a-4ae2-bb56-2af5275a2cc6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28a9b09e-194e-42ed-97d1-64d37be24b5e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "034216a6-e234-459c-9893-2691a1bcf9f5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21ef9266-2bcf-48ce-8fad-07cc7f0e986c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_core\": {\n    \"external_supplier_id\": \"691759\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"2342112\",\n    \"web_site\": \"abcsuppliers.com\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"vat_registration_number\": \"D08J66\",\n    \"tax_registration_numbers\": [\n      \"D08J6671736\",\n      \"ABC123456\"\n    ],\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"note\": \"Category A Supplier\"\n  },\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"payment_term_id\": \"652402\",\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"6521\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": [\n          \"INR\",\n          \"USD\"\n        ],\n        \"invoiceAmountHardThreshold\": {\n          \"amount\": 50000,\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6af404d2-4a40-424e-a45e-5aa28e782f12",
+          "name": "Returns a supplier's details",
+          "request": {
+            "name": "Returns a supplier's details",
+            "description": {
+              "content": "Returns the details of a supplier by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supplier",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) Globally unique identifier for an uploaded document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed9598ce-30c2-4db0-b1e5-e6a0c4c84e41",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"string\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"string\",\n    \"string\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"customer_id\": \"488059\",\n  \"payment_term_id\": \"652402\",\n  \"supplier_core\": {\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"external_supplier_id\": \"691759\",\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n    \"valid_end_date\": \"2024-03-01T11:01:00Z\",\n    \"note\": \"Category A Supplier\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"MZ342F1\",\n    \"vat_registration_number\": \"D08J66\",\n    \"web_site\": \"abcsuppliers.com\"\n  },\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"uuid\": \"6731fb82-2e69-4d0e-a71b-4b1576dad163\",\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": \"[\\\"INR\\\",\\\"USD\\\"]\"\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": \"[\\\"INR\\\",\\\"USD\\\"]\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddf047cb-730c-4ce8-b2e2-3a3d31788b75",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ee70db2-749e-45d0-8e63-be4f067af95f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fef2ebef-5b7f-45bc-925c-a0c19432731a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40f91874-0cc1-4db0-94bc-1a8b360cfe48",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeeeff80-ed97-4bbf-8517-873761742757",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0f06818-3834-4755-9839-840ab07f5601",
+          "name": "Returns a supplier's details",
+          "request": {
+            "name": "Returns a supplier's details",
+            "description": {
+              "content": "Returns the details of a supplier matching external supplier id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supplier",
+                "external-supplier-id",
+                ":external-supplier-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "external-supplier-id",
+                  "description": "(Required) external supplier id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5b152ed-d195-4eea-a9d6-c3f354b9ff8f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "external-supplier-id",
+                    ":external-supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-supplier-id",
+                      "description": "(Required) external supplier id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"913838\",\n      \"site_name\": \"California HQ\",\n      \"custom_json\": {\n        \"key1\": \"value1\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n      \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n    }\n  ],\n  \"bank_information\": {\n    \"bank_acct_last4\": \"8674\",\n    \"routing_number_last4\": \"string\",\n    \"bank_account_name\": \"ABC Bank\",\n    \"bank_account_type\": \"Checking\"\n  },\n  \"entities_list\": [\n    \"string\",\n    \"string\"\n  ],\n  \"payment_types\": [\n    \"CREDIT\",\n    \"CASH\",\n    \"WIRE\"\n  ],\n  \"contacts\": [\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    },\n    {\n      \"external_contact_id\": \"4266477\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"phone_number\": \"4081234567\"\n    }\n  ],\n  \"customer_id\": \"488059\",\n  \"payment_term_id\": \"652402\",\n  \"supplier_core\": {\n    \"deactive_date\": \"2024-03-01T11:01:00Z\",\n    \"deactived_by\": \"JOHN.DOE@ABC.COM\",\n    \"external_supplier_id\": \"691759\",\n    \"fed_tax_id\": \"GI19E\",\n    \"is_active\": true,\n    \"is_one_time\": false,\n    \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n    \"valid_end_date\": \"2024-03-01T11:01:00Z\",\n    \"note\": \"Category A Supplier\",\n    \"on_file_1099\": \"3DMWWFF\",\n    \"supplier_name\": \"ABC Suppliers Inc.\",\n    \"supplier_number\": \"MZ342F1\",\n    \"vat_registration_number\": \"D08J66\",\n    \"web_site\": \"abcsuppliers.com\"\n  },\n  \"custom_json\": {\n    \"key1\": \"value1\"\n  },\n  \"uuid\": \"6731fb82-2e69-4d0e-a71b-4b1576dad163\",\n  \"entities_banking_details\": [\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    {\n      \"entity_id\": \"ENT001\",\n      \"payment_block\": false,\n      \"payment_block_reason\": \"Pending compliance review\",\n      \"payment_types\": [\n        \"ACH\",\n        \"DOMESTIC_WIRE\"\n      ],\n      \"default_payment_type\": \"ACH\",\n      \"default_payment_term_id\": \"NET30\",\n      \"default_house_bank\": \"HB001\",\n      \"intercompany_flag\": false,\n      \"bank_information\": [\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        },\n        {\n          \"part_bank_key\": \"BANK001\",\n          \"account_id\": \"ACC123456\",\n          \"iban\": \"GB29NWBK60161331926819\",\n          \"swift_bic\": \"NWBKGB2L\",\n          \"currency\": \"USD\",\n          \"name\": \"Main Business Account\",\n          \"account_type\": \"<string>\",\n          \"country\": \"US\",\n          \"contact\": \"John Doe - john.doe@company.com\",\n          \"account_number\": \"1234567890\",\n          \"routing_number\": \"021000021\",\n          \"is_primary\": true\n        }\n      ]\n    }\n  ],\n  \"global_banking_details\": {\n    \"payment_block\": false,\n    \"payment_block_reason\": \"Pending compliance review\",\n    \"payment_types\": [\n      \"ACH\",\n      \"DOMESTIC_WIRE\"\n    ],\n    \"default_payment_type\": \"ACH\",\n    \"default_payment_term_id\": \"NET30\",\n    \"default_house_bank\": \"HB001\",\n    \"intercompany_flag\": false,\n    \"bank_information\": [\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      },\n      {\n        \"part_bank_key\": \"BANK001\",\n        \"account_id\": \"ACC123456\",\n        \"iban\": \"GB29NWBK60161331926819\",\n        \"swift_bic\": \"NWBKGB2L\",\n        \"currency\": \"USD\",\n        \"name\": \"Main Business Account\",\n        \"account_type\": \"<string>\",\n        \"country\": \"US\",\n        \"contact\": \"John Doe - john.doe@company.com\",\n        \"account_number\": \"1234567890\",\n        \"routing_number\": \"021000021\",\n        \"is_primary\": true\n      }\n    ]\n  },\n  \"entities_other_fields\": [\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": \"[\\\"INR\\\",\\\"USD\\\"]\"\n      }\n    },\n    {\n      \"entity_id\": \"ENT-INDIA\",\n      \"other_fields\": {\n        \"poRequirementMode\": \"FORBIDDEN\",\n        \"allowedCurrencies\": \"[\\\"INR\\\",\\\"USD\\\"]\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a5df759-8cbc-4753-b96e-15f1ce6fd838",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "external-supplier-id",
+                    ":external-supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-supplier-id",
+                      "description": "(Required) external supplier id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7c1f5d0-e5f5-4232-b1fe-65e873a91014",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "external-supplier-id",
+                    ":external-supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-supplier-id",
+                      "description": "(Required) external supplier id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10f535c9-4242-4e27-a78b-dc73b6afbdb1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "external-supplier-id",
+                    ":external-supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-supplier-id",
+                      "description": "(Required) external supplier id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cdf1038-5fca-4d40-bb06-94821ae971b2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "external-supplier-id",
+                    ":external-supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-supplier-id",
+                      "description": "(Required) external supplier id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76794b17-6873-4fa2-8990-bba9d76d9681",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "external-supplier-id",
+                    ":external-supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-supplier-id",
+                      "description": "(Required) external supplier id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43cc92a8-dd08-4d81-a793-df87198a4e32",
+          "name": "Returns all Supplier uuids that match the search criteria",
+          "request": {
+            "name": "Returns all Supplier uuids that match the search criteria",
+            "description": {
+              "content": "Returns a list of Supplier uuids that match from-date and end-date",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supplier",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from-last-appzen-update-time\": \"<dateTime>\",\n  \"to-last-appzen-update-time\": \"<dateTime>\",\n  \"limit\": 1000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e86ccb3-f54f-4f09-9d02-4d99adf82630",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supplier-id\": \"string\",\n  \"appzen-uuid\": \"string\",\n  \"is-active\": true,\n  \"last-appzen-update-time\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fcd3ed0-3c95-44f7-986a-9930f18f3ba2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab98ae9d-4460-44d3-a758-4f5bc35790df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2213c9a4-86c4-4982-89ee-3ad6d315ba7f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93acd9c7-1428-46e7-850f-bb66d885b741",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45c000df-e6e1-4a28-99e5-881de9752d2f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "078f65d5-3cda-4ece-b320-a9bd88e92e7c",
+    "name": "Autonomous AP APIs Chart of Accounts Suppliers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

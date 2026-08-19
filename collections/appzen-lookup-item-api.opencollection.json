@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Lookup Item API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookup Item",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/updates a Lookup Item associated with a Look up Table.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/lookup"
+          },
+          "docs": "Creates a new Lookup Item. Returns a uuid for this lookup item. <br>When there already exists a lookup item (with the same lookup_item_name and lookup_item_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns Lookup Item details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/lookup/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a Lookup Item by its Appzen uuid"
+        },
+        {
+          "info": {
+            "name": "Returns Lookup Item details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/lookup/lookup-name-id/:lookup-name-id/lookup-item-id/:lookup-item-id",
+            "params": [
+              {
+                "name": "lookup-name-id",
+                "value": "",
+                "type": "path",
+                "description": "lookup table name id"
+              },
+              {
+                "name": "lookup-item-id",
+                "value": "",
+                "type": "path",
+                "description": "lookup item id"
+              }
+            ]
+          },
+          "docs": "Returns the details of a Lookup Item matching the lookup-name-id and its external lookup-item-id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

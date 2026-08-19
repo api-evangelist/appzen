@@ -1,0 +1,1267 @@
+{
+  "item": [
+    {
+      "id": "817c1997-0fc3-4ffb-b633-438daa394ab2",
+      "name": "Chart of Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b19a4c04-4475-4c24-8b36-95ed68a6ad7a",
+          "name": "Creates a new chart of account segment",
+          "request": {
+            "name": "Creates a new chart of account segment",
+            "description": {
+              "content": "Creates a new chart of account segment in AppZen and returns a uuid that uniquely identifies it. When there already exists a chart of account segment (segment_code), then the operation is an update (the `status` would be `UPDATED` in this case).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chart-of-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                "key": "segment-name-for-uniqueness",
+                "value": "false"
+              },
+              {
+                "disabled": false,
+                "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                "key": "merge-segment-lookup-names",
+                "value": "false"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appzen_segment_type\": \"<string>\",\n  \"segment_type\": \"<string>\",\n  \"segment_name\": \"<string>\",\n  \"segment_code\": \"<string>\",\n  \"parent_segment_type\": \"<string>\",\n  \"parent_segment_name\": \"<string>\",\n  \"parent_segment_code\": \"<string>\",\n  \"parent_segments\": {\n    \"segment_name\": \"<string>\",\n    \"segment_code\": \"<string>\"\n  },\n  \"segment_lookup_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom_json\": \"<object>\",\n  \"active\": true,\n  \"valid_start_date\": \"<dateTime>\",\n  \"valid_end_date\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1fa0f68c-1ea0-4c43-8c67-98b17efffd7f",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddb1100f-d042-4602-81c5-dd69a177cb48",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1dc0e4c-699d-4053-90a5-d18262bdf949",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d36cddce-0661-4391-8a68-4a4e15ad4e6d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fb212cb-5485-4f5f-8458-520503f45c27",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "571ca567-0452-4aa2-a89f-b84ca4c341c6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73a75e9d-3601-4372-b444-2c68ea2b1170",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-name should be used to determine (in addition to segment-code and segment-type) whether the payload signifies a unique chart of account",
+                    "key": "segment-name-for-uniqueness",
+                    "value": "false"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the segment-lookup-names list in the payload should be concatenated to the corresponding list in an existing chart of account",
+                    "key": "merge-segment-lookup-names",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"segment_lookup_names\": [\n    \"ca_locations\",\n    \"hr_locations\"\n  ],\n  \"custom_json\": {\n    \"custom_key1\": \"any-value1\",\n    \"custom_key2\": \"any-value2\"\n  },\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d9186e7-004c-4dcd-a1c7-f974c3050620",
+          "name": "Returns a chart of account segment's details",
+          "request": {
+            "name": "Returns a chart of account segment's details",
+            "description": {
+              "content": "Returns the details of a chart of account segment by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chart-of-accounts",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) Globally unique identifier for an uploaded document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45ca1426-f009-4e29-a784-ba7f6303939c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customer_id\": \"string\",\n  \"appzen_segment_type\": \"LOCATION_SEGMENT\",\n  \"segment_type\": \"Location\",\n  \"segment_name\": \"San Jose\",\n  \"segment_code\": \"SanJose\",\n  \"parent_segment_type\": \"Location\",\n  \"parent_segment_name\": \"United States\",\n  \"parent_segment_code\": \"USA\",\n  \"parent_segments\": {\n    \"segment_name\": \"San Jose\",\n    \"segment_code\": \"SanJose\"\n  },\n  \"custom_json\": {},\n  \"active\": true,\n  \"valid_start_date\": \"2024-03-01T11:01:00Z\",\n  \"valid_end_date\": \"2024-03-01T11:01:00Z\",\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc155a7f-5727-437c-9c18-58b739f7d7ed",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e82e3e45-7bfe-4907-bf8d-c154e6108588",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "196076e3-2389-49dd-b347-e51d003ee2c3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea02a14f-8580-44a7-a1e9-714c56aca6b2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22adb779-96dd-41c5-9154-c866b281e98b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Globally unique identifier for an uploaded document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41fb6484-2435-4aa1-ad5a-08da0eee5e53",
+          "name": "Returns all Chart of Accounts uuid that match the search criteria",
+          "request": {
+            "name": "Returns all Chart of Accounts uuid that match the search criteria",
+            "description": {
+              "content": "Returns a list of the Chart of Accounts uuids that match from-date and end-date",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chart-of-accounts",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from-last-appzen-update-time\": \"<dateTime>\",\n  \"to-last-appzen-update-time\": \"<dateTime>\",\n  \"limit\": 1000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c0476dd-455e-4e8b-996d-0a0fa9769d7a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"erp-invoice-id\": \"string\",\n  \"erp-invoice-status\": \"string\",\n  \"appzen-uuid\": \"string\",\n  \"appzen-invoice-status\": \"string\",\n  \"last-appzen-update-time\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8de4d2ca-815b-462c-9583-96977b519228",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b9c0a62-cf7c-46d6-9c2e-1e1206d9e05b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb209166-a28e-4e95-8c6d-619bad788722",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a39d77b-3e0b-4eae-bca1-f47b666f31c2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0040aae-dd35-4082-8954-d1e4c55945e4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chart-of-accounts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"to-last-appzen-update-time\": \"2024-03-01T11:01:00Z\",\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f3b7809-bcdc-423d-a6ba-5577ca75083c",
+    "name": "Autonomous AP APIs Chart of Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

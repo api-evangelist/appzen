@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Purchase Orders API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Purchase Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/Updates a purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/purchase-order",
+            "headers": [
+              {
+                "name": "bypass-coa-lookup",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a new purchase order in AppZen and returns a uuid that uniquely identifies it. When there already exists a purchase order (purchase_order_number), then the operation is an update (the `status` would be `UPDATED` in this case)."
+        },
+        {
+          "info": {
+            "name": "Returns a purchase order's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/purchase-order/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a purchase order by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns a purchase order's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/purchase-order/purchase-order-number/:po-number",
+            "params": [
+              {
+                "name": "po-number",
+                "value": "",
+                "type": "path",
+                "description": "external purchase order number"
+              }
+            ]
+          },
+          "docs": "Returns the details of a purchase order for a purchase order number"
+        },
+        {
+          "info": {
+            "name": "Returns a purchase order's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/purchase-order/purchase-order-number/:po-number/purchase-order-unique-id/:po-unique-id",
+            "params": [
+              {
+                "name": "po-number",
+                "value": "",
+                "type": "path",
+                "description": "external purchase order number"
+              }
+            ]
+          },
+          "docs": "Returns the details of a purchase order for a purchase order number and its unique id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

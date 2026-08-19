@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Invoice Audit Results API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoice Audit Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns an invoice's audit results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/invoice/:uuid/audit-results",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the audit results of an invoice by uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH and the overall invoice status, such as Approved, Rejected."
+        },
+        {
+          "info": {
+            "name": "Returns a collection of audit results filtered by search parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/invoice/audit-results",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Globally unique identifier for an invoice"
+              },
+              {
+                "name": "invoice-number",
+                "value": "",
+                "type": "query",
+                "description": "The supplier's invoice number"
+              },
+              {
+                "name": "invoice-id",
+                "value": "",
+                "type": "query",
+                "description": "The external invoice id"
+              },
+              {
+                "name": "supplier-id",
+                "value": "",
+                "type": "query",
+                "description": "The external supplier id"
+              }
+            ]
+          },
+          "docs": "Returns the audit results of an invoice filtered by the following search parameters: supplier-id, invoice-number, invoice-id, uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH and the overall invoice status, such as Approved, Rejected. Note: supplier-id and invoice-number are always used in tandem : (supplier-id, invoice-number). Otherwise, it will result in HTTP 400 error response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

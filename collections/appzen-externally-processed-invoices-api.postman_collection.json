@@ -1,0 +1,811 @@
+{
+  "item": [
+    {
+      "id": "5647eac1-fa30-41c7-8c25-874a5a875413",
+      "name": "Externally Processed Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fead03d7-a1e2-4281-a3f0-976e9b4fb4e1",
+          "name": "Creates an externally processed invoice in Appzen with optional validation checks",
+          "request": {
+            "name": "Creates an externally processed invoice in Appzen with optional validation checks",
+            "description": {
+              "content": "This will create a new invoice in AppZen referred by uuid. This invoice will be processed further by AppZen for extraction and validation (optionally, based on header input). When there already exists an invoice (invoice_id), then the operation is an update (the `status` would be `UPDATED` in this case).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "externally-processed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Flag to indicate whether the invoice is historical or not",
+                "key": "historical",
+                "value": "false"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoice_id\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"supplier_id\": \"<string>\",\n  \"invoice_date\": \"<dateTime>\",\n  \"total_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"entity_id\": \"<string>\",\n  \"invoice_status\": \"<string>\",\n  \"entity_name\": \"<string>\",\n  \"purchase_order_number\": \"<string>\",\n  \"purchase_order_numbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"po_policy\": {\n    \"po_backed\": \"<boolean>\",\n    \"po_match_type\": \"<string>\",\n    \"receipt_type\": \"<string>\"\n  },\n  \"site_id\": \"<string>\",\n  \"invoice_type\": \"<string>\",\n  \"original_invoice_id\": \"<string>\",\n  \"original_invoice_date\": \"<dateTime>\",\n  \"original_invoice_number\": \"<string>\",\n  \"payment_term_id\": \"<string>\",\n  \"default_tax_option\": \"<string>\",\n  \"tax_applicability_id\": \"<string>\",\n  \"remit_to_bank_info\": {\n    \"bank_acct_last4\": \"<string>\",\n    \"routing_number_last4\": \"<string>\",\n    \"bank_account_name\": \"<string>\",\n    \"bank_account_type\": \"<string>\"\n  },\n  \"requestor\": \"<string>\",\n  \"requester\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requester_id\": \"<string>\",\n  \"requester_email_address\": \"<string>\",\n  \"product_category\": \"<string>\",\n  \"documents\": [\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"supporting_documents\": [\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"shipping_handling_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"miscellaneous_charges\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"submission_date\": \"<dateTime>\",\n  \"submitter\": \"<string>\",\n  \"supplier_name\": \"<string>\",\n  \"supplier_number\": \"<string>\",\n  \"is_one_time_supplier\": false,\n  \"tax_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"vat_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"vat_breakdown\": [\n    {\n      \"vat_id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\",\n      \"vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"jurisdiction_code\": \"<string>\"\n    },\n    {\n      \"vat_id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\",\n      \"vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"jurisdiction_code\": \"<string>\"\n    }\n  ],\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\"\n    }\n  ],\n  \"vat_registration_numbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"total_amount_excluding_vat\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"payment_due_date\": \"<dateTime>\",\n  \"payments\": [\n    {\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"scheduled_date\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"payment_id\": \"<string>\",\n      \"payment_method\": \"<string>\",\n      \"payment_reference_number\": \"<string>\",\n      \"payment_block\": \"<string>\",\n      \"check_number\": \"<string>\",\n      \"remittance_notes\": \"<string>\",\n      \"payment_batch_id\": \"<string>\",\n      \"approval_status\": \"<string>\",\n      \"payment_instructions\": \"<string>\",\n      \"payment_medium\": \"<string>\",\n      \"transaction_fees\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"requester\": \"<string>\",\n      \"approver\": \"<string>\",\n      \"exchange_rate\": {\n        \"from_currency_code\": \"<string>\",\n        \"to_currency_code\": \"<string>\",\n        \"conversion_rate\": \"<number>\"\n      },\n      \"bank_information\": {\n        \"bank_account_name\": \"\",\n        \"bank_acct_number\": \"<string>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"scheduled_date\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"payment_id\": \"<string>\",\n      \"payment_method\": \"<string>\",\n      \"payment_reference_number\": \"<string>\",\n      \"payment_block\": \"<string>\",\n      \"check_number\": \"<string>\",\n      \"remittance_notes\": \"<string>\",\n      \"payment_batch_id\": \"<string>\",\n      \"approval_status\": \"<string>\",\n      \"payment_instructions\": \"<string>\",\n      \"payment_medium\": \"<string>\",\n      \"transaction_fees\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"requester\": \"<string>\",\n      \"approver\": \"<string>\",\n      \"exchange_rate\": {\n        \"from_currency_code\": \"<string>\",\n        \"to_currency_code\": \"<string>\",\n        \"conversion_rate\": \"<number>\"\n      },\n      \"bank_information\": {\n        \"bank_account_name\": \"\",\n        \"bank_acct_number\": \"<string>\"\n      }\n    }\n  ],\n  \"payment_notes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_status\": \"<string>\",\n  \"memo\": \"<string>\",\n  \"supplier_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"billing_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"shipping_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"remit_to_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"other_addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"<string>\",\n      \"site_name\": \"<string>\",\n      \"custom_json\": {\n        \"key1\": \"<string>\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"<dateTime>\",\n      \"valid_end_date\": \"<dateTime>\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"<string>\",\n      \"site_name\": \"<string>\",\n      \"custom_json\": {\n        \"key1\": \"<string>\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"<dateTime>\",\n      \"valid_end_date\": \"<dateTime>\"\n    }\n  ],\n  \"gl_code\": \"<string>\",\n  \"segments\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"segment_type\": \"<string>\",\n      \"appzen_segment_type\": \"<string>\",\n      \"segment_name_id\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"segment_type\": \"<string>\",\n      \"appzen_segment_type\": \"<string>\",\n      \"segment_name_id\": \"<string>\"\n    }\n  ],\n  \"invoice_description\": \"<string>\",\n  \"payment_date\": \"<dateTime>\",\n  \"payment_type_override\": \"<string>\",\n  \"accounting_date_override\": \"<dateTime>\",\n  \"invoice_lines\": [\n    {\n      \"total_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_number\": \"<number>\",\n      \"unit_price\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"tax_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"tax_applicability_id\": \"<string>\",\n      \"memo\": \"<string>\",\n      \"amortization_schedule\": \"<string>\",\n      \"price_per_unit\": \"<number>\",\n      \"line_vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_vat_breakdown\": [\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        },\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        }\n      ],\n      \"appzen_line_vat_breakdown\": [\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        }\n      ],\n      \"purchase_order_number\": \"<string>\",\n      \"purchase_order_line_number\": \"<string>\",\n      \"po_match_type\": \"<string>\",\n      \"line_item_code\": \"<string>\",\n      \"unit_of_measure\": \"<string>\",\n      \"model_number\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"gl_code\": \"<string>\",\n      \"segments\": [\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        }\n      ],\n      \"has_line_allocations\": \"<boolean>\",\n      \"po_backed_line\": \"<boolean>\",\n      \"line_allocations\": [\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"custom_json\": \"<object>\",\n      \"custom_json_object\": \"<object>\",\n      \"service_start_date\": \"<dateTime>\",\n      \"service_end_date\": \"<dateTime>\",\n      \"amortization_start_date\": \"<dateTime>\",\n      \"amortization_end_date\": \"<dateTime>\",\n      \"amortization_schedule_details\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"line_type\": \"<string>\",\n      \"goods_receipts\": [\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"hsn_sac_code\": \"<string>\",\n      \"line_conditions\": [\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        },\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"header_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_all_discounts\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"total_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_number\": \"<number>\",\n      \"unit_price\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"tax_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"tax_applicability_id\": \"<string>\",\n      \"memo\": \"<string>\",\n      \"amortization_schedule\": \"<string>\",\n      \"price_per_unit\": \"<number>\",\n      \"line_vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_vat_breakdown\": [\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        },\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        }\n      ],\n      \"appzen_line_vat_breakdown\": [\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        }\n      ],\n      \"purchase_order_number\": \"<string>\",\n      \"purchase_order_line_number\": \"<string>\",\n      \"po_match_type\": \"<string>\",\n      \"line_item_code\": \"<string>\",\n      \"unit_of_measure\": \"<string>\",\n      \"model_number\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"gl_code\": \"<string>\",\n      \"segments\": [\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        }\n      ],\n      \"has_line_allocations\": \"<boolean>\",\n      \"po_backed_line\": \"<boolean>\",\n      \"line_allocations\": [\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"custom_json\": \"<object>\",\n      \"custom_json_object\": \"<object>\",\n      \"service_start_date\": \"<dateTime>\",\n      \"service_end_date\": \"<dateTime>\",\n      \"amortization_start_date\": \"<dateTime>\",\n      \"amortization_end_date\": \"<dateTime>\",\n      \"amortization_schedule_details\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"line_type\": \"<string>\",\n      \"goods_receipts\": [\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"hsn_sac_code\": \"<string>\",\n      \"line_conditions\": [\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        },\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"header_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_all_discounts\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"custom_json\": \"<object>\",\n  \"custom_json_object\": \"<object>\",\n  \"options\": {\n    \"strict_invoice_number\": \"0\"\n  },\n  \"total_wht_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"wht_breakdown\": [\n    {\n      \"type\": \"<string>\",\n      \"code\": \"<string>\",\n      \"base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"wht_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"code\": \"<string>\",\n      \"base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"wht_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"header_discounts\": [\n    {\n      \"discount_base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"discount_percentage\": \"<number>\",\n      \"discount_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"discount_base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"discount_percentage\": \"<number>\",\n      \"discount_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"total_discount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"header_discount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"sub_total_after_discount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"payment_type\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"part_bank_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c359ec8e-2ab0-4156-9332-990b7165e94e",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe0df9eb-635f-41d2-bd16-747c017de69d",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "641b7c95-8795-454e-b04d-c1b40e60a043",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9b9653c-80ea-4057-8dbc-5903957e70a3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e176cadb-c035-4263-89ea-6d452533862d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31a4dfc9-c0a9-4bd4-aa54-400614317a4f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac4e25b7-7341-4ec5-bc09-078d0ce68770",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Flag to indicate whether the invoice is historical or not",
+                    "key": "historical",
+                    "value": "false"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bb0b76d-b409-4e8f-af62-198ed56a3afd",
+          "name": "Creates an externally processed invoice in Appzen with validation checks",
+          "request": {
+            "name": "Creates an externally processed invoice in Appzen with validation checks",
+            "description": {
+              "content": "This will create a new invoice in AppZen referred by uuid. This invoice will be processed further by AppZen for extraction and validation. When there already exists an invoice (invoice_id), then the operation is an update (the `status` would be `UPDATED` in this case).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "externally-processed-for-audit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoice_id\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"supplier_id\": \"<string>\",\n  \"invoice_date\": \"<dateTime>\",\n  \"total_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"entity_id\": \"<string>\",\n  \"invoice_status\": \"<string>\",\n  \"entity_name\": \"<string>\",\n  \"purchase_order_number\": \"<string>\",\n  \"purchase_order_numbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"po_policy\": {\n    \"po_backed\": \"<boolean>\",\n    \"po_match_type\": \"<string>\",\n    \"receipt_type\": \"<string>\"\n  },\n  \"site_id\": \"<string>\",\n  \"invoice_type\": \"<string>\",\n  \"original_invoice_id\": \"<string>\",\n  \"original_invoice_date\": \"<dateTime>\",\n  \"original_invoice_number\": \"<string>\",\n  \"payment_term_id\": \"<string>\",\n  \"default_tax_option\": \"<string>\",\n  \"tax_applicability_id\": \"<string>\",\n  \"remit_to_bank_info\": {\n    \"bank_acct_last4\": \"<string>\",\n    \"routing_number_last4\": \"<string>\",\n    \"bank_account_name\": \"<string>\",\n    \"bank_account_type\": \"<string>\"\n  },\n  \"requestor\": \"<string>\",\n  \"requester\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requester_id\": \"<string>\",\n  \"requester_email_address\": \"<string>\",\n  \"product_category\": \"<string>\",\n  \"documents\": [\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"supporting_documents\": [\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"shipping_handling_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"miscellaneous_charges\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"submission_date\": \"<dateTime>\",\n  \"submitter\": \"<string>\",\n  \"supplier_name\": \"<string>\",\n  \"supplier_number\": \"<string>\",\n  \"is_one_time_supplier\": false,\n  \"tax_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"vat_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"vat_breakdown\": [\n    {\n      \"vat_id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\",\n      \"vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"jurisdiction_code\": \"<string>\"\n    },\n    {\n      \"vat_id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\",\n      \"vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"jurisdiction_code\": \"<string>\"\n    }\n  ],\n  \"appzen_vat_breakdown\": [\n    {\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"rate\": \"<number>\"\n    }\n  ],\n  \"vat_registration_numbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"total_amount_excluding_vat\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"payment_due_date\": \"<dateTime>\",\n  \"payments\": [\n    {\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"scheduled_date\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"payment_id\": \"<string>\",\n      \"payment_method\": \"<string>\",\n      \"payment_reference_number\": \"<string>\",\n      \"payment_block\": \"<string>\",\n      \"check_number\": \"<string>\",\n      \"remittance_notes\": \"<string>\",\n      \"payment_batch_id\": \"<string>\",\n      \"approval_status\": \"<string>\",\n      \"payment_instructions\": \"<string>\",\n      \"payment_medium\": \"<string>\",\n      \"transaction_fees\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"requester\": \"<string>\",\n      \"approver\": \"<string>\",\n      \"exchange_rate\": {\n        \"from_currency_code\": \"<string>\",\n        \"to_currency_code\": \"<string>\",\n        \"conversion_rate\": \"<number>\"\n      },\n      \"bank_information\": {\n        \"bank_account_name\": \"\",\n        \"bank_acct_number\": \"<string>\"\n      }\n    },\n    {\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"scheduled_date\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"payment_id\": \"<string>\",\n      \"payment_method\": \"<string>\",\n      \"payment_reference_number\": \"<string>\",\n      \"payment_block\": \"<string>\",\n      \"check_number\": \"<string>\",\n      \"remittance_notes\": \"<string>\",\n      \"payment_batch_id\": \"<string>\",\n      \"approval_status\": \"<string>\",\n      \"payment_instructions\": \"<string>\",\n      \"payment_medium\": \"<string>\",\n      \"transaction_fees\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"requester\": \"<string>\",\n      \"approver\": \"<string>\",\n      \"exchange_rate\": {\n        \"from_currency_code\": \"<string>\",\n        \"to_currency_code\": \"<string>\",\n        \"conversion_rate\": \"<number>\"\n      },\n      \"bank_information\": {\n        \"bank_account_name\": \"\",\n        \"bank_acct_number\": \"<string>\"\n      }\n    }\n  ],\n  \"payment_notes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"payment_status\": \"<string>\",\n  \"memo\": \"<string>\",\n  \"supplier_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"billing_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"shipping_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"remit_to_address\": {\n    \"address_type\": \"<string>\",\n    \"address\": {\n      \"address_line1\": \"\",\n      \"country\": \"\",\n      \"zip\": \"\",\n      \"address_line2\": \"\",\n      \"address_line3\": \"\",\n      \"area_code\": \"\",\n      \"city\": \"\",\n      \"company\": \"\",\n      \"contact\": \"\",\n      \"country_iso3\": \"\",\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"province\": \"\",\n      \"state\": \"\"\n    },\n    \"site_id\": \"<string>\",\n    \"site_name\": \"<string>\",\n    \"custom_json\": {\n      \"key1\": \"<string>\"\n    },\n    \"is_active\": true,\n    \"valid_start_date\": \"<dateTime>\",\n    \"valid_end_date\": \"<dateTime>\"\n  },\n  \"other_addresses\": [\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"<string>\",\n      \"site_name\": \"<string>\",\n      \"custom_json\": {\n        \"key1\": \"<string>\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"<dateTime>\",\n      \"valid_end_date\": \"<dateTime>\"\n    },\n    {\n      \"address_type\": \"<string>\",\n      \"address\": {\n        \"address_line1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address_line3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"area_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"company\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country_iso3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"site_id\": \"<string>\",\n      \"site_name\": \"<string>\",\n      \"custom_json\": {\n        \"key1\": \"<string>\"\n      },\n      \"is_active\": true,\n      \"valid_start_date\": \"<dateTime>\",\n      \"valid_end_date\": \"<dateTime>\"\n    }\n  ],\n  \"gl_code\": \"<string>\",\n  \"segments\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"segment_type\": \"<string>\",\n      \"appzen_segment_type\": \"<string>\",\n      \"segment_name_id\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"segment_type\": \"<string>\",\n      \"appzen_segment_type\": \"<string>\",\n      \"segment_name_id\": \"<string>\"\n    }\n  ],\n  \"invoice_description\": \"<string>\",\n  \"payment_date\": \"<dateTime>\",\n  \"payment_type_override\": \"<string>\",\n  \"accounting_date_override\": \"<dateTime>\",\n  \"invoice_lines\": [\n    {\n      \"total_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_number\": \"<number>\",\n      \"unit_price\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"tax_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"tax_applicability_id\": \"<string>\",\n      \"memo\": \"<string>\",\n      \"amortization_schedule\": \"<string>\",\n      \"price_per_unit\": \"<number>\",\n      \"line_vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_vat_breakdown\": [\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        },\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        }\n      ],\n      \"appzen_line_vat_breakdown\": [\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        }\n      ],\n      \"purchase_order_number\": \"<string>\",\n      \"purchase_order_line_number\": \"<string>\",\n      \"po_match_type\": \"<string>\",\n      \"line_item_code\": \"<string>\",\n      \"unit_of_measure\": \"<string>\",\n      \"model_number\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"gl_code\": \"<string>\",\n      \"segments\": [\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        }\n      ],\n      \"has_line_allocations\": \"<boolean>\",\n      \"po_backed_line\": \"<boolean>\",\n      \"line_allocations\": [\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"custom_json\": \"<object>\",\n      \"custom_json_object\": \"<object>\",\n      \"service_start_date\": \"<dateTime>\",\n      \"service_end_date\": \"<dateTime>\",\n      \"amortization_start_date\": \"<dateTime>\",\n      \"amortization_end_date\": \"<dateTime>\",\n      \"amortization_schedule_details\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"line_type\": \"<string>\",\n      \"goods_receipts\": [\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"hsn_sac_code\": \"<string>\",\n      \"line_conditions\": [\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        },\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"header_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_all_discounts\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"total_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_number\": \"<number>\",\n      \"unit_price\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"tax_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"tax_applicability_id\": \"<string>\",\n      \"memo\": \"<string>\",\n      \"amortization_schedule\": \"<string>\",\n      \"price_per_unit\": \"<number>\",\n      \"line_vat_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"line_vat_breakdown\": [\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        },\n        {\n          \"vat_id\": \"<string>\",\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\",\n          \"vat_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jurisdiction_code\": \"<string>\"\n        }\n      ],\n      \"appzen_line_vat_breakdown\": [\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"rate\": \"<number>\"\n        }\n      ],\n      \"purchase_order_number\": \"<string>\",\n      \"purchase_order_line_number\": \"<string>\",\n      \"po_match_type\": \"<string>\",\n      \"line_item_code\": \"<string>\",\n      \"unit_of_measure\": \"<string>\",\n      \"model_number\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"gl_code\": \"<string>\",\n      \"segments\": [\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"segment_type\": \"<string>\",\n          \"appzen_segment_type\": \"<string>\",\n          \"segment_name_id\": \"<string>\"\n        }\n      ],\n      \"has_line_allocations\": \"<boolean>\",\n      \"po_backed_line\": \"<boolean>\",\n      \"line_allocations\": [\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"amount\": \"<number>\",\n          \"tax\": \"<number>\",\n          \"percentage\": \"<number>\",\n          \"external_allocation_id\": \"<string>\",\n          \"gl_code\": \"<string>\",\n          \"allocation_quantity\": \"<number>\",\n          \"purchase_order_number\": \"<string>\",\n          \"purchase_order_line_number\": \"<integer>\",\n          \"appzen_line_allocation_number\": \"<integer>\",\n          \"goods_receipts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"custom_json\": \"<object>\",\n      \"custom_json_object\": \"<object>\",\n      \"service_start_date\": \"<dateTime>\",\n      \"service_end_date\": \"<dateTime>\",\n      \"amortization_start_date\": \"<dateTime>\",\n      \"amortization_end_date\": \"<dateTime>\",\n      \"amortization_schedule_details\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"line_type\": \"<string>\",\n      \"goods_receipts\": [\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"receipt_id\": \"<string>\",\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"hsn_sac_code\": \"<string>\",\n      \"line_conditions\": [\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        },\n        {\n          \"scope\": \"<string>\",\n          \"condition_type\": \"<string>\",\n          \"condition_category\": \"<string>\",\n          \"condition_supplier_id\": \"<string>\",\n          \"charge_vendor_id\": \"<string>\",\n          \"charge_vendor_name\": \"<string>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"discount_base_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discount_percentage\": \"<number>\",\n          \"discount_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"header_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_line_discount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"total_after_all_discounts\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"custom_json\": \"<object>\",\n  \"custom_json_object\": \"<object>\",\n  \"options\": {\n    \"strict_invoice_number\": \"0\"\n  },\n  \"total_wht_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"wht_breakdown\": [\n    {\n      \"type\": \"<string>\",\n      \"code\": \"<string>\",\n      \"base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"wht_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"code\": \"<string>\",\n      \"base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"wht_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"header_discounts\": [\n    {\n      \"discount_base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"discount_percentage\": \"<number>\",\n      \"discount_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"discount_base_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"discount_percentage\": \"<number>\",\n      \"discount_amount\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"total_discount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"header_discount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"sub_total_after_discount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"payment_type\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"part_bank_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "248ef565-50c0-4181-a2f4-e9650db8bd28",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b64a781-95ff-4d50-9e4b-2b325694ec9a",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c40ea85-aeb0-4c6f-b3cd-2945627d77cb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b2e5c2c-6998-43d3-b234-89c16543ac86",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4855c793-a674-4171-a567-522d5ae79184",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07ce8107-efeb-4a85-826e-27684c34c93b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69f1ff32-b3ac-4e1e-9ded-eba17643a067",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "externally-processed-for-audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "53481d29-6aec-4267-9a49-62f7cab5587f",
+    "name": "Autonomous AP APIs Chart of Accounts Externally Processed Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

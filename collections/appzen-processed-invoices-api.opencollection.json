@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Processed Invoices API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Processed Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the processed invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/invoice/processed-invoice/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the processed results and invoice by uuid. It includes the risk at invoice header level, such as LOW, MEDIUM, HIGH, the overall invoice status, such as Approved, Rejected and invoice detail. The download links to the images are valid for only 5 minutes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

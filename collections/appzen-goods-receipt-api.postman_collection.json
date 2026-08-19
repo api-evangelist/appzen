@@ -1,0 +1,810 @@
+{
+  "item": [
+    {
+      "id": "405ce455-c84c-447f-a93e-00e8e0654a94",
+      "name": "Goods Receipt",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "850d6562-0de9-4965-880f-48e30fc469b4",
+          "name": "Creates/Updates a goods receipt",
+          "request": {
+            "name": "Creates/Updates a goods receipt",
+            "description": {
+              "content": "Creates a new goods receipt in AppZen and returns a uuid that uniquely identifies it. When there already exists a goods receipt (receipt_id), then the operation is an update (the `status` would be `UPDATED` in this case).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goods-receipt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_id\": \"<string>\",\n  \"receipt_number\": \"<string>\",\n  \"purchase_order_number\": \"<string>\",\n  \"purchase_order_line_number\": \"<integer>\",\n  \"unit_price\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"receipt_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"receipt_quantity\": \"<integer>\",\n  \"open_amount\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"open_quantity\": \"<integer>\",\n  \"receipt_date\": \"<date>\",\n  \"receipt_type\": \"<string>\",\n  \"po_external_unique_id\": \"<string>\",\n  \"unit_of_measure\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94ed6b4b-7865-4366-b049-e9c41e696df3",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"UPDATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28c30f03-f9e5-480a-9960-6b07c285dba3",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"5fc03087-d265-11e7-b8c6-83e29cd24f4c\",\n  \"status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cbdddc4-0532-4571-8d2d-43675faacaf3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbb9bb4b-4ff4-4e1e-9ded-b24b2da4ef4a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1db26016-ab2d-46f9-90ac-3b754d44787b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a418cb07-b27f-4556-9d59-c8d24a7ffe0a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "264039aa-fa98-45ba-81c5-24a19f369ba1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10,\n  \"receipt_date\": \"2020-11-01\",\n  \"receipt_type\": \"TYPE_1\",\n  \"po_external_unique_id\": \"A000010232\",\n  \"unit_of_measure\": \"UOM\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54e319e8-ab52-4224-a57b-4831e490bf3f",
+          "name": "Returns a goods receipt details",
+          "request": {
+            "name": "Returns a goods receipt details",
+            "description": {
+              "content": "Returns the details of a goods receipt for a receipt id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goods-receipt",
+                ":receipt_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "receipt_id",
+                  "description": "(Required) goods receipt id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4744f410-e27f-42a1-8fdb-d2ceafc6a5d2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt",
+                    ":receipt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_id",
+                      "description": "(Required) goods receipt id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"receipt_id\": \"123AB\",\n  \"receipt_number\": \"R1\",\n  \"receipt_type\": \"TYPE_1\",\n  \"purchase_order_number\": \"000010232\",\n  \"purchase_order_line_number\": 1,\n  \"po_external_unique_id\": \"A000010232\",\n  \"receipt_date\": \"2020-11-01\",\n  \"unit_of_measure\": \"UOM\",\n  \"unit_price\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"receipt_quantity\": 10,\n  \"receipt_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_amount\": {\n    \"amount\": 1.5,\n    \"currency\": \"USD\"\n  },\n  \"open_quantity\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bcf64d1-c6cb-4b5c-b93f-a73d28f85d7b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt",
+                    ":receipt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_id",
+                      "description": "(Required) goods receipt id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "621f57a4-180c-42bd-bf13-4b4422be7e68",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt",
+                    ":receipt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_id",
+                      "description": "(Required) goods receipt id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abfd0181-e3d4-474a-a4d3-a78872ecd0b9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt",
+                    ":receipt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_id",
+                      "description": "(Required) goods receipt id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c79a433-e3b0-4952-92f8-ecc830ea40bf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt",
+                    ":receipt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_id",
+                      "description": "(Required) goods receipt id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9087180d-2c74-4bc6-8ec4-2798910f26c6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goods-receipt",
+                    ":receipt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_id",
+                      "description": "(Required) goods receipt id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "866af2e1-ebec-44a9-9eac-1a0d0acd446c",
+    "name": "Autonomous AP APIs Chart of Accounts Goods Receipt API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

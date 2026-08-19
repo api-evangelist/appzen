@@ -1,0 +1,1103 @@
+{
+  "item": [
+    {
+      "id": "440adfec-1389-4751-a641-c2e1ff29cf59",
+      "name": "User Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43d346f5-7ac3-4eb0-8bdd-5172119b1f08",
+          "name": "Returns all user groups for the customer",
+          "request": {
+            "name": "Returns all user groups for the customer",
+            "description": {
+              "content": "Returns every user group for the customer as an array. Each element has the same shape as the single-group GET response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user-groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "861d49b6-34fd-4bc3-badf-70aa4c7cdb36",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"group_id\": \"734512\",\n    \"customer_id\": \"488059\",\n    \"external_group_id\": \"AP-GROUP-1001\",\n    \"management_source\": \"EXTERNALLY_MANAGED\",\n    \"category\": \"APPROVAL_ASSIGNMENT\",\n    \"product\": \"PRODUCT_AP\",\n    \"group_name\": \"AP Approvers - North America\",\n    \"group_description\": \"Approvers for North America AP invoices\",\n    \"group_email\": \"ap-approvers-na@abc.com\",\n    \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n    \"status\": \"ACTIVE\",\n    \"members\": [\n      {\n        \"user_id\": \"az-user-90211\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"john.doe@abc.com\",\n        \"added_at\": \"2024-03-01T11:01:00Z\",\n        \"added_by\": \"az-user-00001\"\n      },\n      {\n        \"user_id\": \"az-user-90211\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"john.doe@abc.com\",\n        \"added_at\": \"2024-03-01T11:01:00Z\",\n        \"added_by\": \"az-user-00001\"\n      }\n    ],\n    \"source_created_at\": \"2024-03-01T11:01:00Z\",\n    \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n    \"created_at\": \"2024-03-01T11:01:00Z\",\n    \"created_by\": \"az-user-00001\",\n    \"updated_at\": \"2024-03-01T11:01:00Z\",\n    \"updated_by\": \"az-user-00001\"\n  },\n  {\n    \"group_id\": \"734512\",\n    \"customer_id\": \"488059\",\n    \"external_group_id\": \"AP-GROUP-1001\",\n    \"management_source\": \"EXTERNALLY_MANAGED\",\n    \"category\": \"APPROVAL_ASSIGNMENT\",\n    \"product\": \"PRODUCT_AP\",\n    \"group_name\": \"AP Approvers - North America\",\n    \"group_description\": \"Approvers for North America AP invoices\",\n    \"group_email\": \"ap-approvers-na@abc.com\",\n    \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n    \"status\": \"ACTIVE\",\n    \"members\": [\n      {\n        \"user_id\": \"az-user-90211\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"john.doe@abc.com\",\n        \"added_at\": \"2024-03-01T11:01:00Z\",\n        \"added_by\": \"az-user-00001\"\n      },\n      {\n        \"user_id\": \"az-user-90211\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"john.doe@abc.com\",\n        \"added_at\": \"2024-03-01T11:01:00Z\",\n        \"added_by\": \"az-user-00001\"\n      }\n    ],\n    \"source_created_at\": \"2024-03-01T11:01:00Z\",\n    \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n    \"created_at\": \"2024-03-01T11:01:00Z\",\n    \"created_by\": \"az-user-00001\",\n    \"updated_at\": \"2024-03-01T11:01:00Z\",\n    \"updated_by\": \"az-user-00001\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfd2a42c-db86-485c-a7e5-62f275eeade4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adbfed28-408d-4b84-88b3-65cb6eee53ba",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9110706b-95e9-462a-a00a-03289d2e5628",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "047451b0-ce59-4020-a292-02da37b38402",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca38e09d-1539-42a9-a344-d9ac0314f7a6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a59737be-6894-4523-82f8-25cdd83712b5",
+          "name": "Creates/updates a user group",
+          "request": {
+            "name": "Creates/updates a user group",
+            "description": {
+              "content": "Creates a user group, or updates the existing one with the same `external_group_id` (upsert).\nAn update is a full replace of the group, including its `members`. Setting `status` to\n`DISABLED` archives the group, and is allowed even while the group is referenced by in-flight\ninvoices or automations. Members that are not existing AppZen users are skipped and returned\nin `unresolved_user_ids` (the request still succeeds).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user-group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_group_id\": \"<string>\",\n  \"management_source\": \"<string>\",\n  \"category\": \"<string>\",\n  \"product\": \"<string>\",\n  \"group_name\": \"<string>\",\n  \"group_description\": \"<string>\",\n  \"group_email\": \"<string>\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"<dateTime>\",\n  \"source_last_updated_at\": \"<dateTime>\",\n  \"members\": [\n    {\n      \"user_id\": \"<string>\"\n    },\n    {\n      \"user_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed73f4bf-59f8-4271-b0a0-555ffffb2977",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"group_id\": \"734512\",\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"status\": \"CREATED\",\n  \"unresolved_user_ids\": [\n    \"az-user-99999\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a81b692-d8f3-45d3-bf7c-24f83dd2204c",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"group_id\": \"734512\",\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"status\": \"CREATED\",\n  \"unresolved_user_ids\": [\n    \"az-user-99999\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5abee453-d208-4ffb-a338-c77bd2330e95",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "013d7db9-6ac5-486a-8193-7486ca7e7639",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ec3b6c5-515a-4341-9133-64befc7df2c3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b9b9b8c-d764-49c1-94f8-b1ef444f515e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "440e0c3a-058a-4024-a33f-8d938d27e5d7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\"\n    },\n    {\n      \"user_id\": \"az-user-90211\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0892ae1f-4a12-4bd0-b09b-3a2b130122e9",
+          "name": "Returns a user group",
+          "request": {
+            "name": "Returns a user group",
+            "description": {
+              "content": "Returns the details (including members) of the group matching the external group id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user-group",
+                ":external-group-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "external-group-id",
+                  "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e1ed1ce-6f2d-4ca7-894c-c1af38c0e783",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group",
+                    ":external-group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-group-id",
+                      "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"group_id\": \"734512\",\n  \"customer_id\": \"488059\",\n  \"external_group_id\": \"AP-GROUP-1001\",\n  \"management_source\": \"EXTERNALLY_MANAGED\",\n  \"category\": \"APPROVAL_ASSIGNMENT\",\n  \"product\": \"PRODUCT_AP\",\n  \"group_name\": \"AP Approvers - North America\",\n  \"group_description\": \"Approvers for North America AP invoices\",\n  \"group_email\": \"ap-approvers-na@abc.com\",\n  \"notification_method\": \"GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS\",\n  \"status\": \"ACTIVE\",\n  \"members\": [\n    {\n      \"user_id\": \"az-user-90211\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"added_at\": \"2024-03-01T11:01:00Z\",\n      \"added_by\": \"az-user-00001\"\n    },\n    {\n      \"user_id\": \"az-user-90211\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"john.doe@abc.com\",\n      \"added_at\": \"2024-03-01T11:01:00Z\",\n      \"added_by\": \"az-user-00001\"\n    }\n  ],\n  \"source_created_at\": \"2024-03-01T11:01:00Z\",\n  \"source_last_updated_at\": \"2024-03-01T11:01:00Z\",\n  \"created_at\": \"2024-03-01T11:01:00Z\",\n  \"created_by\": \"az-user-00001\",\n  \"updated_at\": \"2024-03-01T11:01:00Z\",\n  \"updated_by\": \"az-user-00001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f548b1c2-7720-4f4d-baac-bc01aa0a878c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group",
+                    ":external-group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-group-id",
+                      "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Bad Request\",\n  \"message\": \"Error code : 17e3338d - Invalid request, please fix and resend\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c871ce34-1f28-4927-9dd6-ff6e189f8c3c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group",
+                    ":external-group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-group-id",
+                      "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Unauthorized\",\n  \"message\": \"Error code : 17e3338d - Unable to authenticate credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a44f2e2b-ac87-451a-ae2d-3ff6bfa084c6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group",
+                    ":external-group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-group-id",
+                      "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Forbidden\",\n  \"message\": \"Error code : 17e3338d - You do not have permission to access this resource\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6bd2949-bbeb-49ec-94a3-3a521c786b11",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group",
+                    ":external-group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-group-id",
+                      "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Not Found\",\n  \"message\": \"Error code : 17e3338d - The resource you specified cannot be not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "faa34b5c-2408-472c-be80-52a05ae18888",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-group",
+                    ":external-group-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external-group-id",
+                      "description": "(Required) The group identifier in the source ERP system (e.g. \"AP-GROUP-1001\"). This is the stable identity of an externally managed group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2019-01-17T16:12:45.977+0000\",\n  \"status\": \"string\",\n  \"error\": \"Internal Server Error\",\n  \"message\": \"Error code : 17e3338d - Unable to process your request at this moment, please try again later\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<env>.appzen.com/dictionary-data-services",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "74eca861-39ae-467d-bd9c-c0bd01596e97",
+    "name": "Autonomous AP APIs Chart of Accounts User Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public APIs for integrating with Autonomous AP",
+      "type": "text/plain"
+    }
+  }
+}

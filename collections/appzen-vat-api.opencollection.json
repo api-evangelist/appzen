@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Vat API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/updates a Vat master item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vat"
+          },
+          "docs": "Creates a new Vat master item in AppZen. Returns a uuid for this vat item. When vat item -- with the same vat_code/vat_rate combination -- already exists, then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns Vat master item details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vat/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a Vat master item by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns Vat master item details by vat-id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vat/vat-id/:vat-id",
+            "params": [
+              {
+                "name": "vat-id",
+                "value": "",
+                "type": "path",
+                "description": "customer vat id"
+              }
+            ]
+          },
+          "docs": "Returns Vat master item details matching vat-id specified as path parameter"
+        },
+        {
+          "info": {
+            "name": "Returns Vat master item details by vat-code and vat-rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vat/vat-code/:vat-code/vat-rate/:vat-rate",
+            "params": [
+              {
+                "name": "vat-code",
+                "value": "",
+                "type": "path",
+                "description": "customer vat code"
+              },
+              {
+                "name": "vat-rate",
+                "value": "",
+                "type": "path",
+                "description": "customer vat rate. If vat record was loaded without a vat rate, set it to 0 in this request"
+              }
+            ]
+          },
+          "docs": "Returns Vat master item details matching vat-code and vat-rate specified as path parameters"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

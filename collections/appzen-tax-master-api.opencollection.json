@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Tax Master API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Master",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/Updates a tax master record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tax"
+          },
+          "docs": "Creates a new tax master record in AppZen and returns a uuid that uniquely identifies it. When there is already exists a record (tax_id), then the operation is an update (the `status` would be `UPDATED` in this case)."
+        },
+        {
+          "info": {
+            "name": "Returns Tax master item details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tax/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a Tax master item by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns tax master item details by tax-id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tax/tax-id/:tax-id",
+            "params": [
+              {
+                "name": "tax-id",
+                "value": "",
+                "type": "path",
+                "description": "customer tax id"
+              }
+            ]
+          },
+          "docs": "Returns Tax master item details matching tax-id specified as path parameter"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

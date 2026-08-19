@@ -171,3 +171,9 @@ tools:
 - name: get_user_group
   description: Returns a user group
   source_operation: openapi/appzen-autonomous-ap-openapi-original.yml#GET /user-group/{external-group-id}
+deployment:
+  mode: none
+  verified: derived
+  tools: 54
+  checked: '2026-08-12'
+  source: catalog MCP census

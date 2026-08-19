@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Unit of Measures API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Unit of Measures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/updates a unit of measure",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/unit-of-measures"
+          },
+          "docs": "Creates a new unit of measure in AppZen. Returns a uuid for this unit of measure. When there already exists a unit of measure (with the same uom_code), then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns unit of measure details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/unit-of-measure/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a unit of measure by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns unit of measure details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/unit-of-measure/uom-code/:uom-code",
+            "params": [
+              {
+                "name": "uom-code",
+                "value": "",
+                "type": "path",
+                "description": "Customer specific unit of measure code"
+              }
+            ]
+          },
+          "docs": "Returns the details of a unit of measure matching the uom-code"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

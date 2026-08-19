@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Custom Data Sets API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Data Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/updates a custom data record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/custom-data"
+          },
+          "docs": "Creates a new Lookup in AppZen (set of named key  value pairs). Returns a uuid for this lookup. When there already exists a lookup (with the same lookup_name and external_id), then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns custom data record details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom-data/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a custom data record by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns custom data record details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/custom-data/dataset-name/:dataset-name/external-id/:custom-external-id",
+            "params": [
+              {
+                "name": "dataset-name",
+                "value": "",
+                "type": "path",
+                "description": "data set name"
+              },
+              {
+                "name": "custom-external-id",
+                "value": "",
+                "type": "path",
+                "description": "external-id for custom data item"
+              }
+            ]
+          },
+          "docs": "Returns the details of a custom data record matching the dataset-name and its external-id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

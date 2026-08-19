@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Invoices API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/Updates an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/invoice",
+            "headers": [
+              {
+                "name": "historical",
+                "value": ""
+              },
+              {
+                "name": "bypass-coa-lookup",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This will create a new invoice in AppZen referred by uuid. This invoice will be processed further by AppZen for extraction and validation. When there already exists an invoice (invoice_id), then the operation is an update (the `status` would be `UPDATED` in this case)."
+        },
+        {
+          "info": {
+            "name": "Returns all invoices uuid that match the search criteria",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/invoice/search"
+          },
+          "docs": "Returns a list of the invoice uuids that match the status, from-date and end-date"
+        },
+        {
+          "info": {
+            "name": "Returns an invoice's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/invoice/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of an invoice by uuid"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

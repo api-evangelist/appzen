@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Invoice Status Sync API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoice Status Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Updates the external status of an invoice in Appzen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/invoice/:uuid/status-sync",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "This is used to update the external ERP status as well as appzen internal state for an invoice referred by uuid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

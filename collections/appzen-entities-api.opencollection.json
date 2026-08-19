@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autonomous AP APIs Chart of Accounts Entities API",
+    "version": "2.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates/updates an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entity"
+          },
+          "docs": "Creates a new entity in AppZen. Returns a uuid for this entity. When there already exists an entity (with the same uuid), then the operation is an update (in this case, the `status` in the response will be `UPDATED`)."
+        },
+        {
+          "info": {
+            "name": "Returns entity details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/entity/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Globally unique identifier for an uploaded document"
+              }
+            ]
+          },
+          "docs": "Returns the details of a entity by uuid"
+        },
+        {
+          "info": {
+            "name": "Returns entity details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/entity/external-entity-id/:external-entity-id",
+            "params": [
+              {
+                "name": "external-entity-id",
+                "value": "",
+                "type": "path",
+                "description": "external entity id"
+              }
+            ]
+          },
+          "docs": "Returns the details of a entity by external entity id"
+        },
+        {
+          "info": {
+            "name": "Returns all Entities uuid that match the search criteria",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entity/search"
+          },
+          "docs": "Returns a list of the Entities uuids that match from-date and end-date"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
