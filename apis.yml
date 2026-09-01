@@ -245,7 +245,7 @@ apis:
   humanURL: https://api-docs.appzen.com/
   baseURL: https://api.appzen.com/dictionary-data-services
   tags:
-  - Vat
+  - VAT
   tags_raw:
   - Vat
   properties:
