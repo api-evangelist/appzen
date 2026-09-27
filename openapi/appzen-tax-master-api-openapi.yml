@@ -160,79 +160,7 @@ paths:
       operationId: getTaxTaxIdByTaxId
       x-operation-id-source: derived
 components:
-  parameters:
-    tax-id:
-      in: path
-      description: customer tax id
-      required: true
-      name: tax-id
-      schema:
-        type: string
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    tax-json-schema:
-      in: body
-      required: true
-      name: tax-json-schema
-      schema:
-        $ref: '#/components/schemas/tax-json-schema'
   schemas:
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    appzen-vat-breakdown-item:
-      type: object
-      properties:
-        code:
-          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
-          type: string
-          example: VAT
-        rate:
-          type: number
-          description: rate as percentage
-          example: 12
-          exclusiveMinimum: 0
     tax-get:
       properties:
         tax_code:
@@ -288,6 +216,21 @@ components:
           type: string
           description: Standard tax jurisdiction code
           example: IN
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     uuid:
       type: object
       properties:
@@ -297,6 +240,57 @@ components:
         status:
           type: string
           example: CREATED
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    appzen-vat-breakdown-item:
+      type: object
+      properties:
+        code:
+          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+          type: string
+          example: VAT
+        rate:
+          type: number
+          description: rate as percentage
+          example: 12
+          exclusiveMinimum: 0
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     tax-json-schema:
       type: object
       properties:
@@ -359,6 +353,21 @@ components:
       - tax_type
       - tax_code
       - tax_rate
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     http-404-error-response:
       type: object
       properties:
@@ -374,36 +383,27 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+  parameters:
+    tax-json-schema:
+      in: body
+      required: true
+      name: tax-json-schema
+      schema:
+        $ref: '#/components/schemas/tax-json-schema'
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
+    tax-id:
+      in: path
+      description: customer tax id
+      required: true
+      name: tax-id
+      schema:
+        type: string
   securitySchemes:
     API_Key_Header:
       type: apiKey

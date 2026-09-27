@@ -174,27 +174,6 @@ paths:
       operationId: postChartOfAccountsSearch
       x-operation-id-source: derived
 components:
-  parameters:
-    chart-of-account-input-schema:
-      in: body
-      required: true
-      name: chart-of-account-input-schema
-      schema:
-        $ref: '#/components/schemas/chart-of-account-input-schema'
-    find-query-spec:
-      in: body
-      description: Query Criterion for locating Items
-      required: true
-      name: find-query-spec
-      schema:
-        $ref: '#/components/schemas/find-query-spec'
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
   schemas:
     http-403-error-response:
       type: object
@@ -211,59 +190,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    find-query-spec:
-      description: The date range must be limited to 7 days
-      properties:
-        from-last-appzen-update-time:
-          description: Start Date Range value for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        to-last-appzen-update-time:
-          description: End Date Range for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        limit:
-          description: Number of matched records to return
-          type: number
-          default: 1000
-          maximum: 1000
-          example: 50
-      required:
-      - from-last-appzen-update-time
-      - to-last-appzen-update-time
-    segments:
-      type: object
-      properties:
-        segment_name:
-          type: string
-          example: San Jose
-        segment_code:
-          type: string
-          example: SanJose
     http-400-error-response:
       type: object
       properties:
@@ -279,34 +205,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    find-chart-of-accounts-result-spec:
-      example:
-      - segment-code: '3689490915'
-        segment-type: Account
-        appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
-        is-active: true
-        last-appzen-update-time: '2021-12-08T23:30:10.314Z'
-      - segment-code: '6649972540'
-        segment-type: Legal
-        appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
-        is-active: true
-        last-appzen-update-time: '2021-12-08T23:30:12.597Z'
-      properties:
-        erp-invoice-id:
-          type: string
-        erp-invoice-status:
-          type: string
-        appzen-uuid:
-          type: string
-        appzen-invoice-status:
-          type: string
-        last-appzen-update-time:
-          type: string
     uuid:
       type: object
       properties:
@@ -316,6 +214,15 @@ components:
         status:
           type: string
           example: CREATED
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
     chart-of-account-output-schema:
       type: object
       properties:
@@ -383,6 +290,79 @@ components:
         uuid:
           type: string
           example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+    find-chart-of-accounts-result-spec:
+      example:
+      - segment-code: '3689490915'
+        segment-type: Account
+        appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
+        is-active: true
+        last-appzen-update-time: '2021-12-08T23:30:10.314Z'
+      - segment-code: '6649972540'
+        segment-type: Legal
+        appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
+        is-active: true
+        last-appzen-update-time: '2021-12-08T23:30:12.597Z'
+      properties:
+        erp-invoice-id:
+          type: string
+        erp-invoice-status:
+          type: string
+        appzen-uuid:
+          type: string
+        appzen-invoice-status:
+          type: string
+        last-appzen-update-time:
+          type: string
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    find-query-spec:
+      description: The date range must be limited to 7 days
+      properties:
+        from-last-appzen-update-time:
+          description: Start Date Range value for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        to-last-appzen-update-time:
+          description: End Date Range for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        limit:
+          description: Number of matched records to return
+          type: number
+          default: 1000
+          maximum: 1000
+          example: 50
+      required:
+      - from-last-appzen-update-time
+      - to-last-appzen-update-time
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     chart-of-account-input-schema:
       type: object
       properties:
@@ -472,21 +452,41 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-500-error-response:
+    segments:
       type: object
       properties:
-        timestamp:
+        segment_name:
           type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
+          example: San Jose
+        segment_code:
           type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+          example: SanJose
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+  parameters:
+    chart-of-account-input-schema:
+      in: body
+      required: true
+      name: chart-of-account-input-schema
+      schema:
+        $ref: '#/components/schemas/chart-of-account-input-schema'
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
+    find-query-spec:
+      in: body
+      description: Query Criterion for locating Items
+      required: true
+      name: find-query-spec
+      schema:
+        $ref: '#/components/schemas/find-query-spec'
   securitySchemes:
     API_Key_Header:
       type: apiKey

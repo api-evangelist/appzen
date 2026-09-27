@@ -179,6 +179,15 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
     uuid-updated:
       type: object
       properties:
@@ -188,83 +197,6 @@ components:
         status:
           type: string
           example: UPDATED
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    lookup:
-      properties:
-        lookup_name_id:
-          description: Lookup Table Id for this Lookup Item
-          type: string
-          example: TAX_APPLICABILITY
-        lookup_item_id:
-          example: XDES322
-          description: Lookup Item Id from ERP system.
-          type: string
-        lookup_item_name:
-          example: EMEA Region
-          description: Lookup Item Name.
-          type: string
-        lookup_item_description:
-          example: Tax Applicability in EMEA Region
-          description: Lookup Item Description.
-          type: string
-        is_active:
-          description: Is lookup active in the ERP system.
-          default: true
-          type: boolean
-        parent_lookup_item_id:
-          example: Euroasia
-          description: deprecated - please use 'parent_lookup_item_ids' instead
-          type: string
-        parent_lookup_item_ids:
-          example:
-          - Euroasia
-          - XDES323
-          description: Parent Lookup Item Ids from ERP system.
-          type: string
-        created_at:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        updated_at:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-      required:
-      - lookup_name_id
-      - lookup_item_id
-      - lookup_item_name
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
     lookup-get:
       properties:
         lookup_name_id:
@@ -310,15 +242,21 @@ components:
         uuid:
           type: string
           example: 0045-89707-0906-DE3C
-    uuid:
+    http-400-error-response:
       type: object
       properties:
-        uuid:
+        timestamp:
           type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+          example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: CREATED
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     http-404-error-response:
       type: object
       properties:
@@ -349,7 +287,76 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    lookup:
+      properties:
+        lookup_name_id:
+          description: Lookup Table Id for this Lookup Item
+          type: string
+          example: TAX_APPLICABILITY
+        lookup_item_id:
+          example: XDES322
+          description: Lookup Item Id from ERP system.
+          type: string
+        lookup_item_name:
+          example: EMEA Region
+          description: Lookup Item Name.
+          type: string
+        lookup_item_description:
+          example: Tax Applicability in EMEA Region
+          description: Lookup Item Description.
+          type: string
+        is_active:
+          description: Is lookup active in the ERP system.
+          default: true
+          type: boolean
+        parent_lookup_item_id:
+          example: Euroasia
+          description: deprecated - please use 'parent_lookup_item_ids' instead
+          type: string
+        parent_lookup_item_ids:
+          example:
+          - Euroasia
+          - XDES323
+          description: Parent Lookup Item Ids from ERP system.
+          type: string
+        created_at:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        updated_at:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+      required:
+      - lookup_name_id
+      - lookup_item_id
+      - lookup_item_name
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
   parameters:
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
     lookup-json-schema:
       in: body
       required: true
@@ -361,13 +368,6 @@ components:
       description: lookup table name id
       required: true
       name: lookup-name-id
-      schema:
-        type: string
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
       schema:
         type: string
     lookup-item-id:

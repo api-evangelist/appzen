@@ -213,113 +213,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    find-query-spec:
-      description: The date range must be limited to 7 days
-      properties:
-        from-last-appzen-update-time:
-          description: Start Date Range value for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        to-last-appzen-update-time:
-          description: End Date Range for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        limit:
-          description: Number of matched records to return
-          type: number
-          default: 1000
-          maximum: 1000
-          example: 50
-      required:
-      - from-last-appzen-update-time
-      - to-last-appzen-update-time
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    find-payment-terms-result-spec:
-      example:
-      - payment-term-id: NET20-EPR-XID
-        appzen-uuid: 02e9c5ab-3973-4552-9ba0-d069439e92a5
-        is-active: true
-        last-appzen-update-time: '2022-12-09T08:24:13.192Z'
-      - payment-term-id: NET30-DISC5
-        appzen-uuid: 01fb405a-78f6-4924-9531-425fbffdda6d
-        is-active: true
-        last-appzen-update-time: '2022-12-09T08:37:29.526Z'
-      properties:
-        payment-term-id:
-          type: string
-        appzen-uuid:
-          type: string
-        is-active:
-          type: boolean
-        last-appzen-update-time:
-          type: string
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
     payment-term:
       properties:
         name:
@@ -371,6 +264,143 @@ components:
       required:
       - id
       - name
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
+    find-query-spec:
+      description: The date range must be limited to 7 days
+      properties:
+        from-last-appzen-update-time:
+          description: Start Date Range value for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        to-last-appzen-update-time:
+          description: End Date Range for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        limit:
+          description: Number of matched records to return
+          type: number
+          default: 1000
+          maximum: 1000
+          example: 50
+      required:
+      - from-last-appzen-update-time
+      - to-last-appzen-update-time
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    find-payment-terms-result-spec:
+      example:
+      - payment-term-id: NET20-EPR-XID
+        appzen-uuid: 02e9c5ab-3973-4552-9ba0-d069439e92a5
+        is-active: true
+        last-appzen-update-time: '2022-12-09T08:24:13.192Z'
+      - payment-term-id: NET30-DISC5
+        appzen-uuid: 01fb405a-78f6-4924-9531-425fbffdda6d
+        is-active: true
+        last-appzen-update-time: '2022-12-09T08:37:29.526Z'
+      properties:
+        payment-term-id:
+          type: string
+        appzen-uuid:
+          type: string
+        is-active:
+          type: boolean
+        last-appzen-update-time:
+          type: string
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
     discounts:
       items:
         properties:
@@ -395,44 +425,7 @@ components:
         - discount_days
         - discount_percent
       type: array
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
   parameters:
-    find-query-spec:
-      in: body
-      description: Query Criterion for locating Items
-      required: true
-      name: find-query-spec
-      schema:
-        $ref: '#/components/schemas/find-query-spec'
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -446,6 +439,13 @@ components:
       name: payment-terms-json-schema
       schema:
         $ref: '#/components/schemas/payment-term'
+    find-query-spec:
+      in: body
+      description: Query Criterion for locating Items
+      required: true
+      name: find-query-spec
+      schema:
+        $ref: '#/components/schemas/find-query-spec'
   securitySchemes:
     API_Key_Header:
       type: apiKey

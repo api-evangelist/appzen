@@ -213,11 +213,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    entity-addresses:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/entity-address'
     http-403-error-response:
       type: object
       properties:
@@ -233,86 +228,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    data-lookup-names:
-      type: object
-      properties:
-        coa_lookup_names:
-          type: array
-          description: If "" or " " (white space only, no lookup context is specified for the corresponding coa_structure element.
-          example:
-          - us_lookups
-          - ''
-          - ' '
-          - f1_list
-        supplier_lookup_name:
-          type: string
-          description: associated supplier lookup name list
-          example: s1
-    entity-address:
-      type: object
-      required:
-      - address_type
-      properties:
-        address_type:
-          type: string
-          enum:
-          - REMIT_TO
-          - BILL_TO
-          - SHIP_TO
-          - OFFICE
-          - SUPPLIER_ADDRESS
-          - CUSTOMER_ADDRESS
-          - NONE_ADDRESS_TYPE
-        address:
-          allOf:
-          - $ref: '#/components/schemas/addressCore'
-        site_id:
-          type: string
-          example: '913838'
-        site_name:
-          type: string
-          example: California HQ
-        custom_json:
-          type: object
-          properties:
-            key1:
-              type: string
-              example: value1
-    find-query-spec:
-      description: The date range must be limited to 7 days
-      properties:
-        from-last-appzen-update-time:
-          description: Start Date Range value for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        to-last-appzen-update-time:
-          description: End Date Range for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        limit:
-          description: Number of matched records to return
-          type: number
-          default: 1000
-          maximum: 1000
-          example: 50
-      required:
-      - from-last-appzen-update-time
-      - to-last-appzen-update-time
     http-400-error-response:
       type: object
       properties:
@@ -328,115 +243,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    find-entity-result-spec:
-      example:
-      - entity-id: '1951243072'
-        appzen-uuid: 506dd9b6-a93c-48fc-98e8-919093032b49
-        is-active: false
-        last-appzen-update-time: '2021-12-08T23:00:17.724Z'
-      - entity-id: '1623599683'
-        appzen-uuid: f43c0612-11b5-4965-9554-425fbffdda6d
-        is-active: false
-        last-appzen-update-time: '2021-12-08T23:30:15.368Z'
-      properties:
-        entity-id:
-          type: string
-        appzen-uuid:
-          type: string
-        is-active:
-          type: boolean
-        last-appzen-update-time:
-          type: string
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    addressCore:
-      required:
-      - address_line1
-      - country
-      - zip
-      properties:
-        address_line1:
-          default: ''
-          title: The address_line1 schema
-          type: string
-          example: 12345 MARKET STREET
-        address_line2:
-          default: ''
-          title: The address_line2 schema
-          type: string
-          example: SUITE 1234
-        address_line3:
-          default: ''
-          title: The address_line3 schema
-          type: string
-          example: ''
-        area_code:
-          default: ''
-          title: The area_code schema
-          type: string
-          example: '415'
-        city:
-          default: ''
-          title: The city schema
-          type: string
-          example: SAN FRANCISCO
-        company:
-          default: ''
-          title: The company schema
-          type: string
-          example: Preferred Supplier Inc.
-        contact:
-          default: ''
-          title: The contact schema
-          type: string
-          example: Jane Doe
-        country:
-          default: ''
-          title: The country schema
-          type: string
-          example: US
-        country_iso3:
-          default: ''
-          title: The country_iso3 schema
-          type: string
-          example: USA
-        email:
-          default: ''
-          title: The email schema
-          type: string
-          example: janedoe@supplier.com
-        phone:
-          default: ''
-          title: The phone schema
-          type: string
-          example: '4042965282'
-        province:
-          default: ''
-          title: The province schema
-          type: string
-          example: ''
-        state:
-          default: ''
-          title: The state schema
-          type: string
-          example: CA
-        zip:
-          default: ''
-          title: The zip schema
-          type: string
-          example: '94016'
     uuid:
       type: object
       properties:
@@ -446,6 +252,50 @@ components:
         status:
           type: string
           example: CREATED
+    entity-addresses:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/entity-address'
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
+    data-lookup-names:
+      type: object
+      properties:
+        coa_lookup_names:
+          type: array
+          description: If "" or " " (white space only, no lookup context is specified for the corresponding coa_structure element.
+          example:
+          - us_lookups
+          - ''
+          - ' '
+          - f1_list
+        supplier_lookup_name:
+          type: string
+          description: associated supplier lookup name list
+          example: s1
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     entity:
       properties:
         entity_id:
@@ -535,6 +385,117 @@ components:
       - appzen_entity_type
       - currency
       - addresses
+    find-query-spec:
+      description: The date range must be limited to 7 days
+      properties:
+        from-last-appzen-update-time:
+          description: Start Date Range value for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        to-last-appzen-update-time:
+          description: End Date Range for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        limit:
+          description: Number of matched records to return
+          type: number
+          default: 1000
+          maximum: 1000
+          example: 50
+      required:
+      - from-last-appzen-update-time
+      - to-last-appzen-update-time
+    addressCore:
+      required:
+      - address_line1
+      - country
+      - zip
+      properties:
+        address_line1:
+          default: ''
+          title: The address_line1 schema
+          type: string
+          example: 12345 MARKET STREET
+        address_line2:
+          default: ''
+          title: The address_line2 schema
+          type: string
+          example: SUITE 1234
+        address_line3:
+          default: ''
+          title: The address_line3 schema
+          type: string
+          example: ''
+        area_code:
+          default: ''
+          title: The area_code schema
+          type: string
+          example: '415'
+        city:
+          default: ''
+          title: The city schema
+          type: string
+          example: SAN FRANCISCO
+        company:
+          default: ''
+          title: The company schema
+          type: string
+          example: Preferred Supplier Inc.
+        contact:
+          default: ''
+          title: The contact schema
+          type: string
+          example: Jane Doe
+        country:
+          default: ''
+          title: The country schema
+          type: string
+          example: US
+        country_iso3:
+          default: ''
+          title: The country_iso3 schema
+          type: string
+          example: USA
+        email:
+          default: ''
+          title: The email schema
+          type: string
+          example: janedoe@supplier.com
+        phone:
+          default: ''
+          title: The phone schema
+          type: string
+          example: '4042965282'
+        province:
+          default: ''
+          title: The province schema
+          type: string
+          example: ''
+        state:
+          default: ''
+          title: The state schema
+          type: string
+          example: CA
+        zip:
+          default: ''
+          title: The zip schema
+          type: string
+          example: '94016'
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     http-404-error-response:
       type: object
       properties:
@@ -550,35 +511,61 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-500-error-response:
-      type: object
+    find-entity-result-spec:
+      example:
+      - entity-id: '1951243072'
+        appzen-uuid: 506dd9b6-a93c-48fc-98e8-919093032b49
+        is-active: false
+        last-appzen-update-time: '2021-12-08T23:00:17.724Z'
+      - entity-id: '1623599683'
+        appzen-uuid: f43c0612-11b5-4965-9554-425fbffdda6d
+        is-active: false
+        last-appzen-update-time: '2021-12-08T23:30:15.368Z'
       properties:
-        timestamp:
+        entity-id:
           type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
+        appzen-uuid:
           type: string
-          example: 500
-        error:
+        is-active:
+          type: boolean
+        last-appzen-update-time:
           type: string
-          example: Internal Server Error
-        message:
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    entity-address:
+      type: object
+      required:
+      - address_type
+      properties:
+        address_type:
           type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+          enum:
+          - REMIT_TO
+          - BILL_TO
+          - SHIP_TO
+          - OFFICE
+          - SUPPLIER_ADDRESS
+          - CUSTOMER_ADDRESS
+          - NONE_ADDRESS_TYPE
+        address:
+          allOf:
+          - $ref: '#/components/schemas/addressCore'
+        site_id:
+          type: string
+          example: '913838'
+        site_name:
+          type: string
+          example: California HQ
+        custom_json:
+          type: object
+          properties:
+            key1:
+              type: string
+              example: value1
   parameters:
-    entity-schema:
-      in: body
-      required: true
-      name: entity-schema
-      schema:
-        $ref: '#/components/schemas/entity'
-    find-query-spec:
-      in: body
-      description: Query Criterion for locating Items
-      required: true
-      name: find-query-spec
-      schema:
-        $ref: '#/components/schemas/find-query-spec'
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -586,6 +573,19 @@ components:
       name: uuid
       schema:
         type: string
+    find-query-spec:
+      in: body
+      description: Query Criterion for locating Items
+      required: true
+      name: find-query-spec
+      schema:
+        $ref: '#/components/schemas/find-query-spec'
+    entity-schema:
+      in: body
+      required: true
+      name: entity-schema
+      schema:
+        $ref: '#/components/schemas/entity'
   securitySchemes:
     API_Key_Header:
       type: apiKey

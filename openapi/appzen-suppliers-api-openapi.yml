@@ -212,7 +212,134 @@ paths:
       operationId: postSupplierSearch
       x-operation-id-source: derived
 components:
+  parameters:
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
+    suppliers-json-schema:
+      in: body
+      required: true
+      name: suppliers-json-schema
+      schema:
+        $ref: '#/components/schemas/suppliers-json-schema'
+    find-query-spec:
+      in: body
+      description: Query Criterion for locating Items
+      required: true
+      name: find-query-spec
+      schema:
+        $ref: '#/components/schemas/find-query-spec'
   schemas:
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    addressCore:
+      required:
+      - address_line1
+      - country
+      - zip
+      properties:
+        address_line1:
+          default: ''
+          title: The address_line1 schema
+          type: string
+          example: 12345 MARKET STREET
+        address_line2:
+          default: ''
+          title: The address_line2 schema
+          type: string
+          example: SUITE 1234
+        address_line3:
+          default: ''
+          title: The address_line3 schema
+          type: string
+          example: ''
+        area_code:
+          default: ''
+          title: The area_code schema
+          type: string
+          example: '415'
+        city:
+          default: ''
+          title: The city schema
+          type: string
+          example: SAN FRANCISCO
+        company:
+          default: ''
+          title: The company schema
+          type: string
+          example: Preferred Supplier Inc.
+        contact:
+          default: ''
+          title: The contact schema
+          type: string
+          example: Jane Doe
+        country:
+          default: ''
+          title: The country schema
+          type: string
+          example: US
+        country_iso3:
+          default: ''
+          title: The country_iso3 schema
+          type: string
+          example: USA
+        email:
+          default: ''
+          title: The email schema
+          type: string
+          example: janedoe@supplier.com
+        phone:
+          default: ''
+          title: The phone schema
+          type: string
+          example: '4042965282'
+        province:
+          default: ''
+          title: The province schema
+          type: string
+          example: ''
+        state:
+          default: ''
+          title: The state schema
+          type: string
+          example: CA
+        zip:
+          default: ''
+          title: The zip schema
+          type: string
+          example: '94016'
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     suppliers-json-schema:
       type: object
       required:
@@ -575,141 +702,35 @@ components:
                   invoiceAmountHardThreshold:
                     amount: 50000
                     currency: USD
-    http-401-error-response:
-      type: object
+    bank_account_type:
+      type: string
+      enum:
+      - CHECKING
+      - SAVINGS
+      - BUSINESS_CHECKING
+      - BUSINESS_SAVINGS
+      - MONEY_MARKET
+      - CD
+      - OTHER
+    find-supplier-result-spec:
+      example:
+      - supplier-id: SX13072
+        appzen-uuid: a93cd9b6-cd98-48fc-98e8-425fbffdda6d
+        is-active: false
+        last-appzen-update-time: '2021-12-08T23:00:17.724Z'
+      - supplier-id: Sup-162683
+        appzen-uuid: f11b5612-11b5-4965-9554-425fbffdda6d
+        is-active: false
+        last-appzen-update-time: '2021-12-08T23:30:15.368Z'
       properties:
-        timestamp:
+        supplier-id:
           type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
+        appzen-uuid:
           type: string
-          example: 401
-        error:
+        is-active:
+          type: boolean
+        last-appzen-update-time:
           type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    addressCore:
-      required:
-      - address_line1
-      - country
-      - zip
-      properties:
-        address_line1:
-          default: ''
-          title: The address_line1 schema
-          type: string
-          example: 12345 MARKET STREET
-        address_line2:
-          default: ''
-          title: The address_line2 schema
-          type: string
-          example: SUITE 1234
-        address_line3:
-          default: ''
-          title: The address_line3 schema
-          type: string
-          example: ''
-        area_code:
-          default: ''
-          title: The area_code schema
-          type: string
-          example: '415'
-        city:
-          default: ''
-          title: The city schema
-          type: string
-          example: SAN FRANCISCO
-        company:
-          default: ''
-          title: The company schema
-          type: string
-          example: Preferred Supplier Inc.
-        contact:
-          default: ''
-          title: The contact schema
-          type: string
-          example: Jane Doe
-        country:
-          default: ''
-          title: The country schema
-          type: string
-          example: US
-        country_iso3:
-          default: ''
-          title: The country_iso3 schema
-          type: string
-          example: USA
-        email:
-          default: ''
-          title: The email schema
-          type: string
-          example: janedoe@supplier.com
-        phone:
-          default: ''
-          title: The phone schema
-          type: string
-          example: '4042965282'
-        province:
-          default: ''
-          title: The province schema
-          type: string
-          example: ''
-        state:
-          default: ''
-          title: The state schema
-          type: string
-          example: CA
-        zip:
-          default: ''
-          title: The zip schema
-          type: string
-          example: '94016'
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    addresses:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/address'
     supplier:
       properties:
         addresses:
@@ -1068,25 +1089,6 @@ components:
                   poRequirementMode: FORBIDDEN
                   allowedCurrencies: '["INR","USD"]'
       type: object
-    find-supplier-result-spec:
-      example:
-      - supplier-id: SX13072
-        appzen-uuid: a93cd9b6-cd98-48fc-98e8-425fbffdda6d
-        is-active: false
-        last-appzen-update-time: '2021-12-08T23:00:17.724Z'
-      - supplier-id: Sup-162683
-        appzen-uuid: f11b5612-11b5-4965-9554-425fbffdda6d
-        is-active: false
-        last-appzen-update-time: '2021-12-08T23:30:15.368Z'
-      properties:
-        supplier-id:
-          type: string
-        appzen-uuid:
-          type: string
-        is-active:
-          type: boolean
-        last-appzen-update-time:
-          type: string
     uuid-updated:
       type: object
       properties:
@@ -1096,12 +1098,7 @@ components:
         status:
           type: string
           example: UPDATED
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    http-404-error-response:
+    http-400-error-response:
       type: object
       properties:
         timestamp:
@@ -1109,13 +1106,94 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 404
+          example: 400
         error:
           type: string
-          example: Not Found
+          example: Bad Request
         message:
           type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    payment_type:
+      type: string
+      enum:
+      - ACH
+      - DOMESTIC_WIRE
+      - SEPA_CREDIT_TRANSFER
+      - INTERNATIONAL_WIRE_SWIFT
+      - BACS
+      - BECS
+      - CHECK_PAPER
+      - REAL_TIME_PAYMENTS
+      - VIRTUAL_CARD
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
+    addresses:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/address'
+    find-query-spec:
+      description: The date range must be limited to 7 days
+      properties:
+        from-last-appzen-update-time:
+          description: Start Date Range value for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        to-last-appzen-update-time:
+          description: End Date Range for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        limit:
+          description: Number of matched records to return
+          type: number
+          default: 1000
+          maximum: 1000
+          example: 50
+      required:
+      - from-last-appzen-update-time
+      - to-last-appzen-update-time
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     address:
       type: object
       required:
@@ -1155,84 +1233,6 @@ components:
         valid_end_date:
           allOf:
           - $ref: '#/components/schemas/date-time'
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    find-query-spec:
-      description: The date range must be limited to 7 days
-      properties:
-        from-last-appzen-update-time:
-          description: Start Date Range value for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        to-last-appzen-update-time:
-          description: End Date Range for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        limit:
-          description: Number of matched records to return
-          type: number
-          default: 1000
-          maximum: 1000
-          example: 50
-      required:
-      - from-last-appzen-update-time
-      - to-last-appzen-update-time
-    bank_account_type:
-      type: string
-      enum:
-      - CHECKING
-      - SAVINGS
-      - BUSINESS_CHECKING
-      - BUSINESS_SAVINGS
-      - MONEY_MARKET
-      - CD
-      - OTHER
-    payment_type:
-      type: string
-      enum:
-      - ACH
-      - DOMESTIC_WIRE
-      - SEPA_CREDIT_TRANSFER
-      - INTERNATIONAL_WIRE_SWIFT
-      - BACS
-      - BECS
-      - CHECK_PAPER
-      - REAL_TIME_PAYMENTS
-      - VIRTUAL_CARD
-  parameters:
-    find-query-spec:
-      in: body
-      description: Query Criterion for locating Items
-      required: true
-      name: find-query-spec
-      schema:
-        $ref: '#/components/schemas/find-query-spec'
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    suppliers-json-schema:
-      in: body
-      required: true
-      name: suppliers-json-schema
-      schema:
-        $ref: '#/components/schemas/suppliers-json-schema'
   securitySchemes:
     API_Key_Header:
       type: apiKey
