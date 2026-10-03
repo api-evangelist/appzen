@@ -210,6 +210,20 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
     http-403-error-response:
       type: object
       properties:
@@ -271,15 +285,36 @@ components:
       required:
       - lookup_name_id
       - lookup_name
-    uuid:
+    http-404-error-response:
       type: object
       properties:
-        uuid:
+        timestamp:
           type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+          example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: CREATED
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     uuid-updated:
       type: object
       properties:
@@ -304,36 +339,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     lookup-table-get:
       properties:
         lookup_name_id:
@@ -365,19 +370,7 @@ components:
         uuid:
           type: string
           example: 0045-89707-0906-DE3C
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
   parameters:
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
     lookup-table-json-schema:
       in: body
       required: true
@@ -389,6 +382,13 @@ components:
       description: lookup table name id
       required: true
       name: lookup-name-id
+      schema:
+        type: string
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
       schema:
         type: string
   securitySchemes:

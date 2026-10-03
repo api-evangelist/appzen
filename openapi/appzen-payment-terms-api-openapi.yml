@@ -213,6 +213,79 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    discounts:
+      items:
+        properties:
+          discount_days:
+            default: 0
+            example: 0
+            description: The discount days
+            type: integer
+          discount_percent:
+            default: 0
+            example: 0
+            description: The discount percent
+            type: integer
+          discount_amount:
+            default: 0
+            example: 0
+            description: The discount amount
+            type: integer
+        type: object
+        required:
+        - discount_amount
+        - discount_days
+        - discount_percent
+      type: array
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    find-query-spec:
+      description: The date range must be limited to 7 days
+      properties:
+        from-last-appzen-update-time:
+          description: Start Date Range value for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        to-last-appzen-update-time:
+          description: End Date Range for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        limit:
+          description: Number of matched records to return
+          type: number
+          default: 1000
+          maximum: 1000
+          example: 50
+      required:
+      - from-last-appzen-update-time
+      - to-last-appzen-update-time
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     payment-term:
       properties:
         name:
@@ -264,21 +337,6 @@ components:
       required:
       - id
       - name
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     http-400-error-response:
       type: object
       properties:
@@ -294,74 +352,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    find-query-spec:
-      description: The date range must be limited to 7 days
-      properties:
-        from-last-appzen-update-time:
-          description: Start Date Range value for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        to-last-appzen-update-time:
-          description: End Date Range for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        limit:
-          description: Number of matched records to return
-          type: number
-          default: 1000
-          maximum: 1000
-          example: 50
-      required:
-      - from-last-appzen-update-time
-      - to-last-appzen-update-time
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     http-404-error-response:
       type: object
       properties:
@@ -377,6 +367,45 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     find-payment-terms-result-spec:
       example:
       - payment-term-id: NET20-EPR-XID
@@ -396,49 +425,7 @@ components:
           type: boolean
         last-appzen-update-time:
           type: string
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    discounts:
-      items:
-        properties:
-          discount_days:
-            default: 0
-            example: 0
-            description: The discount days
-            type: integer
-          discount_percent:
-            default: 0
-            example: 0
-            description: The discount percent
-            type: integer
-          discount_amount:
-            default: 0
-            example: 0
-            description: The discount amount
-            type: integer
-        type: object
-        required:
-        - discount_amount
-        - discount_days
-        - discount_percent
-      type: array
   parameters:
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    payment-terms-json-schema:
-      in: body
-      required: true
-      name: payment-terms-json-schema
-      schema:
-        $ref: '#/components/schemas/payment-term'
     find-query-spec:
       in: body
       description: Query Criterion for locating Items
@@ -446,6 +433,19 @@ components:
       name: find-query-spec
       schema:
         $ref: '#/components/schemas/find-query-spec'
+    payment-terms-json-schema:
+      in: body
+      required: true
+      name: payment-terms-json-schema
+      schema:
+        $ref: '#/components/schemas/payment-term'
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
   securitySchemes:
     API_Key_Header:
       type: apiKey

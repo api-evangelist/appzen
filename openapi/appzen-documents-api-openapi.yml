@@ -117,21 +117,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     http-403-error-response:
       type: object
       properties:
@@ -147,19 +132,7 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    signed-url-response:
-      type: object
-      properties:
-        url:
-          type: string
-          example: http://download-link.appzen.com/Staged_Documents/0102/5fc03087-d265-11e7-b8c6-83e29cd24f4c/AEMB7W..<very-long-url>
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        expires:
-          type: string
-          example: '2021-02-23T22:20:47.636Z'
-    http-500-error-response:
+    http-400-error-response:
       type: object
       properties:
         timestamp:
@@ -167,28 +140,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 500
+          example: 400
         error:
           type: string
-          example: Internal Server Error
+          example: Bad Request
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     http-404-error-response:
       type: object
       properties:
@@ -204,6 +162,48 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    signed-url-response:
+      type: object
+      properties:
+        url:
+          type: string
+          example: http://download-link.appzen.com/Staged_Documents/0102/5fc03087-d265-11e7-b8c6-83e29cd24f4c/AEMB7W..<very-long-url>
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        expires:
+          type: string
+          example: '2021-02-23T22:20:47.636Z'
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
   securitySchemes:
     API_Key_Header:
       type: apiKey

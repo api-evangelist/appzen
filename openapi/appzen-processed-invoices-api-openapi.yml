@@ -61,6 +61,31 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    processed-invoice-other-object-fields:
+      type: object
+      description: Set of key value pairs, where each value is an object with two keys - name and id
+      example:
+        code-region:
+          name: us-east
+          id: region1s
+        code-dept:
+          name: wing-1
+          id: '325'
     invoice-goods-receipt:
       type: object
       properties:
@@ -77,27 +102,57 @@ components:
           format: int32
           example: 10
           description: Quantity allocated to invoice from this receipt
+    processed-invoice-other-segment:
+      type: object
+      properties:
+        segment_code:
+          type: string
+        segment_name:
+          type: string
+        segment_type:
+          type: string
+    vat-breakdown-item:
+      type: object
+      properties:
+        vat_id:
+          type: string
+          description: External vat_id
+          example: gst_1232ext
+        code:
+          type: string
+          example: GST
+        rate:
+          type: number
+          description: rate as percentage
+          example: 20.5
+          exclusiveMinimum: 0
+        vat_amount:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+        jurisdiction_code:
+          type: string
+          description: Standard tax jurisdiction code
+          example: IN
     po_policy_match_type:
       type: string
       enum:
       - PO_NONE_MATCH_TYPE
       - PO_POLICY_TWO_WAY_MATCH
       - PO_POLICY_THREE_WAY_MATCH
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    invoice_line_type:
+      type: string
+      enum:
+      - NONE_LINE_TYPE
+      - GOODS
+      - SERVICE
+      - FREIGHT
+      - TAX
+      - MISCELLANEOUS
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
     addressCore:
       required:
       - address_line1
@@ -174,16 +229,18 @@ components:
           title: The zip schema
           type: string
           example: '94016'
-    processed-invoice-other-object-fields:
+    appzen-vat-breakdown-item:
       type: object
-      description: Set of key value pairs, where each value is an object with two keys - name and id
-      example:
-        code-region:
-          name: us-east
-          id: region1s
-        code-dept:
-          name: wing-1
-          id: '325'
+      properties:
+        code:
+          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+          type: string
+          example: VAT
+        rate:
+          type: number
+          description: rate as percentage
+          example: 12
+          exclusiveMinimum: 0
     http-404-error-response:
       type: object
       properties:
@@ -199,6 +256,21 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     invoice-header-custom-json:
       type: object
       description: 'Maximum of 20 fields allowed, 500 chars per field.
@@ -377,60 +449,48 @@ components:
         approval-code: KE-382
         category: internal-projects
         'appzen: withholding': '23.5'
-    appzen-vat-breakdown-item:
+    validation:
       type: object
       properties:
-        code:
-          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+        action_type:
           type: string
-          example: VAT
-        rate:
-          type: number
-          description: rate as percentage
-          example: 12
-          exclusiveMinimum: 0
-    processed-invoice-other-segment:
-      type: object
-      properties:
-        segment_code:
+        confidence:
           type: string
-        segment_name:
+        field_name:
           type: string
-        segment_type:
+        final_risk:
           type: string
-    invoice_line_type:
-      type: string
-      enum:
-      - NONE_LINE_TYPE
-      - GOODS
-      - SERVICE
-      - FREIGHT
-      - TAX
-      - MISCELLANEOUS
-    discounts:
-      items:
-        properties:
-          discount_days:
-            default: 0
-            example: 0
-            description: The discount days
-            type: integer
-          discount_percent:
-            default: 0
-            example: 0
-            description: The discount percent
-            type: integer
-          discount_amount:
-            default: 0
-            example: 0
-            description: The discount amount
-            type: integer
-        type: object
-        required:
-        - discount_amount
-        - discount_days
-        - discount_percent
-      type: array
+        post_config_risk:
+          type: string
+        post_feedback_risk:
+          type: string
+        result_data:
+          type: object
+          properties:
+            ai_model_detected:
+              type: array
+              items:
+                type: string
+            duplicate_invoice_ids:
+              type: array
+              items:
+                type: string
+            electronic_query_detected:
+              type: array
+              items:
+                type: string
+        risk_level:
+          type: string
+        risk_reason:
+          type: string
+        state:
+          type: string
+        validation_display_name:
+          type: string
+        validation_id:
+          type: string
+        validation_name:
+          type: string
     payment-term:
       properties:
         name:
@@ -482,21 +542,82 @@ components:
       required:
       - id
       - name
-    http-400-error-response:
+    po_policy:
       type: object
       properties:
-        timestamp:
+        po_backed:
+          type: boolean
+        po_match_type:
+          allOf:
+          - $ref: '#/components/schemas/po_policy_match_type'
+        receipt_type:
+          allOf:
+          - $ref: '#/components/schemas/po_receipt_type'
+    po_receipt_type:
+      type: string
+      enum:
+      - PO
+      - GOODS_RECEIPT
+    amount:
+      properties:
+        amount:
+          example: 1.5
+          type: number
+        currency:
+          example: USD
           type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
+      type: object
+    withholding-tax:
+      type: object
+      properties:
+        type:
           type: string
-          example: 400
-        error:
+        code:
           type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+        base_amount:
+          type: object
+          required:
+          - amount
+          - currency
+          properties:
+            amount:
+              type: number
+            currency:
+              type: string
+        wht_amount:
+          type: object
+          required:
+          - amount
+          - currency
+          properties:
+            amount:
+              type: number
+            currency:
+              type: string
+    discounts:
+      items:
+        properties:
+          discount_days:
+            default: 0
+            example: 0
+            description: The discount days
+            type: integer
+          discount_percent:
+            default: 0
+            example: 0
+            description: The discount percent
+            type: integer
+          discount_amount:
+            default: 0
+            example: 0
+            description: The discount amount
+            type: integer
+        type: object
+        required:
+        - discount_amount
+        - discount_days
+        - discount_percent
+      type: array
     processed-invoice-account-segment:
       type: object
       properties:
@@ -525,59 +646,6 @@ components:
           type: string
         segment_type:
           type: string
-    withholding-tax:
-      type: object
-      properties:
-        type:
-          type: string
-        code:
-          type: string
-        base_amount:
-          type: object
-          required:
-          - amount
-          - currency
-          properties:
-            amount:
-              type: number
-            currency:
-              type: string
-        wht_amount:
-          type: object
-          required:
-          - amount
-          - currency
-          properties:
-            amount:
-              type: number
-            currency:
-              type: string
-    amount:
-      properties:
-        amount:
-          example: 1.5
-          type: number
-        currency:
-          example: USD
-          type: string
-      type: object
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    payment_type:
-      type: string
-      enum:
-      - ACH
-      - DOMESTIC_WIRE
-      - SEPA_CREDIT_TRANSFER
-      - INTERNATIONAL_WIRE_SWIFT
-      - BACS
-      - BECS
-      - CHECK_PAPER
-      - REAL_TIME_PAYMENTS
-      - VIRTUAL_CARD
     http-403-error-response:
       type: object
       properties:
@@ -593,82 +661,7 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    po_policy:
-      type: object
-      properties:
-        po_backed:
-          type: boolean
-        po_match_type:
-          allOf:
-          - $ref: '#/components/schemas/po_policy_match_type'
-        receipt_type:
-          allOf:
-          - $ref: '#/components/schemas/po_receipt_type'
-    validation:
-      type: object
-      properties:
-        action_type:
-          type: string
-        confidence:
-          type: string
-        field_name:
-          type: string
-        final_risk:
-          type: string
-        post_config_risk:
-          type: string
-        post_feedback_risk:
-          type: string
-        result_data:
-          type: object
-          properties:
-            ai_model_detected:
-              type: array
-              items:
-                type: string
-            duplicate_invoice_ids:
-              type: array
-              items:
-                type: string
-            electronic_query_detected:
-              type: array
-              items:
-                type: string
-        risk_level:
-          type: string
-        risk_reason:
-          type: string
-        state:
-          type: string
-        validation_display_name:
-          type: string
-        validation_id:
-          type: string
-        validation_name:
-          type: string
-    vat-breakdown-item:
-      type: object
-      properties:
-        vat_id:
-          type: string
-          description: External vat_id
-          example: gst_1232ext
-        code:
-          type: string
-          example: GST
-        rate:
-          type: number
-          description: rate as percentage
-          example: 20.5
-          exclusiveMinimum: 0
-        vat_amount:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-        jurisdiction_code:
-          type: string
-          description: Standard tax jurisdiction code
-          example: IN
-    http-401-error-response:
+    http-400-error-response:
       type: object
       properties:
         timestamp:
@@ -676,13 +669,64 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 401
+          example: 400
         error:
           type: string
-          example: Unauthorized
+          example: Bad Request
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    address:
+      type: object
+      required:
+      - address_type
+      properties:
+        address_type:
+          type: string
+          enum:
+          - REMIT_TO
+          - BILL_TO
+          - SHIP_TO
+          - OFFICE
+          - SUPPLIER_ADDRESS
+          - CUSTOMER_ADDRESS
+          - NONE_ADDRESS_TYPE
+        address:
+          allOf:
+          - $ref: '#/components/schemas/addressCore'
+        site_id:
+          type: string
+          example: '913838'
+        site_name:
+          type: string
+          example: California HQ
+        custom_json:
+          type: object
+          properties:
+            key1:
+              type: string
+              example: value1
+        is_active:
+          type: boolean
+          default: true
+        valid_start_date:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        valid_end_date:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+    payment_type:
+      type: string
+      enum:
+      - ACH
+      - DOMESTIC_WIRE
+      - SEPA_CREDIT_TRANSFER
+      - INTERNATIONAL_WIRE_SWIFT
+      - BACS
+      - BECS
+      - CHECK_PAPER
+      - REAL_TIME_PAYMENTS
+      - VIRTUAL_CARD
     processed-invoice-json-schema:
       example:
         audit_results:
@@ -1421,50 +1465,6 @@ components:
             bank_currency:
               type: string
               example: USD
-    po_receipt_type:
-      type: string
-      enum:
-      - PO
-      - GOODS_RECEIPT
-    address:
-      type: object
-      required:
-      - address_type
-      properties:
-        address_type:
-          type: string
-          enum:
-          - REMIT_TO
-          - BILL_TO
-          - SHIP_TO
-          - OFFICE
-          - SUPPLIER_ADDRESS
-          - CUSTOMER_ADDRESS
-          - NONE_ADDRESS_TYPE
-        address:
-          allOf:
-          - $ref: '#/components/schemas/addressCore'
-        site_id:
-          type: string
-          example: '913838'
-        site_name:
-          type: string
-          example: California HQ
-        custom_json:
-          type: object
-          properties:
-            key1:
-              type: string
-              example: value1
-        is_active:
-          type: boolean
-          default: true
-        valid_start_date:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        valid_end_date:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
   parameters:
     uuid:
       in: path

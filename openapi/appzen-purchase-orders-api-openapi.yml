@@ -225,12 +225,114 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    exchange-rate:
+      description: Optional. If the exchange_rate is provided, then all three fields (from_currency_code, to_currency_code and conversion_rate) are required.
+      example:
+        from_currency_code: USD
+        to_currency_code: EUR
+        conversion_rate: 0.92
+      required:
+      - from_currency_code
+      - to_currency_code
+      - conversion_rate
+      properties:
+        conversion_rate:
+          type: number
+          example: 0.92
+        from_currency_code:
+          type: string
+          example: USD
+        to_currency_code:
+          type: string
+          example: EUR
+      type: object
+    vat-breakdown-item:
+      type: object
+      properties:
+        vat_id:
+          type: string
+          description: External vat_id
+          example: gst_1232ext
+        code:
+          type: string
+          example: GST
+        rate:
+          type: number
+          description: rate as percentage
+          example: 20.5
+          exclusiveMinimum: 0
+        vat_amount:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+        jurisdiction_code:
+          type: string
+          description: Standard tax jurisdiction code
+          example: IN
     po_policy_match_type:
       type: string
       enum:
       - PO_NONE_MATCH_TYPE
       - PO_POLICY_TWO_WAY_MATCH
       - PO_POLICY_THREE_WAY_MATCH
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
     purchase-order-condition:
       type: object
       description: Represents a condition on a PO (e.g., freight charges, taxes, discounts). Can be at header level (applying to entire PO) or line level (specific to a PO line)
@@ -351,36 +453,6 @@ components:
           type: boolean
           example: false
           description: Whether this condition is statistical (included in PO total) or non-statistical (not included in PO total)
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     uuid-updated:
       type: object
       properties:
@@ -390,6 +462,40 @@ components:
         status:
           type: string
           example: UPDATED
+    amount:
+      properties:
+        amount:
+          example: 1.5
+          type: number
+        currency:
+          example: USD
+          type: string
+      type: object
+    po-line-allocation:
+      type: object
+      description: An allocation for an purchase order line. Either amount/tax or percentage should be provided.
+      required:
+      - external_allocation_id
+      - gl_code
+      properties:
+        external_allocation_id:
+          type: string
+          example: xsd-1234
+        gl_code:
+          type: string
+          example: 1002.369.922.0000.0000
+        amount:
+          type: number
+          example: 25.6
+        tax:
+          example: 2.56
+          type: number
+        percentage:
+          type: number
+          example: 35
+        allocation_quantity:
+          type: number
+          example: 2.5
     purchase-order:
       type: object
       properties:
@@ -675,56 +781,6 @@ components:
       - purchase_order_status
       - appzen_purchase_order_status
       - purchase_order_lines
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    amount:
-      properties:
-        amount:
-          example: 1.5
-          type: number
-        currency:
-          example: USD
-          type: string
-      type: object
-    exchange-rate:
-      description: Optional. If the exchange_rate is provided, then all three fields (from_currency_code, to_currency_code and conversion_rate) are required.
-      example:
-        from_currency_code: USD
-        to_currency_code: EUR
-        conversion_rate: 0.92
-      required:
-      - from_currency_code
-      - to_currency_code
-      - conversion_rate
-      properties:
-        conversion_rate:
-          type: number
-          example: 0.92
-        from_currency_code:
-          type: string
-          example: USD
-        to_currency_code:
-          type: string
-          example: EUR
-      type: object
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
     http-403-error-response:
       type: object
       properties:
@@ -740,68 +796,7 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    po-line-allocation:
-      type: object
-      description: An allocation for an purchase order line. Either amount/tax or percentage should be provided.
-      required:
-      - external_allocation_id
-      - gl_code
-      properties:
-        external_allocation_id:
-          type: string
-          example: xsd-1234
-        gl_code:
-          type: string
-          example: 1002.369.922.0000.0000
-        amount:
-          type: number
-          example: 25.6
-        tax:
-          example: 2.56
-          type: number
-        percentage:
-          type: number
-          example: 35
-        allocation_quantity:
-          type: number
-          example: 2.5
-    date:
-      type: string
-      format: date
-      example: '2020-11-01'
-      description: date should be in UTC format
-    vat-breakdown-item:
-      type: object
-      properties:
-        vat_id:
-          type: string
-          description: External vat_id
-          example: gst_1232ext
-        code:
-          type: string
-          example: GST
-        rate:
-          type: number
-          description: rate as percentage
-          example: 20.5
-          exclusiveMinimum: 0
-        vat_amount:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-        jurisdiction_code:
-          type: string
-          description: Standard tax jurisdiction code
-          example: IN
-    http-401-error-response:
+    http-400-error-response:
       type: object
       properties:
         timestamp:
@@ -809,13 +804,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 401
+          example: 400
         error:
           type: string
-          example: Unauthorized
+          example: Bad Request
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     purchase-order-json-schema:
       type: object
       properties:
@@ -1107,6 +1102,11 @@ components:
       - purchase_order_status
       - appzen_purchase_order_status
       - purchase_order_lines
+    date:
+      type: string
+      format: date
+      example: '2020-11-01'
+      description: date should be in UTC format
   parameters:
     uuid:
       in: path

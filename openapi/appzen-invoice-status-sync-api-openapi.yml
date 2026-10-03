@@ -88,21 +88,11 @@ components:
               type: string
             exception:
               type: string
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
     http-403-error-response:
       type: object
       properties:
@@ -118,7 +108,7 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-500-error-response:
+    http-400-error-response:
       type: object
       properties:
         timestamp:
@@ -126,28 +116,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 500
+          example: 400
         error:
           type: string
-          example: Internal Server Error
+          example: Bad Request
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     http-404-error-response:
       type: object
       properties:
@@ -163,12 +138,43 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
   parameters:
+    invoice-status-sync-request-schema:
+      in: body
+      required: true
+      name: invoice-json-schema
+      schema:
+        $ref: '#/components/schemas/invoice-status-sync-request-schema'
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -176,12 +182,6 @@ components:
       name: uuid
       schema:
         type: string
-    invoice-status-sync-request-schema:
-      in: body
-      required: true
-      name: invoice-json-schema
-      schema:
-        $ref: '#/components/schemas/invoice-status-sync-request-schema'
   securitySchemes:
     API_Key_Header:
       type: apiKey

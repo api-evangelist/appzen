@@ -175,6 +175,40 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    find-query-spec:
+      description: The date range must be limited to 7 days
+      properties:
+        from-last-appzen-update-time:
+          description: Start Date Range value for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        to-last-appzen-update-time:
+          description: End Date Range for Appzen processing date specified in UTC format
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        limit:
+          description: Number of matched records to return
+          type: number
+          default: 1000
+          maximum: 1000
+          example: 50
+      required:
+      - from-last-appzen-update-time
+      - to-last-appzen-update-time
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
     http-403-error-response:
       type: object
       properties:
@@ -205,115 +239,7 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    chart-of-account-output-schema:
-      type: object
-      properties:
-        customer_id:
-          type: string
-        appzen_segment_type:
-          type: string
-          description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
-          enum:
-          - OTHER_SEGMENT
-          - LEGAL_ENTITY_SEGMENT
-          - COMPANY_SEGMENT
-          - ACCOUNT_SEGMENT
-          - DEPARTMENT_SEGMENT
-          - COST_CENTER_SEGMENT
-          - VENDOR_SEGMENT
-          - LOCATION_SEGMENT
-          - USER_SEGMENT
-          - CUSTOMER_SEGMENT
-          - PROJECT_SEGMENT
-          - SPEND_CATEGORY_SEGMENT
-          - REGION_SEGMENT
-          - INTERCOMPANY_SEGMENT
-          example: LOCATION_SEGMENT
-        segment_type:
-          type: string
-          example: Location
-        segment_name:
-          type: string
-          example: San Jose
-        segment_code:
-          type: string
-          example: SanJose
-        parent_segment_type:
-          description: Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
-          type: string
-          example: Location
-        parent_segment_name:
-          type: string
-          example: United States
-        parent_segment_code:
-          description: Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
-          type: string
-          example: USA
-        parent_segments:
-          description: parent chart of account segments. Combination of segment_type and segment_code must reference another existing Chart of Account
-          $ref: '#/components/schemas/segments'
-        segment_lookup_names:
-          description: optional list of lookup names
-          type: array
-          example:
-          - ca_locations
-          - hr_locations
-        custom_json:
-          type: object
-          description: 20 fields allowed, 500 chars per field
-        active:
-          type: boolean
-        valid_start_date:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        valid_end_date:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-    find-chart-of-accounts-result-spec:
-      example:
-      - segment-code: '3689490915'
-        segment-type: Account
-        appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
-        is-active: true
-        last-appzen-update-time: '2021-12-08T23:30:10.314Z'
-      - segment-code: '6649972540'
-        segment-type: Legal
-        appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
-        is-active: true
-        last-appzen-update-time: '2021-12-08T23:30:12.597Z'
-      properties:
-        erp-invoice-id:
-          type: string
-        erp-invoice-status:
-          type: string
-        appzen-uuid:
-          type: string
-        appzen-invoice-status:
-          type: string
-        last-appzen-update-time:
-          type: string
-    http-500-error-response:
+    http-404-error-response:
       type: object
       properties:
         timestamp:
@@ -321,33 +247,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 500
+          example: 404
         error:
           type: string
-          example: Internal Server Error
+          example: Not Found
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    find-query-spec:
-      description: The date range must be limited to 7 days
-      properties:
-        from-last-appzen-update-time:
-          description: Start Date Range value for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        to-last-appzen-update-time:
-          description: End Date Range for Appzen processing date specified in UTC format
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        limit:
-          description: Number of matched records to return
-          type: number
-          default: 1000
-          maximum: 1000
-          example: 50
-      required:
-      - from-last-appzen-update-time
-      - to-last-appzen-update-time
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     http-401-error-response:
       type: object
       properties:
@@ -437,21 +343,15 @@ components:
       - segment_type
       - segment_name
       - segment_code
-    http-404-error-response:
+    uuid-updated:
       type: object
       properties:
-        timestamp:
+        uuid:
           type: string
-          example: 2019-01-17T16:12:45.977+0000
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
         status:
           type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+          example: UPDATED
     segments:
       type: object
       properties:
@@ -461,18 +361,112 @@ components:
         segment_code:
           type: string
           example: SanJose
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
+    chart-of-account-output-schema:
+      type: object
+      properties:
+        customer_id:
+          type: string
+        appzen_segment_type:
+          type: string
+          description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
+          enum:
+          - OTHER_SEGMENT
+          - LEGAL_ENTITY_SEGMENT
+          - COMPANY_SEGMENT
+          - ACCOUNT_SEGMENT
+          - DEPARTMENT_SEGMENT
+          - COST_CENTER_SEGMENT
+          - VENDOR_SEGMENT
+          - LOCATION_SEGMENT
+          - USER_SEGMENT
+          - CUSTOMER_SEGMENT
+          - PROJECT_SEGMENT
+          - SPEND_CATEGORY_SEGMENT
+          - REGION_SEGMENT
+          - INTERCOMPANY_SEGMENT
+          example: LOCATION_SEGMENT
+        segment_type:
+          type: string
+          example: Location
+        segment_name:
+          type: string
+          example: San Jose
+        segment_code:
+          type: string
+          example: SanJose
+        parent_segment_type:
+          description: Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
+          type: string
+          example: Location
+        parent_segment_name:
+          type: string
+          example: United States
+        parent_segment_code:
+          description: Combination of parent_segment_type and parent_segment_code must reference another existing Chart of Account
+          type: string
+          example: USA
+        parent_segments:
+          description: parent chart of account segments. Combination of segment_type and segment_code must reference another existing Chart of Account
+          $ref: '#/components/schemas/segments'
+        segment_lookup_names:
+          description: optional list of lookup names
+          type: array
+          example:
+          - ca_locations
+          - hr_locations
+        custom_json:
+          type: object
+          description: 20 fields allowed, 500 chars per field
+        active:
+          type: boolean
+        valid_start_date:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        valid_end_date:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    find-chart-of-accounts-result-spec:
+      example:
+      - segment-code: '3689490915'
+        segment-type: Account
+        appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
+        is-active: true
+        last-appzen-update-time: '2021-12-08T23:30:10.314Z'
+      - segment-code: '6649972540'
+        segment-type: Legal
+        appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
+        is-active: true
+        last-appzen-update-time: '2021-12-08T23:30:12.597Z'
+      properties:
+        erp-invoice-id:
+          type: string
+        erp-invoice-status:
+          type: string
+        appzen-uuid:
+          type: string
+        appzen-invoice-status:
+          type: string
+        last-appzen-update-time:
+          type: string
   parameters:
-    chart-of-account-input-schema:
-      in: body
-      required: true
-      name: chart-of-account-input-schema
-      schema:
-        $ref: '#/components/schemas/chart-of-account-input-schema'
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -487,6 +481,12 @@ components:
       name: find-query-spec
       schema:
         $ref: '#/components/schemas/find-query-spec'
+    chart-of-account-input-schema:
+      in: body
+      required: true
+      name: chart-of-account-input-schema
+      schema:
+        $ref: '#/components/schemas/chart-of-account-input-schema'
   securitySchemes:
     API_Key_Header:
       type: apiKey

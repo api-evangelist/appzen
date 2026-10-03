@@ -164,6 +164,11 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
     http-403-error-response:
       type: object
       properties:
@@ -188,15 +193,36 @@ components:
         status:
           type: string
           example: CREATED
-    uuid-updated:
+    http-400-error-response:
       type: object
       properties:
-        uuid:
+        timestamp:
           type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+          example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: UPDATED
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     lookup-get:
       properties:
         lookup_name_id:
@@ -242,7 +268,7 @@ components:
         uuid:
           type: string
           example: 0045-89707-0906-DE3C
-    http-400-error-response:
+    http-401-error-response:
       type: object
       properties:
         timestamp:
@@ -250,28 +276,22 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 400
+          example: 401
         error:
           type: string
-          example: Bad Request
+          example: Unauthorized
         message:
           type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-404-error-response:
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    uuid-updated:
       type: object
       properties:
-        timestamp:
+        uuid:
           type: string
-          example: 2019-01-17T16:12:45.977+0000
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
         status:
           type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+          example: UPDATED
     http-500-error-response:
       type: object
       properties:
@@ -329,27 +349,21 @@ components:
       - lookup_name_id
       - lookup_item_id
       - lookup_item_name
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
   parameters:
+    lookup-item-id:
+      in: path
+      description: lookup item id
+      required: true
+      name: lookup-item-id
+      schema:
+        type: string
+    lookup-name-id:
+      in: path
+      description: lookup table name id
+      required: true
+      name: lookup-name-id
+      schema:
+        type: string
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -363,20 +377,6 @@ components:
       name: lookup-json-schema
       schema:
         $ref: '#/components/schemas/lookup'
-    lookup-name-id:
-      in: path
-      description: lookup table name id
-      required: true
-      name: lookup-name-id
-      schema:
-        type: string
-    lookup-item-id:
-      in: path
-      description: lookup item id
-      required: true
-      name: lookup-item-id
-      schema:
-        type: string
   securitySchemes:
     API_Key_Header:
       type: apiKey
