@@ -1,0 +1,73 @@
+slug: appzen
+provider: AppZen
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Externally Processed Invoices
+  spec_file: appzen-externally-processed-invoices-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.9
+  evidence: POST /invoice/externally-processed-for-audit  Creates an externally processed invoice in Appzen
+    with validation checks
+  reason: Ingestion and validation of supplier invoices prior to payment is core accounts payable invoice
+    processing.
+- tag: Invoices
+  spec_file: appzen-invoices-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.9
+  evidence: 'POST /invoice  Creates/Updates an invoice; schemas: invoice-line, payment, vat-breakdown-item,
+    invoice-goods-receipt'
+  reason: Create, search and retrieve supplier invoices with lines, payment and goods-receipt matching
+    data — accounts payable invoice processing.
+- tag: Chart Of Accounts
+  spec_file: appzen-chart-of-accounts-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.85
+  evidence: 'POST /chart-of-accounts  postChartOfAccounts  Creates a new chart of account segment; schemas:
+    chart-of-account-input-schema, segments'
+  reason: Operations create and retrieve chart-of-account segments, which is explicitly chart-of-accounts
+    maintenance under general ledger management, even though the vendor's wider product audits AP invoices.
+- tag: Processed Invoices
+  spec_file: appzen-processed-invoices-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.85
+  evidence: 'GET /invoice/processed-invoice/{uuid}  Returns the processed invoice; schemas: validation,
+    payment-term, withholding-tax, po_policy'
+  reason: Retrieval of the fully processed and validated supplier invoice with PO policy, tax and validation
+    detail — accounts payable invoice processing output.
+- tag: Invoice Audit Results
+  spec_file: appzen-invoice-audit-results-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.8
+  evidence: GET /invoice/{uuid}/audit-results  Returns an invoice's audit results
+  reason: Results of automated validation/risk checks on supplier invoices before payment — part of AP
+    invoice processing controls, not internal audit of the enterprise.
+- tag: Invoice Status Sync
+  spec_file: appzen-invoice-status-sync-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.7
+  evidence: POST /invoice/{uuid}/status-sync  Updates the external status of an invoice in Appzen
+  reason: Keeps AP invoice processing status aligned between the ERP and AppZen; it is invoice lifecycle
+    state within accounts payable, though the operation is largely an integration sync.

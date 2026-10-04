@@ -259,6 +259,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/appzen-capability-edges.yml
+  name: AppZen Business Capability Map
 - type: Overlay
   url: overlays/appzen-autonomous-ap-overlay.yaml
 - type: DomainSecurity
