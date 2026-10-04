@@ -213,6 +213,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     discounts:
       items:
         properties:
@@ -237,11 +252,6 @@ components:
         - discount_days
         - discount_percent
       type: array
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
     find-query-spec:
       description: The date range must be limited to 7 days
       properties:
@@ -262,7 +272,22 @@ components:
       required:
       - from-last-appzen-update-time
       - to-last-appzen-update-time
-    uuid:
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    uuid-updated:
       type: object
       properties:
         uuid:
@@ -270,7 +295,41 @@ components:
           example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
         status:
           type: string
-          example: CREATED
+          example: UPDATED
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    find-payment-terms-result-spec:
+      example:
+      - payment-term-id: NET20-EPR-XID
+        appzen-uuid: 02e9c5ab-3973-4552-9ba0-d069439e92a5
+        is-active: true
+        last-appzen-update-time: '2022-12-09T08:24:13.192Z'
+      - payment-term-id: NET30-DISC5
+        appzen-uuid: 01fb405a-78f6-4924-9531-425fbffdda6d
+        is-active: true
+        last-appzen-update-time: '2022-12-09T08:37:29.526Z'
+      properties:
+        payment-term-id:
+          type: string
+        appzen-uuid:
+          type: string
+        is-active:
+          type: boolean
+        last-appzen-update-time:
+          type: string
     http-403-error-response:
       type: object
       properties:
@@ -286,6 +345,20 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
     payment-term:
       properties:
         name:
@@ -337,21 +410,6 @@ components:
       required:
       - id
       - name
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     http-404-error-response:
       type: object
       properties:
@@ -367,65 +425,14 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    find-payment-terms-result-spec:
-      example:
-      - payment-term-id: NET20-EPR-XID
-        appzen-uuid: 02e9c5ab-3973-4552-9ba0-d069439e92a5
-        is-active: true
-        last-appzen-update-time: '2022-12-09T08:24:13.192Z'
-      - payment-term-id: NET30-DISC5
-        appzen-uuid: 01fb405a-78f6-4924-9531-425fbffdda6d
-        is-active: true
-        last-appzen-update-time: '2022-12-09T08:37:29.526Z'
-      properties:
-        payment-term-id:
-          type: string
-        appzen-uuid:
-          type: string
-        is-active:
-          type: boolean
-        last-appzen-update-time:
-          type: string
   parameters:
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
     find-query-spec:
       in: body
       description: Query Criterion for locating Items
@@ -439,13 +446,6 @@ components:
       name: payment-terms-json-schema
       schema:
         $ref: '#/components/schemas/payment-term'
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
   securitySchemes:
     API_Key_Header:
       type: apiKey

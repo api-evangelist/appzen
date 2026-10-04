@@ -111,103 +111,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    invoice-audit-results-search-json-schema:
-      type: array
-      items:
-        type: object
-        properties:
-          audit_results:
-            type: object
-            properties:
-              uuid:
-                type: string
-                description: A globally unique identifier for an invoice
-                example: 08edd8d9-cc1c-45e1-8bbb-29ffb7e3a404
-              invoice-number:
-                type: string
-                description: The supplier's invoice number
-                example: MHEIN00051739
-              invoice-id:
-                type: string
-                description: The external invoice id
-                example: '77887788'
-              supplier-id:
-                type: string
-                description: The external supplier id
-                example: '7082403'
-              rules:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    rule_code:
-                      type: string
-                      description: A unique identifier of a rule
-                      example: duplicate_invoice_amount
-                    risk_message:
-                      type: string
-                      description: Description of the risk detected
-                      example: No duplicate detected
-                    risk_results:
-                      type: object
-                      properties:
-                        risk_level:
-                          type: string
-                          description: The Risk Level, such as LOW, MEDIUM, or HIGH.
-                          example: LOW
-              risk_level:
-                type: string
-                description: The risk at invoice header level, such as LOW, MEDIUM, HIGH.
-                example: LOW
-              status:
-                type: string
-                description: The overall invoice status, such as Approved, Rejected.
-                example: Approved
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     http-401-error-response:
       type: object
       properties:
@@ -272,12 +175,116 @@ components:
               type: string
               description: The overall invoice status, such as Approved, Rejected.
               example: Approved
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    invoice-audit-results-search-json-schema:
+      type: array
+      items:
+        type: object
+        properties:
+          audit_results:
+            type: object
+            properties:
+              uuid:
+                type: string
+                description: A globally unique identifier for an invoice
+                example: 08edd8d9-cc1c-45e1-8bbb-29ffb7e3a404
+              invoice-number:
+                type: string
+                description: The supplier's invoice number
+                example: MHEIN00051739
+              invoice-id:
+                type: string
+                description: The external invoice id
+                example: '77887788'
+              supplier-id:
+                type: string
+                description: The external supplier id
+                example: '7082403'
+              rules:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    rule_code:
+                      type: string
+                      description: A unique identifier of a rule
+                      example: duplicate_invoice_amount
+                    risk_message:
+                      type: string
+                      description: Description of the risk detected
+                      example: No duplicate detected
+                    risk_results:
+                      type: object
+                      properties:
+                        risk_level:
+                          type: string
+                          description: The Risk Level, such as LOW, MEDIUM, or HIGH.
+                          example: LOW
+              risk_level:
+                type: string
+                description: The risk at invoice header level, such as LOW, MEDIUM, HIGH.
+                example: LOW
+              status:
+                type: string
+                description: The overall invoice status, such as Approved, Rejected.
+                example: Approved
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
   parameters:
-    uuid-query:
-      in: query
-      description: Globally unique identifier for an invoice
-      required: false
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
       name: uuid
+      schema:
+        type: string
+    invoice-number:
+      in: query
+      description: The supplier's invoice number
+      required: false
+      name: invoice-number
       schema:
         type: string
     invoice-id:
@@ -287,13 +294,6 @@ components:
       name: invoice-id
       schema:
         type: string
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
     supplier-id:
       in: query
       description: The external supplier id
@@ -301,11 +301,11 @@ components:
       name: supplier-id
       schema:
         type: string
-    invoice-number:
+    uuid-query:
       in: query
-      description: The supplier's invoice number
+      description: Globally unique identifier for an invoice
       required: false
-      name: invoice-number
+      name: uuid
       schema:
         type: string
   securitySchemes:

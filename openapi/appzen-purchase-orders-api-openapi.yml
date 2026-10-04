@@ -224,22 +224,21 @@ paths:
       operationId: getPurchaseOrderPurchaseOrderNumberByPoNumberPurchaseOrderUniqueIdByPoUniqueId
       x-operation-id-source: derived
 components:
+  parameters:
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
+    purchase-order-json-schema:
+      in: body
+      required: true
+      name: purchase-order-json-schema
+      schema:
+        $ref: '#/components/schemas/purchase-order-json-schema'
   schemas:
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     exchange-rate:
       description: Optional. If the exchange_rate is provided, then all three fields (from_currency_code, to_currency_code and conversion_rate) are required.
       example:
@@ -261,6 +260,30 @@ components:
           type: string
           example: EUR
       type: object
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     vat-breakdown-item:
       type: object
       properties:
@@ -283,17 +306,6 @@ components:
           type: string
           description: Standard tax jurisdiction code
           example: IN
-    po_policy_match_type:
-      type: string
-      enum:
-      - PO_NONE_MATCH_TYPE
-      - PO_POLICY_TWO_WAY_MATCH
-      - PO_POLICY_THREE_WAY_MATCH
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
     http-404-error-response:
       type: object
       properties:
@@ -309,6 +321,27 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    po_policy_match_type:
+      type: string
+      enum:
+      - PO_NONE_MATCH_TYPE
+      - PO_POLICY_TWO_WAY_MATCH
+      - PO_POLICY_THREE_WAY_MATCH
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     http-500-error-response:
       type: object
       properties:
@@ -324,15 +357,311 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    uuid:
+    amount:
+      properties:
+        amount:
+          example: 1.5
+          type: number
+        currency:
+          example: USD
+          type: string
+      type: object
+    purchase-order-json-schema:
       type: object
       properties:
-        uuid:
+        purchase_order_number:
           type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
+          example: 193-994K
+          description: The Purchase Order(PO) Number from source system
+        entity_id:
           type: string
-          example: CREATED
+          example: '1002'
+          description: The unique entity identifier
+        supplier_id:
+          type: string
+          example: '3009293'
+          description: The unique supplier identifier in the source system that matches with the supplier reference sent in supplier file. Refer to supplier template
+        gl_code:
+          type: string
+          example: 1002.369.922.0000.0000
+        payment_term_id:
+          type: string
+          example: '8900012'
+          description: This value should be unique in the customer’s ERP system to distinguish payment terms
+        external_unique_id:
+          type: string
+          example: XP-1234-01
+          description: The unique identifier in ERP
+        comments:
+          type: string
+        exchange_rate:
+          allOf:
+          - $ref: '#/components/schemas/exchange-rate'
+        start_date:
+          allOf:
+          - $ref: '#/components/schemas/date'
+          - description: The date when the purchase order has been issued to a vendor
+        end_date:
+          allOf:
+          - $ref: '#/components/schemas/date'
+          - description: The date for which delivery of any Product is stated in a Purchase Order and confirmed by Supplier
+        total_amount:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+          - description: The total amount of the PO
+        amount_limit:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+        min_release_amount:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+        email_address:
+          type: string
+          example: john.doe@acme.org
+        purchase_requisition_id:
+          type: string
+          example: null
+        purchase_order_type:
+          type: string
+          description: Can be of type for example Blanket/Standard/Contract
+        purchase_order_status:
+          type: string
+          example: Issued
+          description: This status value should contain the purchase order (header level) status as shown in the customer’s ERP system
+        appzen_purchase_order_status:
+          type: string
+          enum:
+          - PO_STATUS_NOT_AVAILABLE
+          - PO_ISSUED
+          - PO_CLOSED
+          example: PO_ISSUED
+          description: Mapping from customer's purchase_order_status to AppZen’s defined purchase order status values
+        ship_to_location:
+          type: string
+        ship_to_location_id:
+          type: string
+        requester:
+          type: string
+        custom_json:
+          type: object
+          description: 20 fields allowed, 500 chars per field
+        po_conditions:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/purchase-order-condition'
+          description: Header-level PO conditions (e.g., overall freight charges, taxes applied to entire PO)
+        purchase_order_lines:
+          type: array
+          items:
+            type: object
+            properties:
+              po_line_id:
+                type: string
+                description: The unique identifier of the line from source system
+              line_number:
+                type: number
+                description: The reference of the line
+              gl_code:
+                type: string
+              line_item_code:
+                type: string
+              line_description:
+                type: string
+              quantity:
+                type: number
+                description: The quantity of goods and services provided by the supplier. Should be assigned value of 1 if value is missing
+              unit_price:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+              price_per_unit:
+                type: number
+                example: 2.55
+              amount:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+                - description: The line amount of the purchase order line
+              line_vat_amount:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+                - description: The total line vat amount of the purchase order line
+              line_vat_breakdown:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/vat-breakdown-item'
+                  - description: The break down of vat amount for the purchase order line
+              line_allocations:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/po-line-allocation'
+              contractor_name:
+                type: string
+              contractor_start_date:
+                allOf:
+                - $ref: '#/components/schemas/date'
+              closed_flag:
+                type: boolean
+              closed_by:
+                type: string
+              closed_date:
+                allOf:
+                - $ref: '#/components/schemas/date'
+                - description: The date on which PO was closed
+              closed_reason:
+                type: string
+                description: The reason for closing the PO
+              cancel_flag:
+                type: boolean
+                description: If the PO is cancelled
+              cancel_date:
+                allOf:
+                - $ref: '#/components/schemas/date'
+                - description: Date on which the PO was cancelled.
+              cancel_reason:
+                type: string
+                description: Reason for cancellation
+              taxable_flag:
+                type: boolean
+                description: If the PO is taxable
+              tax_code_id:
+                type: string
+                description: The tax code Id of the purchase order
+              tax_name:
+                type: string
+                description: The tax name on the purchase order
+              type_1099:
+                type: string
+              committed_amount:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+              amount_limit:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+              unit_list_price:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+                - description: The unit list price you charge per unit of goods or services
+              base_list_price:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+              uninvoiced_amount:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+                - description: Balance left in the PO line
+              received_amount:
+                allOf:
+                - $ref: '#/components/schemas/amount'
+                - description: Received Amount in the PO line
+              progress_payment_rate:
+                type: number
+              item_category:
+                type: string
+                description: category name
+              item_category_id:
+                type: string
+              hazard_class_id:
+                type: string
+              unit_of_measure:
+                type: string
+                description: The unit of measure for the line item. Ex. each, pallet, package, etc
+              committed_quantity:
+                type: number
+                description: The mandatory quantity to be provided
+              ordered_quantity:
+                type: number
+              received_quantity:
+                type: number
+              uninvoiced_quantity:
+                type: number
+              service_line_start_date:
+                allOf:
+                - $ref: '#/components/schemas/date'
+              service_line_end_date:
+                allOf:
+                - $ref: '#/components/schemas/date'
+              match_basis:
+                type: string
+                enum:
+                - NONE_MATCH_BASIS
+                - AMOUNT
+                - QUANTITY
+              match_type:
+                allOf:
+                - $ref: '#/components/schemas/po_policy_match_type'
+              line_type:
+                type: string
+                enum:
+                - NONE_LINE_TYPE
+                - GOODS
+                - SERVICE
+                - FREIGHT
+                - TAX
+                - MISCELLANEOUS
+              purchase_order_line_status:
+                type: string
+                description: This status value should contain the purchase order line status as shown in the customer’s ERP system
+              appzen_purchase_order_line_status:
+                type: string
+                enum:
+                - PO_STATUS_NOT_AVAILABLE
+                - PO_ISSUED
+                - PO_CLOSED
+                example: PO_ISSUED
+                description: Mapping from customer's purchase_order_line_status to AppZen’s defined purchase order line status values
+              purchase_requisition_id:
+                type: string
+              buyer:
+                type: string
+              amortization_start_date:
+                allOf:
+                - $ref: '#/components/schemas/date-time'
+              amortization_end_date:
+                allOf:
+                - $ref: '#/components/schemas/date-time'
+              amortization_schedule_details:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+              hsn_sac_code:
+                type: string
+              custom_json:
+                description: 20 fields allowed, 500 chars per field
+                type: object
+              po_line_conditions:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/purchase-order-condition'
+                description: Line-level PO conditions specific to this PO line (e.g., line-specific freight charges, taxes)
+            required:
+            - line_number
+            - gl_code
+            - quantity
+            - unit_price
+            - amount
+            - uninvoiced_amount
+            - purchase_order_line_status
+            - appzen_purchase_order_line_status
+        purchase_order_date:
+          allOf:
+          - $ref: '#/components/schemas/date'
+      required:
+      - entity_id
+      - supplier_id
+      - purchase_order_number
+      - purchase_order_status
+      - appzen_purchase_order_status
+      - purchase_order_lines
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
     purchase-order-condition:
       type: object
       description: Represents a condition on a PO (e.g., freight charges, taxes, discounts). Can be at header level (applying to entire PO) or line level (specific to a PO line)
@@ -453,6 +782,11 @@ components:
           type: boolean
           example: false
           description: Whether this condition is statistical (included in PO total) or non-statistical (not included in PO total)
+    date:
+      type: string
+      format: date
+      example: '2020-11-01'
+      description: date should be in UTC format
     uuid-updated:
       type: object
       properties:
@@ -462,15 +796,21 @@ components:
         status:
           type: string
           example: UPDATED
-    amount:
-      properties:
-        amount:
-          example: 1.5
-          type: number
-        currency:
-          example: USD
-          type: string
+    http-400-error-response:
       type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     po-line-allocation:
       type: object
       description: An allocation for an purchase order line. Either amount/tax or percentage should be provided.
@@ -781,346 +1121,6 @@ components:
       - purchase_order_status
       - appzen_purchase_order_status
       - purchase_order_lines
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    purchase-order-json-schema:
-      type: object
-      properties:
-        purchase_order_number:
-          type: string
-          example: 193-994K
-          description: The Purchase Order(PO) Number from source system
-        entity_id:
-          type: string
-          example: '1002'
-          description: The unique entity identifier
-        supplier_id:
-          type: string
-          example: '3009293'
-          description: The unique supplier identifier in the source system that matches with the supplier reference sent in supplier file. Refer to supplier template
-        gl_code:
-          type: string
-          example: 1002.369.922.0000.0000
-        payment_term_id:
-          type: string
-          example: '8900012'
-          description: This value should be unique in the customer’s ERP system to distinguish payment terms
-        external_unique_id:
-          type: string
-          example: XP-1234-01
-          description: The unique identifier in ERP
-        comments:
-          type: string
-        exchange_rate:
-          allOf:
-          - $ref: '#/components/schemas/exchange-rate'
-        start_date:
-          allOf:
-          - $ref: '#/components/schemas/date'
-          - description: The date when the purchase order has been issued to a vendor
-        end_date:
-          allOf:
-          - $ref: '#/components/schemas/date'
-          - description: The date for which delivery of any Product is stated in a Purchase Order and confirmed by Supplier
-        total_amount:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-          - description: The total amount of the PO
-        amount_limit:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-        min_release_amount:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-        email_address:
-          type: string
-          example: john.doe@acme.org
-        purchase_requisition_id:
-          type: string
-          example: null
-        purchase_order_type:
-          type: string
-          description: Can be of type for example Blanket/Standard/Contract
-        purchase_order_status:
-          type: string
-          example: Issued
-          description: This status value should contain the purchase order (header level) status as shown in the customer’s ERP system
-        appzen_purchase_order_status:
-          type: string
-          enum:
-          - PO_STATUS_NOT_AVAILABLE
-          - PO_ISSUED
-          - PO_CLOSED
-          example: PO_ISSUED
-          description: Mapping from customer's purchase_order_status to AppZen’s defined purchase order status values
-        ship_to_location:
-          type: string
-        ship_to_location_id:
-          type: string
-        requester:
-          type: string
-        custom_json:
-          type: object
-          description: 20 fields allowed, 500 chars per field
-        po_conditions:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/purchase-order-condition'
-          description: Header-level PO conditions (e.g., overall freight charges, taxes applied to entire PO)
-        purchase_order_lines:
-          type: array
-          items:
-            type: object
-            properties:
-              po_line_id:
-                type: string
-                description: The unique identifier of the line from source system
-              line_number:
-                type: number
-                description: The reference of the line
-              gl_code:
-                type: string
-              line_item_code:
-                type: string
-              line_description:
-                type: string
-              quantity:
-                type: number
-                description: The quantity of goods and services provided by the supplier. Should be assigned value of 1 if value is missing
-              unit_price:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-              price_per_unit:
-                type: number
-                example: 2.55
-              amount:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-                - description: The line amount of the purchase order line
-              line_vat_amount:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-                - description: The total line vat amount of the purchase order line
-              line_vat_breakdown:
-                type: array
-                items:
-                  allOf:
-                  - $ref: '#/components/schemas/vat-breakdown-item'
-                  - description: The break down of vat amount for the purchase order line
-              line_allocations:
-                type: array
-                items:
-                  allOf:
-                  - $ref: '#/components/schemas/po-line-allocation'
-              contractor_name:
-                type: string
-              contractor_start_date:
-                allOf:
-                - $ref: '#/components/schemas/date'
-              closed_flag:
-                type: boolean
-              closed_by:
-                type: string
-              closed_date:
-                allOf:
-                - $ref: '#/components/schemas/date'
-                - description: The date on which PO was closed
-              closed_reason:
-                type: string
-                description: The reason for closing the PO
-              cancel_flag:
-                type: boolean
-                description: If the PO is cancelled
-              cancel_date:
-                allOf:
-                - $ref: '#/components/schemas/date'
-                - description: Date on which the PO was cancelled.
-              cancel_reason:
-                type: string
-                description: Reason for cancellation
-              taxable_flag:
-                type: boolean
-                description: If the PO is taxable
-              tax_code_id:
-                type: string
-                description: The tax code Id of the purchase order
-              tax_name:
-                type: string
-                description: The tax name on the purchase order
-              type_1099:
-                type: string
-              committed_amount:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-              amount_limit:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-              unit_list_price:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-                - description: The unit list price you charge per unit of goods or services
-              base_list_price:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-              uninvoiced_amount:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-                - description: Balance left in the PO line
-              received_amount:
-                allOf:
-                - $ref: '#/components/schemas/amount'
-                - description: Received Amount in the PO line
-              progress_payment_rate:
-                type: number
-              item_category:
-                type: string
-                description: category name
-              item_category_id:
-                type: string
-              hazard_class_id:
-                type: string
-              unit_of_measure:
-                type: string
-                description: The unit of measure for the line item. Ex. each, pallet, package, etc
-              committed_quantity:
-                type: number
-                description: The mandatory quantity to be provided
-              ordered_quantity:
-                type: number
-              received_quantity:
-                type: number
-              uninvoiced_quantity:
-                type: number
-              service_line_start_date:
-                allOf:
-                - $ref: '#/components/schemas/date'
-              service_line_end_date:
-                allOf:
-                - $ref: '#/components/schemas/date'
-              match_basis:
-                type: string
-                enum:
-                - NONE_MATCH_BASIS
-                - AMOUNT
-                - QUANTITY
-              match_type:
-                allOf:
-                - $ref: '#/components/schemas/po_policy_match_type'
-              line_type:
-                type: string
-                enum:
-                - NONE_LINE_TYPE
-                - GOODS
-                - SERVICE
-                - FREIGHT
-                - TAX
-                - MISCELLANEOUS
-              purchase_order_line_status:
-                type: string
-                description: This status value should contain the purchase order line status as shown in the customer’s ERP system
-              appzen_purchase_order_line_status:
-                type: string
-                enum:
-                - PO_STATUS_NOT_AVAILABLE
-                - PO_ISSUED
-                - PO_CLOSED
-                example: PO_ISSUED
-                description: Mapping from customer's purchase_order_line_status to AppZen’s defined purchase order line status values
-              purchase_requisition_id:
-                type: string
-              buyer:
-                type: string
-              amortization_start_date:
-                allOf:
-                - $ref: '#/components/schemas/date-time'
-              amortization_end_date:
-                allOf:
-                - $ref: '#/components/schemas/date-time'
-              amortization_schedule_details:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-              hsn_sac_code:
-                type: string
-              custom_json:
-                description: 20 fields allowed, 500 chars per field
-                type: object
-              po_line_conditions:
-                type: array
-                items:
-                  allOf:
-                  - $ref: '#/components/schemas/purchase-order-condition'
-                description: Line-level PO conditions specific to this PO line (e.g., line-specific freight charges, taxes)
-            required:
-            - line_number
-            - gl_code
-            - quantity
-            - unit_price
-            - amount
-            - uninvoiced_amount
-            - purchase_order_line_status
-            - appzen_purchase_order_line_status
-        purchase_order_date:
-          allOf:
-          - $ref: '#/components/schemas/date'
-      required:
-      - entity_id
-      - supplier_id
-      - purchase_order_number
-      - purchase_order_status
-      - appzen_purchase_order_status
-      - purchase_order_lines
-    date:
-      type: string
-      format: date
-      example: '2020-11-01'
-      description: date should be in UTC format
-  parameters:
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    purchase-order-json-schema:
-      in: body
-      required: true
-      name: purchase-order-json-schema
-      schema:
-        $ref: '#/components/schemas/purchase-order-json-schema'
   securitySchemes:
     API_Key_Header:
       type: apiKey

@@ -209,12 +209,42 @@ paths:
       operationId: getVatVatCodeByVatCodeVatRateByVatRate
       x-operation-id-source: derived
 components:
+  parameters:
+    vat-rate:
+      in: path
+      description: customer vat rate. If vat record was loaded without a vat rate, set it to 0 in this request
+      required: true
+      name: vat-rate
+      schema:
+        type: number
+    vat-code:
+      in: path
+      description: customer vat code
+      required: true
+      name: vat-code
+      schema:
+        type: string
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
+    vat-id:
+      in: path
+      description: customer vat id
+      required: true
+      name: vat-id
+      schema:
+        type: string
+    vat-json-schema:
+      in: body
+      required: true
+      name: vat-json-schema
+      schema:
+        $ref: '#/components/schemas/vat-master'
   schemas:
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
     vat-master:
       properties:
         vat_code:
@@ -261,16 +291,7 @@ components:
       description: Combination of vat_code and vat_rate (optional) should be unique
       required:
       - vat_code
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    http-403-error-response:
+    http-500-error-response:
       type: object
       properties:
         timestamp:
@@ -278,13 +299,37 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 403
+          example: 500
         error:
           type: string
-          example: Forbidden
+          example: Internal Server Error
         message:
           type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
     http-400-error-response:
       type: object
       properties:
@@ -346,6 +391,30 @@ components:
           type: string
           description: Standard tax jurisdiction code
           example: IN
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     appzen-vat-breakdown-item:
       type: object
       properties:
@@ -358,6 +427,11 @@ components:
           description: rate as percentage
           example: 12
           exclusiveMinimum: 0
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
     http-404-error-response:
       type: object
       properties:
@@ -373,80 +447,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-  parameters:
-    vat-id:
-      in: path
-      description: customer vat id
-      required: true
-      name: vat-id
-      schema:
-        type: string
-    vat-rate:
-      in: path
-      description: customer vat rate. If vat record was loaded without a vat rate, set it to 0 in this request
-      required: true
-      name: vat-rate
-      schema:
-        type: number
-    vat-json-schema:
-      in: body
-      required: true
-      name: vat-json-schema
-      schema:
-        $ref: '#/components/schemas/vat-master'
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    vat-code:
-      in: path
-      description: customer vat code
-      required: true
-      name: vat-code
-      schema:
-        type: string
   securitySchemes:
     API_Key_Header:
       type: apiKey

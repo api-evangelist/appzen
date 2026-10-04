@@ -117,63 +117,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    signed-url-response:
-      type: object
-      properties:
-        url:
-          type: string
-          example: http://download-link.appzen.com/Staged_Documents/0102/5fc03087-d265-11e7-b8c6-83e29cd24f4c/AEMB7W..<very-long-url>
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        expires:
-          type: string
-          example: '2021-02-23T22:20:47.636Z'
     http-401-error-response:
       type: object
       properties:
@@ -204,6 +147,63 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    signed-url-response:
+      type: object
+      properties:
+        url:
+          type: string
+          example: http://download-link.appzen.com/Staged_Documents/0102/5fc03087-d265-11e7-b8c6-83e29cd24f4c/AEMB7W..<very-long-url>
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        expires:
+          type: string
+          example: '2021-02-23T22:20:47.636Z'
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
   securitySchemes:
     API_Key_Header:
       type: apiKey

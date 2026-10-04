@@ -61,216 +61,77 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    processed-invoice-other-object-fields:
-      type: object
-      description: Set of key value pairs, where each value is an object with two keys - name and id
-      example:
-        code-region:
-          name: us-east
-          id: region1s
-        code-dept:
-          name: wing-1
-          id: '325'
-    invoice-goods-receipt:
-      type: object
-      properties:
-        receipt_id:
-          type: string
-          example: 123AB
-          description: The Receipt ID from source system
-        amount:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-          - description: Amount allocated to invoice from this receipt
-        quantity:
-          type: integer
-          format: int32
-          example: 10
-          description: Quantity allocated to invoice from this receipt
-    processed-invoice-other-segment:
-      type: object
-      properties:
-        segment_code:
-          type: string
-        segment_name:
-          type: string
-        segment_type:
-          type: string
-    vat-breakdown-item:
-      type: object
-      properties:
-        vat_id:
-          type: string
-          description: External vat_id
-          example: gst_1232ext
-        code:
-          type: string
-          example: GST
-        rate:
-          type: number
-          description: rate as percentage
-          example: 20.5
-          exclusiveMinimum: 0
-        vat_amount:
-          allOf:
-          - $ref: '#/components/schemas/amount'
-        jurisdiction_code:
-          type: string
-          description: Standard tax jurisdiction code
-          example: IN
-    po_policy_match_type:
+    discounts:
+      items:
+        properties:
+          discount_days:
+            default: 0
+            example: 0
+            description: The discount days
+            type: integer
+          discount_percent:
+            default: 0
+            example: 0
+            description: The discount percent
+            type: integer
+          discount_amount:
+            default: 0
+            example: 0
+            description: The discount amount
+            type: integer
+        type: object
+        required:
+        - discount_amount
+        - discount_days
+        - discount_percent
+      type: array
+    po_receipt_type:
       type: string
       enum:
-      - PO_NONE_MATCH_TYPE
-      - PO_POLICY_TWO_WAY_MATCH
-      - PO_POLICY_THREE_WAY_MATCH
-    invoice_line_type:
-      type: string
-      enum:
-      - NONE_LINE_TYPE
-      - GOODS
-      - SERVICE
-      - FREIGHT
-      - TAX
-      - MISCELLANEOUS
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    addressCore:
-      required:
-      - address_line1
-      - country
-      - zip
+      - PO
+      - GOODS_RECEIPT
+    validation:
+      type: object
       properties:
-        address_line1:
-          default: ''
-          title: The address_line1 schema
+        action_type:
           type: string
-          example: 12345 MARKET STREET
-        address_line2:
-          default: ''
-          title: The address_line2 schema
+        confidence:
           type: string
-          example: SUITE 1234
-        address_line3:
-          default: ''
-          title: The address_line3 schema
+        field_name:
           type: string
-          example: ''
-        area_code:
-          default: ''
-          title: The area_code schema
+        final_risk:
           type: string
-          example: '415'
-        city:
-          default: ''
-          title: The city schema
+        post_config_risk:
           type: string
-          example: SAN FRANCISCO
-        company:
-          default: ''
-          title: The company schema
+        post_feedback_risk:
           type: string
-          example: Preferred Supplier Inc.
-        contact:
-          default: ''
-          title: The contact schema
+        result_data:
+          type: object
+          properties:
+            ai_model_detected:
+              type: array
+              items:
+                type: string
+            duplicate_invoice_ids:
+              type: array
+              items:
+                type: string
+            electronic_query_detected:
+              type: array
+              items:
+                type: string
+        risk_level:
           type: string
-          example: Jane Doe
-        country:
-          default: ''
-          title: The country schema
+        risk_reason:
           type: string
-          example: US
-        country_iso3:
-          default: ''
-          title: The country_iso3 schema
-          type: string
-          example: USA
-        email:
-          default: ''
-          title: The email schema
-          type: string
-          example: janedoe@supplier.com
-        phone:
-          default: ''
-          title: The phone schema
-          type: string
-          example: '4042965282'
-        province:
-          default: ''
-          title: The province schema
-          type: string
-          example: ''
         state:
-          default: ''
-          title: The state schema
           type: string
-          example: CA
-        zip:
-          default: ''
-          title: The zip schema
+        validation_display_name:
           type: string
-          example: '94016'
-    appzen-vat-breakdown-item:
-      type: object
-      properties:
-        code:
-          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+        validation_id:
           type: string
-          example: VAT
-        rate:
-          type: number
-          description: rate as percentage
-          example: 12
-          exclusiveMinimum: 0
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
+        validation_name:
           type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     invoice-header-custom-json:
       type: object
       description: 'Maximum of 20 fields allowed, 500 chars per field.
@@ -449,233 +310,6 @@ components:
         approval-code: KE-382
         category: internal-projects
         'appzen: withholding': '23.5'
-    validation:
-      type: object
-      properties:
-        action_type:
-          type: string
-        confidence:
-          type: string
-        field_name:
-          type: string
-        final_risk:
-          type: string
-        post_config_risk:
-          type: string
-        post_feedback_risk:
-          type: string
-        result_data:
-          type: object
-          properties:
-            ai_model_detected:
-              type: array
-              items:
-                type: string
-            duplicate_invoice_ids:
-              type: array
-              items:
-                type: string
-            electronic_query_detected:
-              type: array
-              items:
-                type: string
-        risk_level:
-          type: string
-        risk_reason:
-          type: string
-        state:
-          type: string
-        validation_display_name:
-          type: string
-        validation_id:
-          type: string
-        validation_name:
-          type: string
-    payment-term:
-      properties:
-        name:
-          description: Payment term name as mentioned in the ERP system
-          type: string
-          example: NET 30
-        id:
-          description: Payment term id that uniquely identifies a payment term in the ERP system
-          type: string
-          example: '8900012'
-        active:
-          description: If payment term is active in the ERP system
-          default: true
-          type: boolean
-        code:
-          default: ''
-          example: NET
-          description: Refers to the AppZen Code. Should be one from the mentioned here.
-          enum:
-          - NONE_PAYMENT_TERM_CODE
-          - NET
-          - EOM
-          - FOM
-          - PIA
-          - CWO
-          - DOR
-          type: string
-        date:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        discounts:
-          $ref: '#/components/schemas/discounts'
-        num_days:
-          default: ''
-          example: 30
-          description: Number of days for payment to be made.
-          type: integer
-        num_grace_days:
-          example: 0
-          description: Number of grace days available for the payment
-          type: integer
-        custom_json:
-          type: object
-        entities_list:
-          description: list of external identifier for entities that this payment term is associated with
-          type: array
-          items:
-            type: string
-      required:
-      - id
-      - name
-    po_policy:
-      type: object
-      properties:
-        po_backed:
-          type: boolean
-        po_match_type:
-          allOf:
-          - $ref: '#/components/schemas/po_policy_match_type'
-        receipt_type:
-          allOf:
-          - $ref: '#/components/schemas/po_receipt_type'
-    po_receipt_type:
-      type: string
-      enum:
-      - PO
-      - GOODS_RECEIPT
-    amount:
-      properties:
-        amount:
-          example: 1.5
-          type: number
-        currency:
-          example: USD
-          type: string
-      type: object
-    withholding-tax:
-      type: object
-      properties:
-        type:
-          type: string
-        code:
-          type: string
-        base_amount:
-          type: object
-          required:
-          - amount
-          - currency
-          properties:
-            amount:
-              type: number
-            currency:
-              type: string
-        wht_amount:
-          type: object
-          required:
-          - amount
-          - currency
-          properties:
-            amount:
-              type: number
-            currency:
-              type: string
-    discounts:
-      items:
-        properties:
-          discount_days:
-            default: 0
-            example: 0
-            description: The discount days
-            type: integer
-          discount_percent:
-            default: 0
-            example: 0
-            description: The discount percent
-            type: integer
-          discount_amount:
-            default: 0
-            example: 0
-            description: The discount amount
-            type: integer
-        type: object
-        required:
-        - discount_amount
-        - discount_days
-        - discount_percent
-      type: array
-    processed-invoice-account-segment:
-      type: object
-      properties:
-        appzen_segment_type:
-          type: string
-          description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
-          enum:
-          - OTHER_SEGMENT
-          - LEGAL_ENTITY_SEGMENT
-          - COMPANY_SEGMENT
-          - ACCOUNT_SEGMENT
-          - DEPARTMENT_SEGMENT
-          - COST_CENTER_SEGMENT
-          - VENDOR_SEGMENT
-          - LOCATION_SEGMENT
-          - USER_SEGMENT
-          - CUSTOMER_SEGMENT
-          - PROJECT_SEGMENT
-          - SPEND_CATEGORY_SEGMENT
-          - REGION_SEGMENT
-          - INTERCOMPANY_SEGMENT
-          example: COST_CENTER_SEGMENT
-        segment_code:
-          type: string
-        segment_name:
-          type: string
-        segment_type:
-          type: string
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     address:
       type: object
       required:
@@ -715,6 +349,103 @@ components:
         valid_end_date:
           allOf:
           - $ref: '#/components/schemas/date-time'
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    vat-breakdown-item:
+      type: object
+      properties:
+        vat_id:
+          type: string
+          description: External vat_id
+          example: gst_1232ext
+        code:
+          type: string
+          example: GST
+        rate:
+          type: number
+          description: rate as percentage
+          example: 20.5
+          exclusiveMinimum: 0
+        vat_amount:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+        jurisdiction_code:
+          type: string
+          description: Standard tax jurisdiction code
+          example: IN
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    po_policy_match_type:
+      type: string
+      enum:
+      - PO_NONE_MATCH_TYPE
+      - PO_POLICY_TWO_WAY_MATCH
+      - PO_POLICY_THREE_WAY_MATCH
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    amount:
+      properties:
+        amount:
+          example: 1.5
+          type: number
+        currency:
+          example: USD
+          type: string
+      type: object
     payment_type:
       type: string
       enum:
@@ -727,6 +458,170 @@ components:
       - CHECK_PAPER
       - REAL_TIME_PAYMENTS
       - VIRTUAL_CARD
+    invoice_line_type:
+      type: string
+      enum:
+      - NONE_LINE_TYPE
+      - GOODS
+      - SERVICE
+      - FREIGHT
+      - TAX
+      - MISCELLANEOUS
+    processed-invoice-other-object-fields:
+      type: object
+      description: Set of key value pairs, where each value is an object with two keys - name and id
+      example:
+        code-region:
+          name: us-east
+          id: region1s
+        code-dept:
+          name: wing-1
+          id: '325'
+    appzen-vat-breakdown-item:
+      type: object
+      properties:
+        code:
+          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+          type: string
+          example: VAT
+        rate:
+          type: number
+          description: rate as percentage
+          example: 12
+          exclusiveMinimum: 0
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    processed-invoice-other-segment:
+      type: object
+      properties:
+        segment_code:
+          type: string
+        segment_name:
+          type: string
+        segment_type:
+          type: string
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    processed-invoice-account-segment:
+      type: object
+      properties:
+        appzen_segment_type:
+          type: string
+          description: Value represents how appzen understands the customer segment type. OTHER_SEGMENT should be used to map any customer segment type that does not have correspondence with one of the named appzen segment types (e.g. ACCOUNT_SEGMENT, DEPARTMENT_SEGMENT etc). Multiple OTHER_SEGMENT mappings may be specified, if needed.
+          enum:
+          - OTHER_SEGMENT
+          - LEGAL_ENTITY_SEGMENT
+          - COMPANY_SEGMENT
+          - ACCOUNT_SEGMENT
+          - DEPARTMENT_SEGMENT
+          - COST_CENTER_SEGMENT
+          - VENDOR_SEGMENT
+          - LOCATION_SEGMENT
+          - USER_SEGMENT
+          - CUSTOMER_SEGMENT
+          - PROJECT_SEGMENT
+          - SPEND_CATEGORY_SEGMENT
+          - REGION_SEGMENT
+          - INTERCOMPANY_SEGMENT
+          example: COST_CENTER_SEGMENT
+        segment_code:
+          type: string
+        segment_name:
+          type: string
+        segment_type:
+          type: string
+    addressCore:
+      required:
+      - address_line1
+      - country
+      - zip
+      properties:
+        address_line1:
+          default: ''
+          title: The address_line1 schema
+          type: string
+          example: 12345 MARKET STREET
+        address_line2:
+          default: ''
+          title: The address_line2 schema
+          type: string
+          example: SUITE 1234
+        address_line3:
+          default: ''
+          title: The address_line3 schema
+          type: string
+          example: ''
+        area_code:
+          default: ''
+          title: The area_code schema
+          type: string
+          example: '415'
+        city:
+          default: ''
+          title: The city schema
+          type: string
+          example: SAN FRANCISCO
+        company:
+          default: ''
+          title: The company schema
+          type: string
+          example: Preferred Supplier Inc.
+        contact:
+          default: ''
+          title: The contact schema
+          type: string
+          example: Jane Doe
+        country:
+          default: ''
+          title: The country schema
+          type: string
+          example: US
+        country_iso3:
+          default: ''
+          title: The country_iso3 schema
+          type: string
+          example: USA
+        email:
+          default: ''
+          title: The email schema
+          type: string
+          example: janedoe@supplier.com
+        phone:
+          default: ''
+          title: The phone schema
+          type: string
+          example: '4042965282'
+        province:
+          default: ''
+          title: The province schema
+          type: string
+          example: ''
+        state:
+          default: ''
+          title: The state schema
+          type: string
+          example: CA
+        zip:
+          default: ''
+          title: The zip schema
+          type: string
+          example: '94016'
     processed-invoice-json-schema:
       example:
         audit_results:
@@ -1465,6 +1360,111 @@ components:
             bank_currency:
               type: string
               example: USD
+    po_policy:
+      type: object
+      properties:
+        po_backed:
+          type: boolean
+        po_match_type:
+          allOf:
+          - $ref: '#/components/schemas/po_policy_match_type'
+        receipt_type:
+          allOf:
+          - $ref: '#/components/schemas/po_receipt_type'
+    invoice-goods-receipt:
+      type: object
+      properties:
+        receipt_id:
+          type: string
+          example: 123AB
+          description: The Receipt ID from source system
+        amount:
+          allOf:
+          - $ref: '#/components/schemas/amount'
+          - description: Amount allocated to invoice from this receipt
+        quantity:
+          type: integer
+          format: int32
+          example: 10
+          description: Quantity allocated to invoice from this receipt
+    withholding-tax:
+      type: object
+      properties:
+        type:
+          type: string
+        code:
+          type: string
+        base_amount:
+          type: object
+          required:
+          - amount
+          - currency
+          properties:
+            amount:
+              type: number
+            currency:
+              type: string
+        wht_amount:
+          type: object
+          required:
+          - amount
+          - currency
+          properties:
+            amount:
+              type: number
+            currency:
+              type: string
+    payment-term:
+      properties:
+        name:
+          description: Payment term name as mentioned in the ERP system
+          type: string
+          example: NET 30
+        id:
+          description: Payment term id that uniquely identifies a payment term in the ERP system
+          type: string
+          example: '8900012'
+        active:
+          description: If payment term is active in the ERP system
+          default: true
+          type: boolean
+        code:
+          default: ''
+          example: NET
+          description: Refers to the AppZen Code. Should be one from the mentioned here.
+          enum:
+          - NONE_PAYMENT_TERM_CODE
+          - NET
+          - EOM
+          - FOM
+          - PIA
+          - CWO
+          - DOR
+          type: string
+        date:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        discounts:
+          $ref: '#/components/schemas/discounts'
+        num_days:
+          default: ''
+          example: 30
+          description: Number of days for payment to be made.
+          type: integer
+        num_grace_days:
+          example: 0
+          description: Number of grace days available for the payment
+          type: integer
+        custom_json:
+          type: object
+        entities_list:
+          description: list of external identifier for entities that this payment term is associated with
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - name
   parameters:
     uuid:
       in: path

@@ -58,86 +58,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    invoice-status-sync-request-schema:
-      type: object
-      required:
-      - appzen_invoice_state
-      - timestamp
-      properties:
-        invoice_id:
-          description: required when appzen_invoice_state is CREATED
-          type: string
-        invoice_status:
-          description: required when appzen_invoice_state is CREATED
-          type: string
-        appzen_invoice_state:
-          type: string
-          enum:
-          - CREATED
-          - ERROR
-        timestamp:
-          description: time of creating invoice in source system
-          $ref: '#/components/schemas/date-time'
-        error_data:
-          description: required when appzen_invoice_state is ERROR
-          type: object
-          properties:
-            message:
-              type: string
-            status:
-              type: string
-            exception:
-              type: string
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     http-401-error-response:
       type: object
       properties:
@@ -168,13 +88,87 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-  parameters:
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     invoice-status-sync-request-schema:
-      in: body
-      required: true
-      name: invoice-json-schema
-      schema:
-        $ref: '#/components/schemas/invoice-status-sync-request-schema'
+      type: object
+      required:
+      - appzen_invoice_state
+      - timestamp
+      properties:
+        invoice_id:
+          description: required when appzen_invoice_state is CREATED
+          type: string
+        invoice_status:
+          description: required when appzen_invoice_state is CREATED
+          type: string
+        appzen_invoice_state:
+          type: string
+          enum:
+          - CREATED
+          - ERROR
+        timestamp:
+          description: time of creating invoice in source system
+          $ref: '#/components/schemas/date-time'
+        error_data:
+          description: required when appzen_invoice_state is ERROR
+          type: object
+          properties:
+            message:
+              type: string
+            status:
+              type: string
+            exception:
+              type: string
+  parameters:
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -182,6 +176,12 @@ components:
       name: uuid
       schema:
         type: string
+    invoice-status-sync-request-schema:
+      in: body
+      required: true
+      name: invoice-json-schema
+      schema:
+        $ref: '#/components/schemas/invoice-status-sync-request-schema'
   securitySchemes:
     API_Key_Header:
       type: apiKey

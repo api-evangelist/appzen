@@ -161,11 +161,88 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    unit-of-measure:
+      properties:
+        uom_code:
+          description: Unit of Measure code in the ERP system
+          type: string
+          example: PCS
+        uom_description:
+          default: ''
+          example: Number of Pieces
+          description: Unit of Measure name/description in the ERP system.
+          type: string
+        uom_precision:
+          type: integer
+          minimum: 0
+          maximum: 9
+          default: 9
+          example: if defined as 2, then quantity of 12.555 will be rounded to 12.56
+          description: Max number of decimal digits of precision to be preserved
+        is_active:
+          description: Is Unit of measure active in the ERP system.
+          default: true
+          type: boolean
+        is_default:
+          description: Is Unit of measure default in the ERP system.
+          default: false
+          type: boolean
+      required:
+      - uom_code
     uuid:
       type: object
       properties:
@@ -190,6 +267,26 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     unit-of-measure-get:
       properties:
         uom_code:
@@ -225,110 +322,7 @@ components:
           - $ref: '#/components/schemas/date-time'
       required:
       - uom_code
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    unit-of-measure:
-      properties:
-        uom_code:
-          description: Unit of Measure code in the ERP system
-          type: string
-          example: PCS
-        uom_description:
-          default: ''
-          example: Number of Pieces
-          description: Unit of Measure name/description in the ERP system.
-          type: string
-        uom_precision:
-          type: integer
-          minimum: 0
-          maximum: 9
-          default: 9
-          example: if defined as 2, then quantity of 12.555 will be rounded to 12.56
-          description: Max number of decimal digits of precision to be preserved
-        is_active:
-          description: Is Unit of measure active in the ERP system.
-          default: true
-          type: boolean
-        is_default:
-          description: Is Unit of measure default in the ERP system.
-          default: false
-          type: boolean
-      required:
-      - uom_code
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
   parameters:
-    unit-of-measures-json-schema:
-      in: body
-      required: true
-      name: unit-of-measures-json-schema
-      schema:
-        $ref: '#/components/schemas/unit-of-measure'
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -343,6 +337,12 @@ components:
       name: uom-code
       schema:
         type: string
+    unit-of-measures-json-schema:
+      in: body
+      required: true
+      name: unit-of-measures-json-schema
+      schema:
+        $ref: '#/components/schemas/unit-of-measure'
   securitySchemes:
     API_Key_Header:
       type: apiKey
