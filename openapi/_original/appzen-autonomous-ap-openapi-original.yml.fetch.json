@@ -1,0 +1,12 @@
+{
+ "url": "https://api-docs.appzen.com/swagger/yaml/data-services-external-api-spec-v1-current.yaml",
+ "requested_url": "https://api-docs.appzen.com/swagger/yaml/data-services-external-api-spec-v1-current.yaml",
+ "status": 200,
+ "content_type": "binary/octet-stream",
+ "bytes": 289734,
+ "sha256": "8eb44970a399e1a8c04d22f06a414d8a75c48501e7fff9f85987bf20ed4b7aa9",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.947), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
