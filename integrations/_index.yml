@@ -15,3 +15,16 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: appzen-workday-own
+  label: Workday (own)
+  partner: workday
+  partner_name: Workday (own)
+  category: Region & Country
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.workday.com/apps/777832/appzen-expense-audit
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
