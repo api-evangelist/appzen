@@ -161,6 +161,97 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    tax-get:
+      properties:
+        tax_code:
+          description: Tax code as mentioned in ERP system
+          type: string
+          example: VAT12
+        tax_rate:
+          example: 12
+          description: Tax item rate in ERP system.
+          type: number
+        tax_id:
+          description: Tax Id from ERP system
+          type: string
+          example: vat_1xsd2sd
+        appzen_tax_code:
+          description: Appzen mapped tax item code
+          type: string
+          example: VAT
+        appzen_tax_rate:
+          description: Appzen mapped Vat item rate
+          type: number
+          example: 12
+        appzen_vat_breakdown:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/appzen-vat-breakdown-item'
+            - description: The appzen break down of vat amount
+        country:
+          type: string
+          example: Germany
+        country_code_iso3:
+          type: string
+          description: ISO3 standard country code
+          example: DEU
+        is_active:
+          description: Is Tax item active in ERP system.
+          default: true
+          type: boolean
+        tax_category:
+          type: string
+          example: WHT_CATEGORY
+          description: The category of record. Possible values - WHT_CATEGORY, VAT_CATEGORY
+        entity_id:
+          type: string
+          description: 'Entity id for which this tax is applicable '
+          example: E124
+        tax_type:
+          type: string
+          description: Tax type for withholding tax. Require for WHT category
+          example: WHT
+        jurisdiction_code:
+          type: string
+          description: Standard tax jurisdiction code
+          example: IN
+    appzen-vat-breakdown-item:
+      type: object
+      properties:
+        code:
+          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
+          type: string
+          example: VAT
+        rate:
+          type: number
+          description: rate as percentage
+          example: 12
+          exclusiveMinimum: 0
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
     http-401-error-response:
       type: object
       properties:
@@ -176,30 +267,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
     tax-json-schema:
       type: object
       properties:
@@ -262,7 +329,7 @@ components:
       - tax_type
       - tax_code
       - tax_rate
-    http-400-error-response:
+    http-500-error-response:
       type: object
       properties:
         timestamp:
@@ -270,104 +337,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 400
+          example: 500
         error:
           type: string
-          example: Bad Request
+          example: Internal Server Error
         message:
           type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    tax-get:
-      properties:
-        tax_code:
-          description: Tax code as mentioned in ERP system
-          type: string
-          example: VAT12
-        tax_rate:
-          example: 12
-          description: Tax item rate in ERP system.
-          type: number
-        tax_id:
-          description: Tax Id from ERP system
-          type: string
-          example: vat_1xsd2sd
-        appzen_tax_code:
-          description: Appzen mapped tax item code
-          type: string
-          example: VAT
-        appzen_tax_rate:
-          description: Appzen mapped Vat item rate
-          type: number
-          example: 12
-        appzen_vat_breakdown:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/appzen-vat-breakdown-item'
-            - description: The appzen break down of vat amount
-        country:
-          type: string
-          example: Germany
-        country_code_iso3:
-          type: string
-          description: ISO3 standard country code
-          example: DEU
-        is_active:
-          description: Is Tax item active in ERP system.
-          default: true
-          type: boolean
-        tax_category:
-          type: string
-          example: WHT_CATEGORY
-          description: The category of record. Possible values - WHT_CATEGORY, VAT_CATEGORY
-        entity_id:
-          type: string
-          description: 'Entity id for which this tax is applicable '
-          example: E124
-        tax_type:
-          type: string
-          description: Tax type for withholding tax. Require for WHT category
-          example: WHT
-        jurisdiction_code:
-          type: string
-          description: Standard tax jurisdiction code
-          example: IN
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    appzen-vat-breakdown-item:
-      type: object
-      properties:
-        code:
-          description: A customer vat code maps to one of these predefined list of vat codes mantained by Appzen.
-          type: string
-          example: VAT
-        rate:
-          type: number
-          description: rate as percentage
-          example: 12
-          exclusiveMinimum: 0
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     http-404-error-response:
       type: object
       properties:
@@ -383,6 +359,30 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
   parameters:
     tax-id:
       in: path

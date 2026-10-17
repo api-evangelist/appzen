@@ -169,94 +169,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    http-401-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 401
-        error:
-          type: string
-          example: Unauthorized
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    http-500-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    group-category:
-      type: string
-      description: Purpose of the group.
-      enum:
-      - TRANSACTION_ASSIGNMENT
-      - BIZ_USER_ASSIGNMENT
-      - APPROVAL_ASSIGNMENT
-      example: APPROVAL_ASSIGNMENT
-    user-group-member-input:
-      type: object
-      description: A group member to assign.
-      properties:
-        user_id:
-          type: string
-          description: The AppZen user id of the member. If it is not an existing AppZen user, the member is skipped and returned in `unresolved_user_ids`.
-          example: az-user-90211
-      required:
-      - user_id
-    user-group-member:
-      type: object
-      description: A group member as returned by the API.
-      properties:
-        user_id:
-          type: string
-          example: az-user-90211
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Doe
-        email:
-          type: string
-          example: john.doe@abc.com
-        added_at:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        added_by:
-          type: string
-          description: AppZen user id who added this member.
-          example: az-user-00001
-    group-management-source:
-      type: string
-      description: Who owns the group.
-      enum:
-      - APPZEN_MANAGED
-      - EXTERNALLY_MANAGED
-      example: EXTERNALLY_MANAGED
-    group-product:
-      type: string
-      description: AppZen product the group belongs to.
-      enum:
-      - PRODUCT_AP
-      - PRODUCT_EXPENSE
-      - PRODUCT_SPEND_AUDIT
-      - PRODUCT_AUTONOMOUS_INBOX
-      - PRODUCT_AGENTS
-      example: PRODUCT_AP
     user-group-sync-result:
       type: object
       description: Result of a create/update (POST) operation.
@@ -290,30 +202,6 @@ components:
             type: string
           example:
           - az-user-99999
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    group-notification-method:
-      type: string
-      description: How notifications are delivered to the group.
-      enum:
-      - GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
-      - GROUP_NOTIFICATION_METHOD_SEND_TO_GROUP_ALIAS
-      - GROUP_NOTIFICATION_METHOD_SEND_TO_BOTH
-      default: GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
-      example: GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
     http-403-error-response:
       type: object
       properties:
@@ -329,11 +217,65 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    date-time:
+    user-group-json-schema:
+      type: object
+      description: Request body for creating/updating a user group.
+      properties:
+        external_group_id:
+          type: string
+          description: Identifier of the group in the external system. Identity / upsert key.
+          example: AP-GROUP-1001
+        management_source:
+          description: Required. Who owns the group.
+          allOf:
+          - $ref: '#/components/schemas/group-management-source'
+        category:
+          $ref: '#/components/schemas/group-category'
+        product:
+          $ref: '#/components/schemas/group-product'
+        group_name:
+          type: string
+          description: Display name of the group. Optional.
+          example: AP Approvers - North America
+        group_description:
+          type: string
+          description: Description of the group. Optional.
+          example: Approvers for North America AP invoices
+        group_email:
+          type: string
+          description: Group email alias. Optional.
+          example: ap-approvers-na@abc.com
+        notification_method:
+          $ref: '#/components/schemas/group-notification-method'
+        status:
+          $ref: '#/components/schemas/group-status'
+        source_created_at:
+          description: When the group was created in the source system. Optional.
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        source_last_updated_at:
+          description: When the group was last modified in the source system. Optional.
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        members:
+          type: array
+          description: The group's members. Replaced in full on each create/update. Any user_id that is not an existing AppZen user is skipped and returned in `unresolved_user_ids`; the request still succeeds.
+          items:
+            $ref: '#/components/schemas/user-group-member-input'
+      required:
+      - external_group_id
+      - management_source
+      - category
+      - product
+    group-notification-method:
       type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
+      description: How notifications are delivered to the group.
+      enum:
+      - GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
+      - GROUP_NOTIFICATION_METHOD_SEND_TO_GROUP_ALIAS
+      - GROUP_NOTIFICATION_METHOD_SEND_TO_BOTH
+      default: GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
+      example: GROUP_NOTIFICATION_METHOD_SEND_TO_MEMBERS
     group-status:
       type: string
       description: Lifecycle status of the group.
@@ -342,6 +284,129 @@ components:
       - DISABLED
       default: ACTIVE
       example: ACTIVE
+    group-management-source:
+      type: string
+      description: Who owns the group.
+      enum:
+      - APPZEN_MANAGED
+      - EXTERNALLY_MANAGED
+      example: EXTERNALLY_MANAGED
+    http-500-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    group-category:
+      type: string
+      description: Purpose of the group.
+      enum:
+      - TRANSACTION_ASSIGNMENT
+      - BIZ_USER_ASSIGNMENT
+      - APPROVAL_ASSIGNMENT
+      example: APPROVAL_ASSIGNMENT
+    user-group-member-input:
+      type: object
+      description: A group member to assign.
+      properties:
+        user_id:
+          type: string
+          description: The AppZen user id of the member. If it is not an existing AppZen user, the member is skipped and returned in `unresolved_user_ids`.
+          example: az-user-90211
+      required:
+      - user_id
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    user-group-member:
+      type: object
+      description: A group member as returned by the API.
+      properties:
+        user_id:
+          type: string
+          example: az-user-90211
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: john.doe@abc.com
+        added_at:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        added_by:
+          type: string
+          description: AppZen user id who added this member.
+          example: az-user-00001
+    group-product:
+      type: string
+      description: AppZen product the group belongs to.
+      enum:
+      - PRODUCT_AP
+      - PRODUCT_EXPENSE
+      - PRODUCT_SPEND_AUDIT
+      - PRODUCT_AUTONOMOUS_INBOX
+      - PRODUCT_AGENTS
+      example: PRODUCT_AP
+    http-404-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     user-group:
       type: object
       description: A user group as returned by the API.
@@ -398,71 +463,6 @@ components:
         updated_by:
           type: string
           example: az-user-00001
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-    user-group-json-schema:
-      type: object
-      description: Request body for creating/updating a user group.
-      properties:
-        external_group_id:
-          type: string
-          description: Identifier of the group in the external system. Identity / upsert key.
-          example: AP-GROUP-1001
-        management_source:
-          description: Required. Who owns the group.
-          allOf:
-          - $ref: '#/components/schemas/group-management-source'
-        category:
-          $ref: '#/components/schemas/group-category'
-        product:
-          $ref: '#/components/schemas/group-product'
-        group_name:
-          type: string
-          description: Display name of the group. Optional.
-          example: AP Approvers - North America
-        group_description:
-          type: string
-          description: Description of the group. Optional.
-          example: Approvers for North America AP invoices
-        group_email:
-          type: string
-          description: Group email alias. Optional.
-          example: ap-approvers-na@abc.com
-        notification_method:
-          $ref: '#/components/schemas/group-notification-method'
-        status:
-          $ref: '#/components/schemas/group-status'
-        source_created_at:
-          description: When the group was created in the source system. Optional.
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        source_last_updated_at:
-          description: When the group was last modified in the source system. Optional.
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        members:
-          type: array
-          description: The group's members. Replaced in full on each create/update. Any user_id that is not an existing AppZen user is skipped and returned in `unresolved_user_ids`; the request still succeeds.
-          items:
-            $ref: '#/components/schemas/user-group-member-input'
-      required:
-      - external_group_id
-      - management_source
-      - category
-      - product
   parameters:
     external-group-id:
       in: path

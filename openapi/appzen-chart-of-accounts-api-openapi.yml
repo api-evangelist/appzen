@@ -175,7 +175,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    http-401-error-response:
+    segments:
+      type: object
+      properties:
+        segment_name:
+          type: string
+          example: San Jose
+        segment_code:
+          type: string
+          example: SanJose
+    http-403-error-response:
       type: object
       properties:
         timestamp:
@@ -183,13 +192,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 401
+          example: 403
         error:
           type: string
-          example: Unauthorized
+          example: Forbidden
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     find-query-spec:
       description: The date range must be limited to 7 days
       properties:
@@ -210,6 +219,30 @@ components:
       required:
       - from-last-appzen-update-time
       - to-last-appzen-update-time
+    uuid-updated:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: UPDATED
+    http-401-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
     http-500-error-response:
       type: object
       properties:
@@ -225,15 +258,73 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    segments:
+    date-time:
+      type: string
+      format: date-time
+      example: '2024-03-01T11:01:00Z'
+      description: date should be in UTC format
+    http-404-error-response:
       type: object
       properties:
-        segment_name:
+        timestamp:
           type: string
-          example: San Jose
-        segment_code:
+          example: 2019-01-17T16:12:45.977+0000
+        status:
           type: string
-          example: SanJose
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    find-chart-of-accounts-result-spec:
+      example:
+      - segment-code: '3689490915'
+        segment-type: Account
+        appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
+        is-active: true
+        last-appzen-update-time: '2021-12-08T23:30:10.314Z'
+      - segment-code: '6649972540'
+        segment-type: Legal
+        appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
+        is-active: true
+        last-appzen-update-time: '2021-12-08T23:30:12.597Z'
+      properties:
+        erp-invoice-id:
+          type: string
+        erp-invoice-status:
+          type: string
+        appzen-uuid:
+          type: string
+        appzen-invoice-status:
+          type: string
+        last-appzen-update-time:
+          type: string
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
+    uuid:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
     chart-of-account-input-schema:
       type: object
       properties:
@@ -308,74 +399,6 @@ components:
       - segment_type
       - segment_name
       - segment_code
-    uuid-updated:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: UPDATED
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
-    date-time:
-      type: string
-      format: date-time
-      example: '2024-03-01T11:01:00Z'
-      description: date should be in UTC format
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    http-404-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: 'Error code : 17e3338d - The resource you specified cannot be not found'
     chart-of-account-output-schema:
       type: object
       properties:
@@ -443,43 +466,7 @@ components:
         uuid:
           type: string
           example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-    find-chart-of-accounts-result-spec:
-      example:
-      - segment-code: '3689490915'
-        segment-type: Account
-        appzen-uuid: 5e160e12-23af-4e3f-bdd5-65f7bbccdbc8
-        is-active: true
-        last-appzen-update-time: '2021-12-08T23:30:10.314Z'
-      - segment-code: '6649972540'
-        segment-type: Legal
-        appzen-uuid: e70cd677-2a91-4564-a429-78163beeadcf
-        is-active: true
-        last-appzen-update-time: '2021-12-08T23:30:12.597Z'
-      properties:
-        erp-invoice-id:
-          type: string
-        erp-invoice-status:
-          type: string
-        appzen-uuid:
-          type: string
-        appzen-invoice-status:
-          type: string
-        last-appzen-update-time:
-          type: string
   parameters:
-    uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    chart-of-account-input-schema:
-      in: body
-      required: true
-      name: chart-of-account-input-schema
-      schema:
-        $ref: '#/components/schemas/chart-of-account-input-schema'
     find-query-spec:
       in: body
       description: Query Criterion for locating Items
@@ -487,6 +474,19 @@ components:
       name: find-query-spec
       schema:
         $ref: '#/components/schemas/find-query-spec'
+    chart-of-account-input-schema:
+      in: body
+      required: true
+      name: chart-of-account-input-schema
+      schema:
+        $ref: '#/components/schemas/chart-of-account-input-schema'
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
   securitySchemes:
     API_Key_Header:
       type: apiKey

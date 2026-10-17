@@ -58,6 +58,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    http-403-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        message:
+          type: string
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     http-401-error-response:
       type: object
       properties:
@@ -88,36 +103,6 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
-    http-400-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    http-403-error-response:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
-          type: string
-          example: 403
-        error:
-          type: string
-          example: Forbidden
-        message:
-          type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
     date-time:
       type: string
       format: date-time
@@ -138,6 +123,21 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     invoice-status-sync-request-schema:
       type: object
       required:
@@ -169,6 +169,12 @@ components:
             exception:
               type: string
   parameters:
+    invoice-status-sync-request-schema:
+      in: body
+      required: true
+      name: invoice-json-schema
+      schema:
+        $ref: '#/components/schemas/invoice-status-sync-request-schema'
     uuid:
       in: path
       description: Globally unique identifier for an uploaded document
@@ -176,12 +182,6 @@ components:
       name: uuid
       schema:
         type: string
-    invoice-status-sync-request-schema:
-      in: body
-      required: true
-      name: invoice-json-schema
-      schema:
-        $ref: '#/components/schemas/invoice-status-sync-request-schema'
   securitySchemes:
     API_Key_Header:
       type: apiKey

@@ -161,8 +161,36 @@ paths:
       operationId: getCustomDataDatasetNameByDatasetNameExternalIdByCustomExternalId
       x-operation-id-source: derived
 components:
+  parameters:
+    dataset-name:
+      in: path
+      description: data set name
+      required: true
+      name: dataset-name
+      schema:
+        type: string
+    custom-data-json-schema:
+      in: body
+      required: true
+      name: custom-data-json-schema
+      schema:
+        $ref: '#/components/schemas/custom-data'
+    custom-external-id:
+      in: path
+      description: external-id for custom data item
+      required: true
+      name: custom-external-id
+      schema:
+        type: string
+    uuid:
+      in: path
+      description: Globally unique identifier for an uploaded document
+      required: true
+      name: uuid
+      schema:
+        type: string
   schemas:
-    http-401-error-response:
+    http-403-error-response:
       type: object
       properties:
         timestamp:
@@ -170,28 +198,53 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 401
+          example: 403
         error:
           type: string
-          example: Unauthorized
+          example: Forbidden
         message:
           type: string
-          example: 'Error code : 17e3338d - Unable to authenticate credentials'
-    http-500-error-response:
-      type: object
+          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+    custom-data:
       properties:
-        timestamp:
+        dataset_name:
+          description: Data Set Name from ERP system
           type: string
-          example: 2019-01-17T16:12:45.977+0000
-        status:
+          example: Employee
+        custom_external_id:
+          example: E123
+          description: Unique ID in the ERP system.
           type: string
-          example: 500
-        error:
-          type: string
-          example: Internal Server Error
-        message:
-          type: string
-          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
+        items:
+          description: List of key value pairs belong to the custom data record.
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: The field name in the record
+              value:
+                type: string
+                description: The value associated with the key
+          example:
+          - key: first_name
+            value: Anand
+          - key: last_name
+            value: Vijian
+        is_active:
+          description: Is custom data record active in the ERP system.
+          default: true
+          type: boolean
+        created_at:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+        updated_at:
+          allOf:
+          - $ref: '#/components/schemas/date-time'
+      required:
+      - dataset_name
+      - custom_external_id
     custom-data-get:
       properties:
         dataset_name:
@@ -241,7 +294,7 @@ components:
         status:
           type: string
           example: UPDATED
-    http-400-error-response:
+    http-401-error-response:
       type: object
       properties:
         timestamp:
@@ -249,63 +302,14 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 400
+          example: 401
         error:
           type: string
-          example: Bad Request
+          example: Unauthorized
         message:
           type: string
-          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
-    custom-data:
-      properties:
-        dataset_name:
-          description: Data Set Name from ERP system
-          type: string
-          example: Employee
-        custom_external_id:
-          example: E123
-          description: Unique ID in the ERP system.
-          type: string
-        items:
-          description: List of key value pairs belong to the custom data record.
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-                description: The field name in the record
-              value:
-                type: string
-                description: The value associated with the key
-          example:
-          - key: first_name
-            value: Anand
-          - key: last_name
-            value: Vijian
-        is_active:
-          description: Is custom data record active in the ERP system.
-          default: true
-          type: boolean
-        created_at:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-        updated_at:
-          allOf:
-          - $ref: '#/components/schemas/date-time'
-      required:
-      - dataset_name
-      - custom_external_id
-    uuid:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
-        status:
-          type: string
-          example: CREATED
-    http-403-error-response:
+          example: 'Error code : 17e3338d - Unable to authenticate credentials'
+    http-500-error-response:
       type: object
       properties:
         timestamp:
@@ -313,13 +317,13 @@ components:
           example: 2019-01-17T16:12:45.977+0000
         status:
           type: string
-          example: 403
+          example: 500
         error:
           type: string
-          example: Forbidden
+          example: Internal Server Error
         message:
           type: string
-          example: 'Error code : 17e3338d - You do not have permission to access this resource'
+          example: 'Error code : 17e3338d - Unable to process your request at this moment, please try again later'
     date-time:
       type: string
       format: date-time
@@ -340,34 +344,30 @@ components:
         message:
           type: string
           example: 'Error code : 17e3338d - The resource you specified cannot be not found'
-  parameters:
-    custom-external-id:
-      in: path
-      description: external-id for custom data item
-      required: true
-      name: custom-external-id
-      schema:
-        type: string
+    http-400-error-response:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2019-01-17T16:12:45.977+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+          example: 'Error code : 17e3338d - Invalid request, please fix and resend'
     uuid:
-      in: path
-      description: Globally unique identifier for an uploaded document
-      required: true
-      name: uuid
-      schema:
-        type: string
-    dataset-name:
-      in: path
-      description: data set name
-      required: true
-      name: dataset-name
-      schema:
-        type: string
-    custom-data-json-schema:
-      in: body
-      required: true
-      name: custom-data-json-schema
-      schema:
-        $ref: '#/components/schemas/custom-data'
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 5fc03087-d265-11e7-b8c6-83e29cd24f4c
+        status:
+          type: string
+          example: CREATED
   securitySchemes:
     API_Key_Header:
       type: apiKey
